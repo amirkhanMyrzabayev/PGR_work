@@ -1,7 +1,10 @@
 <Solution>
   <Configurations>
+    <Platform Name="Win32" />
     <Platform Name="x64" />
     <Platform Name="x86" />
   </Configurations>
-  <Project Path="PGR_semestral/PGR_semestral.vcxproj" />
+  <Project Path="PGR_semestral/PGR_semestral.vcxproj">
+    <Platform Solution="Debug|x64" Project="Win32" />
+  </Project>
 </Solution>
