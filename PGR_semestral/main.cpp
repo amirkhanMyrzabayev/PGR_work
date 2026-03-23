@@ -13,6 +13,10 @@ const int WIN_WIDTH = 1024;
 const int WIN_HEIGHT = 1024;
 const char* WIN_TITLE = "Hello World";
 
+float lastX = WIN_WIDTH / 2.0;
+float lastY = WIN_WIDTH / 2.0;
+bool firstMouse = true;
+
 GLuint shaderProgram = 0;
 GLuint arrayBuffer = 0;
 GLuint vao = 0;
@@ -24,12 +28,33 @@ Camera camera(glm::vec3(0.0f, 0.0f, 3.0f));
 
 void keyPressed(unsigned char key, int x, int y) {
     inputManager.pressKey(key);
-    if (inputManager.keys[key]) std::cout << "key " << key << " is pressed" << std::endl;
+    //if (inputManager.keys[key]) std::cout << "key " << key << " is pressed" << std::endl;
 }
 
 void keyRealesed(unsigned char key, int x, int y) {
     inputManager.releaseKey(key);
-    if (inputManager.keys[key] == false) std::cout << "key " << key << " is realesed" << std::endl;
+    //if (inputManager.keys[key] == false) std::cout << "key " << key << " is realesed" << std::endl;
+}
+
+
+void mouseClickCallback(int button, int state, int xpos, int ypos) {
+    if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN) {
+        firstMouse = true;
+    }
+}
+
+void mouseCallback(int xpos, int ypos) {
+    if (firstMouse) {
+        lastX = xpos;
+        lastY = ypos;
+        firstMouse = false;
+    }
+    float offset_x = xpos - lastX;
+    float offset_y = ypos - lastY;
+    camera.processMouseMovement(offset_x, offset_y);
+    lastX = xpos;
+    lastY = ypos;
+    glutPostRedisplay();
 }
 
 void timerFunc(int value) {
@@ -105,6 +130,8 @@ int main(int argc, char** argv) {
     glutDisplayFunc(draw);
     glutKeyboardFunc(keyPressed);
     glutKeyboardUpFunc(keyRealesed);
+    glutMotionFunc(mouseCallback);
+    glutMouseFunc(mouseClickCallback);
 
     if (!pgr::initialize(pgr::OGL_VER_MAJOR, pgr::OGL_VER_MINOR))
         pgr::dieWithError("pgr init failed, required OpenGL not supported?");

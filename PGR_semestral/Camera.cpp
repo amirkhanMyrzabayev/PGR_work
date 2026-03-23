@@ -30,3 +30,20 @@ void Camera::move(const InputManager& inputManager) {
 	}
 	return;
 }
+
+void Camera::processMouseMovement(float offset_x, float offset_y) {
+	offset_x *= mouseSensitivity;
+	offset_y *= mouseSensitivity;
+	yaw += offset_x;
+	pitch += offset_y;
+	if (pitch > 89.0f) pitch = 89.0f;
+	else if (pitch < -89.0f) pitch = -89.0f;
+	using glm::cos;
+	using glm::sin;
+	using glm::radians;
+	front.x = cos(radians(yaw)) * cos(radians(pitch));	
+	front.y = -sin(radians(pitch));
+	front.z = sin(radians(yaw)) * cos(radians(pitch));
+	front = glm::normalize(front);
+}
+

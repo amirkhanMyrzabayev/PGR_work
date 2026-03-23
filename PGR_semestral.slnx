@@ -4,7 +4,7 @@
     <Platform Name="x64" />
     <Platform Name="x86" />
   </Configurations>
-  <Project Path="PGR_semestral/PGR_semestral.vcxproj">
+  <Project Path="PGR_semestral/PGR_semestral.vcxproj" Id="0ce9bf51-988d-4e39-8b8d-9cd0b91be775">
     <Platform Solution="Debug|x64" Project="Win32" />
   </Project>
 </Solution>
