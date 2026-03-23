@@ -16,6 +16,12 @@ glm::mat4 Camera::getProjectionMatrix() {
 }
 
 void Camera::move(const InputManager& inputManager) {
+	if (inputManager.specialKeys[GLUT_KEY_UP]) {
+		position += up * cameraSpeed;
+	}
+	if (inputManager.specialKeys[GLUT_KEY_DOWN]) {
+		position -= up * cameraSpeed;
+	}
 	if (inputManager.keys['w']) {
 		position += front * cameraSpeed;
 	}

@@ -11,7 +11,7 @@
 
 const int WIN_WIDTH = 1024;
 const int WIN_HEIGHT = 1024;
-const char* WIN_TITLE = "Hello World";
+const char* WIN_TITLE = "PRG_Semestral";
 
 float lastX = WIN_WIDTH / 2.0;
 float lastY = WIN_WIDTH / 2.0;
@@ -36,6 +36,13 @@ void keyRealesed(unsigned char key, int x, int y) {
     //if (inputManager.keys[key] == false) std::cout << "key " << key << " is realesed" << std::endl;
 }
 
+void specialKeyPressed(int key, int x, int y) {
+    inputManager.pressSpecialKey(key);
+}
+
+void specialKeyRealesed(int key, int x, int y) {
+    inputManager.releaseSpecialKey(key);
+}
 
 void mouseClickCallback(int button, int state, int xpos, int ypos) {
     if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN) {
@@ -130,6 +137,8 @@ int main(int argc, char** argv) {
     glutDisplayFunc(draw);
     glutKeyboardFunc(keyPressed);
     glutKeyboardUpFunc(keyRealesed);
+    glutSpecialFunc(specialKeyPressed);
+    glutSpecialUpFunc(specialKeyRealesed);
     glutMotionFunc(mouseCallback);
     glutMouseFunc(mouseClickCallback);
 
