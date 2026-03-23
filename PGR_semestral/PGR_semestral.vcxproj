@@ -136,14 +136,36 @@
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Object.cpp" />
+    <ClCompile Include="ObjLoader.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Assets\BarStand\BarStand.mtl">
+      <FileType>Text</FileType>
+    </None>
+    <None Include="Assets\bezdomovec\bezdomovec.mtl" />
+    <None Include="Shaders\3d_basic.frag" />
+    <None Include="Shaders\3d_basic.vert" />
     <None Include="Shaders\basic.frag" />
     <None Include="Shaders\basic.vert" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Camera.h" />
     <ClInclude Include="InputManager.h" />
+    <ClInclude Include="Object.h" />
+    <ClInclude Include="ObjLoader.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Assets\BarStand\BarStand.jpg">
+      <FileType>Text</FileType>
+    </Image>
+    <Image Include="Assets\bezdomovec\bezdomovec.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Assets\BarStand\BarStand.txt" />
+    <Text Include="Assets\BarStand\BarStandModel.txt" />
+    <Text Include="Assets\bezdomovec\bezdomovec.txt" />
+    <Text Include="Assets\bezdomovec\bezdomovecModel.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

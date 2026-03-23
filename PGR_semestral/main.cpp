@@ -8,6 +8,7 @@
 #include "pgr.h"
 #include "InputManager.h"
 #include "Camera.h"
+#include "Object.h"
 
 const int WIN_WIDTH = 1024;
 const int WIN_HEIGHT = 1024;
@@ -21,6 +22,7 @@ GLuint shaderProgram = 0;
 GLuint arrayBuffer = 0;
 GLuint vao = 0;
 
+Object* myBarStand = nullptr;
 
 
 InputManager inputManager;
@@ -76,31 +78,38 @@ void init() {
     glViewport(0, 0, glutGet(GLUT_WINDOW_WIDTH), glutGet(GLUT_WINDOW_HEIGHT));
 
     GLuint shaders[] = {
-      pgr::createShaderFromFile(GL_VERTEX_SHADER, "Shaders/basic.vert"),
-      pgr::createShaderFromFile(GL_FRAGMENT_SHADER, "Shaders/basic.frag"),
+      //pgr::createShaderFromFile(GL_VERTEX_SHADER, "Shaders/basic.vert"),
+      //pgr::createShaderFromFile(GL_FRAGMENT_SHADER, "Shaders/basic.frag"),
+      pgr::createShaderFromFile(GL_VERTEX_SHADER, "Shaders/3d_basic.vert"),
+      pgr::createShaderFromFile(GL_FRAGMENT_SHADER, "Shaders/3d_basic.frag"),
       0
     };
     shaderProgram = pgr::createProgram(shaders);
+    myBarStand = new Object("Assets/BarStand/BarStandModel.txt", shaderProgram);
+    myBarStand->setSRP(glm::vec3(0.9f, -0.5f, -0.8f), glm::vec3(glm::radians(-90.f), 0.0f, glm::radians(90.0f)), glm::vec3(1.0f));
+    //myBarStand->setPosition(glm::vec3(0.0f));
+    //myBarStand->setRotation(glm::vec3(glm::radians(-90.f), 0.0f, glm::radians(90.0f)));
+    //myBarStand->setScale(glm::vec3(1.0f));
+    //static const float vertices[] = {
+    //  0.5f,  0.5f,
+    //  -0.5f, -0.5f,
+    //  0.5f, -0.5f,
 
-    static const float vertices[] = {
-      0.5f,  0.5f,
-      -0.5f, -0.5f,
-      0.5f, -0.5f,
+    //   -0.5f,  0.5f,
+    //   -0.5f, -0.5f,
+    //  0.5f, 0.5f,
+    //};
 
-       -0.5f,  0.5f,
-       -0.5f, -0.5f,
-      0.5f, 0.5f,
-    };
+    //glGenBuffers(1, &arrayBuffer);
+    //glBindBuffer(GL_ARRAY_BUFFER, arrayBuffer);
+    //glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 
-    glGenBuffers(1, &arrayBuffer);
-    glBindBuffer(GL_ARRAY_BUFFER, arrayBuffer);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+    //glGenVertexArrays(1, &vao);
+    //glBindVertexArray(vao);
+    //GLint positionLoc = glGetAttribLocation(shaderProgram, "position");
+    //glEnableVertexAttribArray(positionLoc);
+    //glVertexAttribPointer(positionLoc, 2, GL_FLOAT, GL_FALSE, 0, 0);
 
-    glGenVertexArrays(1, &vao);
-    glBindVertexArray(vao);
-    GLint positionLoc = glGetAttribLocation(shaderProgram, "position");
-    glEnableVertexAttribArray(positionLoc);
-    glVertexAttribPointer(positionLoc, 2, GL_FLOAT, GL_FALSE, 0, 0);
 
 }
 
@@ -118,9 +127,9 @@ void draw() {
     glUniformMatrix4fv(viewLocation, 1, GL_FALSE, glm::value_ptr(view));
     glUniformMatrix4fv(projLocation, 1, GL_FALSE, glm::value_ptr(proj));
 
-    glBindVertexArray(vao);
-    glDrawArrays(GL_TRIANGLES, 0, 6);
-
+    //glBindVertexArray(vao);
+    //glDrawArrays(GL_TRIANGLES, 0, 6);
+    myBarStand->draw();
     glutSwapBuffers();
 }
 

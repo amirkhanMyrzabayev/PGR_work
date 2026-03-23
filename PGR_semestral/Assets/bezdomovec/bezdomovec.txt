@@ -1,0 +1,12 @@
+#DownloadModelFormat: OBJ
+#GeometryFile: bezdomovec.obj
+#MaterialFile: bezdomovec.mtl
+#PreviewFile: bezdomovec.jpg
+#OtherFiles: textury/chlast.tga
+#DownloadedFromURL: (nothing)
+#DateOfDownload: (nothing)
+#CreatedBy: Lukáš Jelínek
+#CreatedIn: Poser 3
+#UploadedBy: Lukáš Jelínek
+#Description: Bezdomovec
+#NumberOfPolygons: (unknown)

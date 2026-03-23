@@ -16,6 +16,15 @@
     <Filter Include="Shaders">
       <UniqueIdentifier>{aa03359d-2e5c-40e9-a6ee-5f1daddf652a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Assets">
+      <UniqueIdentifier>{4ba8cf05-d952-4453-8f7b-de529ba8ea39}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Assets\BarStand">
+      <UniqueIdentifier>{e9ff1df8-0146-4213-ab7d-f82e3a3d3751}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Assets\bezdomovec">
+      <UniqueIdentifier>{30791c3e-8156-43b4-89b7-d656f5aa4693}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -27,6 +36,12 @@
     <ClCompile Include="Camera.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Object.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjLoader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Shaders\basic.frag">
@@ -34,6 +49,18 @@
     </None>
     <None Include="Shaders\basic.vert">
       <Filter>Shaders</Filter>
+    </None>
+    <None Include="Assets\BarStand\BarStand.mtl">
+      <Filter>Assets\BarStand</Filter>
+    </None>
+    <None Include="Shaders\3d_basic.frag">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="Shaders\3d_basic.vert">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="Assets\bezdomovec\bezdomovec.mtl">
+      <Filter>Assets\bezdomovec</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -43,5 +70,33 @@
     <ClInclude Include="Camera.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Object.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjLoader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Assets\BarStand\BarStand.jpg">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Assets\bezdomovec\bezdomovec.jpg">
+      <Filter>Resource Files</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Assets\BarStand\BarStand.txt">
+      <Filter>Assets\BarStand</Filter>
+    </Text>
+    <Text Include="Assets\BarStand\BarStandModel.txt">
+      <Filter>Assets\BarStand</Filter>
+    </Text>
+    <Text Include="Assets\bezdomovec\bezdomovec.txt">
+      <Filter>Assets\bezdomovec</Filter>
+    </Text>
+    <Text Include="Assets\bezdomovec\bezdomovecModel.txt">
+      <Filter>Assets\bezdomovec</Filter>
+    </Text>
   </ItemGroup>
 </Project>

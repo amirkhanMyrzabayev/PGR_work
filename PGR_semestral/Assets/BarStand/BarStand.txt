@@ -1,0 +1,1 @@
+#DownloadModelFormat: OBJ#GeometryFile: BarStand.obj#MaterialFile: BarStand.mtl#PreviewFile: BarStand.jpg#OtherFiles:#DownloadedFromURL: www.cgtrader.com#DateOfDownload: 17.5.2021#CreatedBy: s1ayer450#CreatedIn: Autodesk#UploadedBy: Hung Pham#Description: Model of Bar stand#NumberOfPolygons: ---
