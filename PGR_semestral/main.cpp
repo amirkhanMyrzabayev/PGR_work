@@ -86,7 +86,7 @@ void init() {
     };
     shaderProgram = pgr::createProgram(shaders);
     myBarStand = new Object("Assets/BarStand/BarStandModel.txt", shaderProgram);
-    myBarStand->setSRP(glm::vec3(0.9f, -0.5f, -0.8f), glm::vec3(glm::radians(-90.f), 0.0f, glm::radians(90.0f)), glm::vec3(1.0f));
+    myBarStand->setSRP(glm::vec3(0.9f, -0.5f, -0.8f), glm::vec3(glm::radians(-90.0f), 0.0f, glm::radians(90.0f)), glm::vec3(1.0f));
     //myBarStand->setPosition(glm::vec3(0.0f));
     //myBarStand->setRotation(glm::vec3(glm::radians(-90.f), 0.0f, glm::radians(90.0f)));
     //myBarStand->setScale(glm::vec3(1.0f));
