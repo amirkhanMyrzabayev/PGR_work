@@ -34,9 +34,13 @@ void Object::draw() {
 	modelR = glm::rotate(modelR, rotation.y, glm::vec3(0.0f, 1.0f, 0.0f));
 	modelR = glm::rotate(modelR, rotation.z, glm::vec3(0.0f, 0.0f, 1.0f));
 	modelR = glm::scale(modelR, scale);
+
+	glm::mat3 normalMatrix = glm::mat3(glm::transpose(glm::inverse(modelR)));
 	GLint modelLocation = glGetUniformLocation(shaderProgram, "model");
+	GLint normalMatrixLocation = glGetUniformLocation(shaderProgram, "normalMatrix");
 
 	glUniformMatrix4fv(modelLocation, 1, GL_FALSE, glm::value_ptr(modelR));
+	glUniformMatrix3fv(normalMatrixLocation, 1, GL_FALSE, glm::value_ptr(normalMatrix));
 	//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 
 	glBindVertexArray(mesh->vao);
