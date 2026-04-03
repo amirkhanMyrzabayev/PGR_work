@@ -87,3 +87,8 @@ void Camera::setCameraState(CameraStates newState) {
 	currentState = newState;
 }
 
+
+glm::vec3 Camera::getPosition() {
+	return position;
+}
+

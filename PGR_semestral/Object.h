@@ -2,13 +2,16 @@
 #include <string>
 #include <vector>
 #include "pgr.h"
+#include "mesh.h"
+#include "MeshManager.h"
+
 
 
 class Object
 {
 public:
-	Object(const std::string& filePath, GLuint _shaderProgram);
-	Object(const std::string& filePath, GLuint _shaderProgram, const glm::vec3& newPos, const glm::vec3& newRotation, const glm::vec3& newScale);
+	Object(const std::string& filePath, GLuint _shaderProgram, MeshManager& meshManager);
+	Object(const std::string& filePath, GLuint _shaderProgram, MeshManager& meshManager, const glm::vec3& newPos, const glm::vec3& newRotation, const glm::vec3& newScale);
 	~Object();
 	void draw();
 
@@ -17,11 +20,11 @@ public:
 	void setScale(const glm::vec3& newScale);
 	void setSRP(const glm::vec3& newPos, const glm::vec3& newRotation, const glm::vec3& newScale);
 private:
-	GLuint vao, vbo, shaderProgram;
-	size_t numVertices;
+	GLuint shaderProgram;
 	glm::vec3 position;
 	glm::vec3 rotation;
 	glm::vec3 scale;
 	glm::mat4 modelMatrix;
+	Mesh* mesh;
 };
 

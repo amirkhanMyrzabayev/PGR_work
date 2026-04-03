@@ -21,24 +21,26 @@ bool firstMouse = true;
 bool isLeftMousePressed = false;
 
 GLuint shaderProgram = 0;
-GLuint arrayBuffer = 0;
-GLuint vao = 0;
+
+glm::vec3 lightPos = glm::vec3(0.0f, 10.0f, 5.0f);
+//GLuint arrayBuffer = 0;
+//GLuint vao = 0;
 
 
 std::vector<Object*> sceneObjects;
 
 
 InputManager inputManager;
-Camera camera(glm::vec3(0.0f, 0.0f, 3.0f));
+Camera camera(STATIC_CAMERAS[0].position);
+MeshManager globalMeshManager;
 
 void keyPressed(unsigned char key, int x, int y) {
     inputManager.pressKey(key);
     if (inputManager.keys['1']) {
-        camera.setCameraState(freeCamera); 
+        camera.setCameraState(freeCamera);
         firstMouse = true;
     }
     else if (inputManager.keys['2']) camera.setCameraState(staticFirst);
-    
     else if (inputManager.keys['3']) camera.setCameraState(staticSecond);
    
     //if (inputManager.keys[key]) std::cout << "key " << key << " is pressed" << std::endl;
@@ -91,21 +93,22 @@ void timerFunc(int value) {
 }
 
 void init() {
-    glClearColor(0.0f, 0.7f, 0.2f, 1.0f);
+    glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
     glEnable(GL_DEPTH_TEST);
     glViewport(0, 0, glutGet(GLUT_WINDOW_WIDTH), glutGet(GLUT_WINDOW_HEIGHT));
 
     GLuint shaders[] = {
       //pgr::createShaderFromFile(GL_VERTEX_SHADER, "Shaders/basic.vert"),
       //pgr::createShaderFromFile(GL_FRAGMENT_SHADER, "Shaders/basic.frag"),
-      pgr::createShaderFromFile(GL_VERTEX_SHADER, "Shaders/3d_basic.vert"),
-      pgr::createShaderFromFile(GL_FRAGMENT_SHADER, "Shaders/3d_basic.frag"),
+      pgr::createShaderFromFile(GL_VERTEX_SHADER, "Shaders/3d_light.vert"),
+      pgr::createShaderFromFile(GL_FRAGMENT_SHADER, "Shaders/3d_light.frag"),
       0
     };
     shaderProgram = pgr::createProgram(shaders);
 
     for (auto objInfo : SCENE_OBJECTS_SETUP) {
-        sceneObjects.push_back(new Object(objInfo.path, shaderProgram,
+        sceneObjects.push_back(new Object(objInfo.path, shaderProgram, 
+                                            globalMeshManager,
                                             objInfo.position, 
                                             objInfo.rotation, 
                                             objInfo.scale));
@@ -149,9 +152,13 @@ void draw() {
 
     GLint projLocation = glGetUniformLocation(shaderProgram, "projection");
     GLint viewLocation = glGetUniformLocation(shaderProgram, "view");
+    GLint lightPosLocation = glGetUniformLocation(shaderProgram, "lightPos");
+    GLint cameraPosLocation = glGetUniformLocation(shaderProgram, "viewPos");
 
     glUniformMatrix4fv(viewLocation, 1, GL_FALSE, glm::value_ptr(view));
     glUniformMatrix4fv(projLocation, 1, GL_FALSE, glm::value_ptr(proj));
+    glUniform3fv(lightPosLocation, 1, glm::value_ptr(lightPos));
+    glUniform3fv(cameraPosLocation, 1, glm::value_ptr(camera.getPosition()));
 
     //glBindVertexArray(vao);
     //glDrawArrays(GL_TRIANGLES, 0, 6);

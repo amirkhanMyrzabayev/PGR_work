@@ -18,8 +18,12 @@ public:
 	glm::mat4 getProjectionMatrix();
 	void move(const InputManager& inputManager);
 	void processMouseMovement(float offset_x, float offset_y);
+
+
 	CameraStates getCameraState();
 	void setCameraState(CameraStates newState);
+
+	glm::vec3 getPosition();
 private:
 	glm::vec3 position;
 	glm::vec3 front;

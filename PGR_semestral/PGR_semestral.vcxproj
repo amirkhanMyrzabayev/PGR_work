@@ -138,6 +138,7 @@
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="MeshManager.cpp" />
     <ClCompile Include="Object.cpp" />
     <ClCompile Include="ObjLoader.cpp" />
   </ItemGroup>
@@ -149,12 +150,16 @@
     <None Include="Assets\cartoon_building\cartoon_building.mtl" />
     <None Include="Shaders\3d_basic.frag" />
     <None Include="Shaders\3d_basic.vert" />
+    <None Include="Shaders\3d_light.frag" />
+    <None Include="Shaders\3d_light.vert" />
     <None Include="Shaders\basic.frag" />
     <None Include="Shaders\basic.vert" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Camera.h" />
     <ClInclude Include="InputManager.h" />
+    <ClInclude Include="mesh.h" />
+    <ClInclude Include="MeshManager.h" />
     <ClInclude Include="Object.h" />
     <ClInclude Include="ObjLoader.h" />
     <ClInclude Include="parametry.h" />
