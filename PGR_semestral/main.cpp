@@ -33,9 +33,14 @@ Camera camera(glm::vec3(0.0f, 0.0f, 3.0f));
 
 void keyPressed(unsigned char key, int x, int y) {
     inputManager.pressKey(key);
-    if (inputManager.keys['1']) camera.setCameraState(freeCamera);
+    if (inputManager.keys['1']) {
+        camera.setCameraState(freeCamera); 
+        firstMouse = true;
+    }
     else if (inputManager.keys['2']) camera.setCameraState(staticFirst);
+    
     else if (inputManager.keys['3']) camera.setCameraState(staticSecond);
+   
     //if (inputManager.keys[key]) std::cout << "key " << key << " is pressed" << std::endl;
 }
 

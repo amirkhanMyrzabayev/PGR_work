@@ -18,7 +18,7 @@ struct StaticCamera {
 
 const StaticCamera STATIC_CAMERAS[2] = {
 	{ glm::vec3(0.0f, 2.0f, 15.0f), glm::vec3(0.0f, 0.0f, -1.0f), glm::vec3(0.0f, 1.0f, 0.0f) },
-	{ glm::vec3(0.0f, 15.0f, 0.0f), glm::vec3(0.0f, -1.0f, 0.0f), glm::vec3(0.0f, 0.0f, 1.0f) }
+	{ glm::vec3(0.0f, 15.0f, 0.0f), glm::vec3(0.0f, -1.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0001f) }
 };
 
 const std::vector<ObjectSetup> SCENE_OBJECTS_SETUP = {
