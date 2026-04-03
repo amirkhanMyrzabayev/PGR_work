@@ -146,6 +146,7 @@
       <FileType>Text</FileType>
     </None>
     <None Include="Assets\bezdomovec\bezdomovec.mtl" />
+    <None Include="Assets\cartoon_building\cartoon_building.mtl" />
     <None Include="Shaders\3d_basic.frag" />
     <None Include="Shaders\3d_basic.vert" />
     <None Include="Shaders\basic.frag" />
@@ -156,6 +157,7 @@
     <ClInclude Include="InputManager.h" />
     <ClInclude Include="Object.h" />
     <ClInclude Include="ObjLoader.h" />
+    <ClInclude Include="parametry.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\BarStand\BarStand.jpg">
@@ -168,6 +170,7 @@
     <Text Include="Assets\BarStand\BarStandModel.txt" />
     <Text Include="Assets\bezdomovec\bezdomovec.txt" />
     <Text Include="Assets\bezdomovec\bezdomovecModel.txt" />
+    <Text Include="Assets\cartoon_building\cartoon_building.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

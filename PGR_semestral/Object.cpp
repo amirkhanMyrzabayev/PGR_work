@@ -21,6 +21,14 @@ Object::Object(const std::string& filePath, GLuint _shaderProgram) : shaderProgr
 	glBindVertexArray(0);
 }
 
+Object::Object(const std::string& filePath, GLuint _shaderProgram, 
+				const glm::vec3& newPos, 
+				const glm::vec3& newRotation, 
+				const glm::vec3& newScale) : Object(filePath, _shaderProgram){
+	setSRP(newPos, newRotation, newScale);
+}
+
+
 void Object::setPosition(const glm::vec3& newPos) { position = newPos; }
 void Object::setRotation(const glm::vec3& newRot) { rotation = newRot; }
 void Object::setScale(const glm::vec3& newScale) { scale = newScale; }

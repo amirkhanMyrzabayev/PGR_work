@@ -8,6 +8,7 @@ class Object
 {
 public:
 	Object(const std::string& filePath, GLuint _shaderProgram);
+	Object(const std::string& filePath, GLuint _shaderProgram, const glm::vec3& newPos, const glm::vec3& newRotation, const glm::vec3& newScale);
 	~Object();
 	void draw();
 

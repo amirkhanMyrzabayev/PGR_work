@@ -9,6 +9,7 @@
 #include "InputManager.h"
 #include "Camera.h"
 #include "Object.h"
+#include "parametry.h"
 
 const int WIN_WIDTH = 1024;
 const int WIN_HEIGHT = 1024;
@@ -17,12 +18,14 @@ const char* WIN_TITLE = "PRG_Semestral";
 float lastX = WIN_WIDTH / 2.0;
 float lastY = WIN_WIDTH / 2.0;
 bool firstMouse = true;
+bool isLeftMousePressed = false;
 
 GLuint shaderProgram = 0;
 GLuint arrayBuffer = 0;
 GLuint vao = 0;
 
-Object* myBarStand = nullptr;
+
+std::vector<Object*> sceneObjects;
 
 
 InputManager inputManager;
@@ -30,6 +33,9 @@ Camera camera(glm::vec3(0.0f, 0.0f, 3.0f));
 
 void keyPressed(unsigned char key, int x, int y) {
     inputManager.pressKey(key);
+    if (inputManager.keys['1']) camera.setCameraState(freeCamera);
+    else if (inputManager.keys['2']) camera.setCameraState(staticFirst);
+    else if (inputManager.keys['3']) camera.setCameraState(staticSecond);
     //if (inputManager.keys[key]) std::cout << "key " << key << " is pressed" << std::endl;
 }
 
@@ -47,12 +53,19 @@ void specialKeyRealesed(int key, int x, int y) {
 }
 
 void mouseClickCallback(int button, int state, int xpos, int ypos) {
-    if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN) {
-        firstMouse = true;
+    if (button == GLUT_LEFT_BUTTON) {
+        if (state == GLUT_DOWN) {
+            firstMouse = true;
+            isLeftMousePressed = true;
+        }
+        else if (state == GLUT_UP) {
+            isLeftMousePressed = false;
+        }
     }
 }
 
 void mouseCallback(int xpos, int ypos) {
+    if (!isLeftMousePressed) return;
     if (firstMouse) {
         lastX = xpos;
         lastY = ypos;
@@ -85,8 +98,16 @@ void init() {
       0
     };
     shaderProgram = pgr::createProgram(shaders);
-    myBarStand = new Object("Assets/BarStand/BarStandModel.txt", shaderProgram);
-    myBarStand->setSRP(glm::vec3(0.9f, -0.5f, -0.8f), glm::vec3(glm::radians(-90.0f), 0.0f, glm::radians(90.0f)), glm::vec3(1.0f));
+
+    for (auto objInfo : SCENE_OBJECTS_SETUP) {
+        sceneObjects.push_back(new Object(objInfo.path, shaderProgram,
+                                            objInfo.position, 
+                                            objInfo.rotation, 
+                                            objInfo.scale));
+    }
+
+    //myBarStand = new Object("Assets/cartoon_building/cartoon_building.txt", shaderProgram);
+    //myBarStand->setSRP(glm::vec3(0.9f, -0.5f, -0.8f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.05f));
     //myBarStand->setPosition(glm::vec3(0.0f));
     //myBarStand->setRotation(glm::vec3(glm::radians(-90.f), 0.0f, glm::radians(90.0f)));
     //myBarStand->setScale(glm::vec3(1.0f));
@@ -129,7 +150,9 @@ void draw() {
 
     //glBindVertexArray(vao);
     //glDrawArrays(GL_TRIANGLES, 0, 6);
-    myBarStand->draw();
+    for (auto obj : sceneObjects) {
+        obj->draw();
+    }
     glutSwapBuffers();
 }
 

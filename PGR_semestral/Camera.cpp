@@ -1,4 +1,5 @@
 #include "Camera.h"
+#include "parametry.h"
 
 Camera::Camera(glm::vec3 pos) : position(pos) {
 	front = glm::vec3(0.0f, 0.0f, -1.0f);
@@ -8,7 +9,20 @@ Camera::Camera(glm::vec3 pos) : position(pos) {
 Camera::~Camera() {}
 
 glm::mat4 Camera::getViewMatrix() {
-	return glm::lookAt(position, position + front, up);
+	switch (currentState)
+	{
+	case freeCamera:
+		return glm::lookAt(position, position + front, up);
+	case staticFirst:
+		return glm::lookAt(STATIC_CAMERAS[0].position,
+			STATIC_CAMERAS[0].position + STATIC_CAMERAS[0].front, STATIC_CAMERAS[0].up);
+	case staticSecond:
+		return glm::lookAt(STATIC_CAMERAS[1].position,
+			STATIC_CAMERAS[1].position + STATIC_CAMERAS[1].front, STATIC_CAMERAS[1].up);
+	default:
+		break;
+	}
+
 }
 
 glm::mat4 Camera::getProjectionMatrix() {
@@ -16,6 +30,7 @@ glm::mat4 Camera::getProjectionMatrix() {
 }
 
 void Camera::move(const InputManager& inputManager) {
+	if (currentState != freeCamera) return;
 	if (inputManager.specialKeys[GLUT_KEY_UP]) {
 		position += up * cameraSpeed;
 	}
@@ -51,5 +66,12 @@ void Camera::processMouseMovement(float offset_x, float offset_y) {
 	front.y = -sin(radians(pitch));
 	front.z = sin(radians(yaw)) * cos(radians(pitch));
 	front = glm::normalize(front);
+}
+
+CameraStates Camera::getCameraState() {
+	return currentState;
+}
+void Camera::setCameraState(CameraStates newState) {
+	currentState = newState;
 }
 

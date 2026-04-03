@@ -25,6 +25,9 @@
     <Filter Include="Assets\bezdomovec">
       <UniqueIdentifier>{30791c3e-8156-43b4-89b7-d656f5aa4693}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Assets\cartoon_building">
+      <UniqueIdentifier>{29a93319-ef4e-4f69-a4e8-ac9a4a52cc9f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -62,6 +65,9 @@
     <None Include="Assets\bezdomovec\bezdomovec.mtl">
       <Filter>Assets\bezdomovec</Filter>
     </None>
+    <None Include="Assets\cartoon_building\cartoon_building.mtl">
+      <Filter>Assets\cartoon_building</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="InputManager.h">
@@ -74,6 +80,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="ObjLoader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="parametry.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -97,6 +106,9 @@
     </Text>
     <Text Include="Assets\bezdomovec\bezdomovecModel.txt">
       <Filter>Assets\bezdomovec</Filter>
+    </Text>
+    <Text Include="Assets\cartoon_building\cartoon_building.txt">
+      <Filter>Assets\cartoon_building</Filter>
     </Text>
   </ItemGroup>
 </Project>

@@ -2,6 +2,13 @@
 #include "pgr.h"
 #include "InputManager.h"
 
+enum CameraStates
+{
+	freeCamera,
+	staticFirst,
+	staticSecond
+};
+
 class Camera
 {
 public:
@@ -11,7 +18,8 @@ public:
 	glm::mat4 getProjectionMatrix();
 	void move(const InputManager& inputManager);
 	void processMouseMovement(float offset_x, float offset_y);
-
+	CameraStates getCameraState();
+	void setCameraState(CameraStates newState);
 private:
 	glm::vec3 position;
 	glm::vec3 front;
@@ -20,5 +28,6 @@ private:
 	float yaw = -90.0f;
 	float pitch = 0.0f;
 	float mouseSensitivity = 0.1f;
+	CameraStates currentState = freeCamera;
 };
 
