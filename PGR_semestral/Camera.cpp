@@ -22,7 +22,20 @@ glm::mat4 Camera::getViewMatrix() {
 	default:
 		break;
 	}
+}
 
+glm::vec3 Camera::getPosition() {
+	switch (currentState)
+	{
+	case freeCamera:
+		return position;
+	case staticFirst:
+		return STATIC_CAMERAS[0].position;
+	case staticSecond:
+		return STATIC_CAMERAS[1].position;
+	default:
+		break;
+	}
 }
 
 glm::mat4 Camera::getProjectionMatrix() {
@@ -75,20 +88,18 @@ void Camera::setCameraState(CameraStates newState) {
 	if (newState == freeCamera && currentState != freeCamera) {
 		position = STATIC_CAMERAS[currentState - 1].position;
 		front = STATIC_CAMERAS[currentState - 1].front;
-		up = glm::vec3(0.0f, 1.0f, 0.0f);
-		front = glm::normalize(front);
-		if (std::abs(front.y + 1.0f) < 0.001f) {
-			front.z += 0.0000001f;
-		}
+		up = STATIC_CAMERAS[currentState - 1].up;
+		//front = glm::normalize(front);
+		//if (std::abs(front.y + 1.0f) < 0.001f) {
+		//	front.z += 0.0000001f;
+		//}
 		front = glm::normalize(front);
 		yaw = glm::degrees(glm::atan(front.z, front.x));
-		pitch = glm::clamp(glm::degrees(glm::asin(-front.y)), -89.0f, 89.0f);
+		pitch = glm::degrees(glm::asin(-front.y));
 	}
 	currentState = newState;
 }
 
 
-glm::vec3 Camera::getPosition() {
-	return position;
-}
+
 

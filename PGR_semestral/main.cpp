@@ -23,8 +23,6 @@ bool isLeftMousePressed = false;
 GLuint shaderProgram = 0;
 
 glm::vec3 lightPos = glm::vec3(0.0f, 10.0f, 5.0f);
-//GLuint arrayBuffer = 0;
-//GLuint vao = 0;
 
 
 std::vector<Object*> sceneObjects;
@@ -113,32 +111,6 @@ void init() {
                                             objInfo.rotation, 
                                             objInfo.scale));
     }
-
-    //myBarStand = new Object("Assets/cartoon_building/cartoon_building.txt", shaderProgram);
-    //myBarStand->setSRP(glm::vec3(0.9f, -0.5f, -0.8f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.05f));
-    //myBarStand->setPosition(glm::vec3(0.0f));
-    //myBarStand->setRotation(glm::vec3(glm::radians(-90.f), 0.0f, glm::radians(90.0f)));
-    //myBarStand->setScale(glm::vec3(1.0f));
-    //static const float vertices[] = {
-    //  0.5f,  0.5f,
-    //  -0.5f, -0.5f,
-    //  0.5f, -0.5f,
-
-    //   -0.5f,  0.5f,
-    //   -0.5f, -0.5f,
-    //  0.5f, 0.5f,
-    //};
-
-    //glGenBuffers(1, &arrayBuffer);
-    //glBindBuffer(GL_ARRAY_BUFFER, arrayBuffer);
-    //glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
-
-    //glGenVertexArrays(1, &vao);
-    //glBindVertexArray(vao);
-    //GLint positionLoc = glGetAttribLocation(shaderProgram, "position");
-    //glEnableVertexAttribArray(positionLoc);
-    //glVertexAttribPointer(positionLoc, 2, GL_FLOAT, GL_FALSE, 0, 0);
-
 
 }
 
