@@ -19,6 +19,7 @@ float lastX = WIN_WIDTH / 2.0;
 float lastY = WIN_WIDTH / 2.0;
 bool firstMouse = true;
 bool isLeftMousePressed = false;
+bool isRightMousePressed = false;
 
 GLuint shaderProgram = 0;
 
@@ -58,27 +59,43 @@ void specialKeyRealesed(int key, int x, int y) {
 }
 
 void mouseClickCallback(int button, int state, int xpos, int ypos) {
-    if (button == GLUT_LEFT_BUTTON) {
+    if (button == GLUT_RIGHT_BUTTON) {
+        if (state == GLUT_DOWN) {
+            firstMouse = true;
+            isRightMousePressed = true;
+            camera.startTrackball((float)xpos, (float)ypos, (float)glutGet(GLUT_WINDOW_WIDTH), (float)glutGet(GLUT_WINDOW_HEIGHT));
+        }
+        else if (state == GLUT_UP) {
+            isRightMousePressed = false;
+        }
+    }
+    else if (button == GLUT_LEFT_BUTTON) {
         if (state == GLUT_DOWN) {
             firstMouse = true;
             isLeftMousePressed = true;
+
         }
         else if (state == GLUT_UP) {
             isLeftMousePressed = false;
         }
     }
+    lastX = xpos;
+    lastY = ypos;
 }
 
 void mouseCallback(int xpos, int ypos) {
-    if (!isLeftMousePressed) return;
+    if (!(isLeftMousePressed || isRightMousePressed)) return;
     if (firstMouse) {
         lastX = xpos;
         lastY = ypos;
         firstMouse = false;
     }
-    float offset_x = xpos - lastX;
-    float offset_y = ypos - lastY;
-    camera.processMouseMovement(offset_x, offset_y);
+    if (isLeftMousePressed) {
+        float offset_x = xpos - lastX;
+        float offset_y = lastY - ypos;
+        camera.processMouseMovement(offset_x, offset_y);
+    }
+    else if (isRightMousePressed) camera.processTrackballMovement((float)xpos, (float)ypos, (float)glutGet(GLUT_WINDOW_WIDTH), (float)glutGet(GLUT_WINDOW_HEIGHT));
     lastX = xpos;
     lastY = ypos;
     glutPostRedisplay();
