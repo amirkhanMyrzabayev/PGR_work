@@ -22,13 +22,13 @@ const StaticCamera STATIC_CAMERAS[2] = {
 };
 
 const std::vector<ObjectSetup> SCENE_OBJECTS_SETUP = {
-	{ "Assets/BarStand/BarStandModel.txt",
+	{ "Assets/BarStand/BarStandModel.obj",
 	glm::vec3(5.0f, 0.0f, 0.0f), glm::vec3(glm::radians(-90.0f), 0.0f, glm::radians(90.0f)), glm::vec3(1.0f) },
 
-	{ "Assets/cartoon_building/cartoon_building.txt",
+	{ "Assets/cartoon_building/cartoon_building.obj",
 	glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f), glm::vec3(0.05f) },
 
-	{ "Assets/bezdomovec/bezdomovecModel.txt",
+	{ "Assets/bezdomovec/bezdomovecModel.obj",
 	glm::vec3(4.5f, 0.0f, -0.2f), glm::vec3(glm::radians(90.0f), 0.0f, 0.0f), glm::vec3(2.0f) }
 };
 

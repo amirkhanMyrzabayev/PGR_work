@@ -113,16 +113,16 @@
     <Text Include="Assets\BarStand\BarStand.txt">
       <Filter>Assets\BarStand</Filter>
     </Text>
-    <Text Include="Assets\BarStand\BarStandModel.txt">
+    <Text Include="Assets\BarStand\BarStandModel.obj">
       <Filter>Assets\BarStand</Filter>
     </Text>
     <Text Include="Assets\bezdomovec\bezdomovec.txt">
       <Filter>Assets\bezdomovec</Filter>
     </Text>
-    <Text Include="Assets\bezdomovec\bezdomovecModel.txt">
+    <Text Include="Assets\bezdomovec\bezdomovecModel.obj">
       <Filter>Assets\bezdomovec</Filter>
     </Text>
-    <Text Include="Assets\cartoon_building\cartoon_building.txt">
+    <Text Include="Assets\cartoon_building\cartoon_building.obj">
       <Filter>Assets\cartoon_building</Filter>
     </Text>
   </ItemGroup>

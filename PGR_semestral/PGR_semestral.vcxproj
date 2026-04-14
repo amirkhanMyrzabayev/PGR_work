@@ -172,10 +172,16 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="Assets\BarStand\BarStand.txt" />
-    <Text Include="Assets\BarStand\BarStandModel.txt" />
+    <Text Include="Assets\BarStand\BarStandModel.obj" />
     <Text Include="Assets\bezdomovec\bezdomovec.txt" />
-    <Text Include="Assets\bezdomovec\bezdomovecModel.txt" />
-    <Text Include="Assets\cartoon_building\cartoon_building.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Assets\bezdomovec\bezdomovecModel.obj">
+      <FileType>Document</FileType>
+    </Text>
+    <Text Include="Assets\cartoon_building\cartoon_building.obj">
+      <FileType>Document</FileType>
+    </Text>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

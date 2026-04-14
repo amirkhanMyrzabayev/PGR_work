@@ -39,12 +39,23 @@ void Object::draw() {
 	GLint modelLocation = glGetUniformLocation(shaderProgram, "model");
 	GLint normalMatrixLocation = glGetUniformLocation(shaderProgram, "normalMatrix");
 
+	GLint ambientLocation = glGetUniformLocation(shaderProgram, "matAmbient");
+	GLint diffuseLocation = glGetUniformLocation(shaderProgram, "matDiffuse");
+	GLint specularlLocation = glGetUniformLocation(shaderProgram, "matSpecular");
+	GLint shininessLocation = glGetUniformLocation(shaderProgram, "matShininess");
+
 	glUniformMatrix4fv(modelLocation, 1, GL_FALSE, glm::value_ptr(modelR));
 	glUniformMatrix3fv(normalMatrixLocation, 1, GL_FALSE, glm::value_ptr(normalMatrix));
 	//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 
 	glBindVertexArray(mesh->vao);
-	glDrawArrays(GL_TRIANGLES, 0, mesh->numVertices);
+	for (const auto& subMesh : mesh->subMeshes) {
+		glUniform3fv(ambientLocation, 1, glm::value_ptr(subMesh.material.ambient));
+		glUniform3fv(diffuseLocation, 1, glm::value_ptr(subMesh.material.diffuse));
+		glUniform3fv(specularlLocation, 1, glm::value_ptr(subMesh.material.specular));
+		glUniform1f(shininessLocation, (GLfloat)subMesh.material.shininess);
+		glDrawArrays(GL_TRIANGLES, subMesh.startIndex, subMesh.numVertices);
+	}
 	glBindVertexArray(0);
 	//glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 }
