@@ -141,6 +141,7 @@
     <ClCompile Include="MeshManager.cpp" />
     <ClCompile Include="Object.cpp" />
     <ClCompile Include="ObjLoader.cpp" />
+    <ClCompile Include="Skybox.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\BarStand\BarStand.mtl">
@@ -152,8 +153,12 @@
     <None Include="Shaders\3d_basic.vert" />
     <None Include="Shaders\3d_light.frag" />
     <None Include="Shaders\3d_light.vert" />
+    <None Include="Shaders\3d_texture.frag" />
+    <None Include="Shaders\3d_texture.vert" />
     <None Include="Shaders\basic.frag" />
     <None Include="Shaders\basic.vert" />
+    <None Include="Shaders\skybox.frag" />
+    <None Include="Shaders\skybox.vert" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Camera.h" />
@@ -163,6 +168,7 @@
     <ClInclude Include="Object.h" />
     <ClInclude Include="ObjLoader.h" />
     <ClInclude Include="parametry.h" />
+    <ClInclude Include="Skybox.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\BarStand\BarStand.jpg">

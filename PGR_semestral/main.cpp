@@ -9,11 +9,8 @@
 #include "InputManager.h"
 #include "Camera.h"
 #include "Object.h"
+#include "Skybox.h"
 #include "parametry.h"
-
-const int WIN_WIDTH = 1024;
-const int WIN_HEIGHT = 1024;
-const char* WIN_TITLE = "PRG_Semestral";
 
 float lastX = WIN_WIDTH / 2.0;
 float lastY = WIN_WIDTH / 2.0;
@@ -21,12 +18,20 @@ bool firstMouse = true;
 bool isLeftMousePressed = false;
 bool isRightMousePressed = false;
 
-GLuint shaderProgram = 0;
+struct Shaders
+{
+    GLuint ObjectShader = 0;
+    GLuint SkyboxShader = 0;
+
+};
+
+Shaders AllShaders;
 
 glm::vec3 lightPos = glm::vec3(0.0f, 10.0f, 5.0f);
 
 
 std::vector<Object*> sceneObjects;
+Skybox* skybox = nullptr;
 
 
 InputManager inputManager;
@@ -112,37 +117,50 @@ void init() {
     glEnable(GL_DEPTH_TEST);
     glViewport(0, 0, glutGet(GLUT_WINDOW_WIDTH), glutGet(GLUT_WINDOW_HEIGHT));
 
-    GLuint shaders[] = {
+    GLuint skyboxShaders[] = {
+        pgr::createShaderFromFile(GL_VERTEX_SHADER, "Shaders/skybox.vert"),
+        pgr::createShaderFromFile(GL_FRAGMENT_SHADER, "Shaders/skybox.frag"),
+        0
+    };
+    AllShaders.SkyboxShader = pgr::createProgram(skyboxShaders);
+
+    skybox = new Skybox(SKYBOX_FACES, AllShaders.SkyboxShader);
+
+
+    GLuint objectShaders[] = {
       //pgr::createShaderFromFile(GL_VERTEX_SHADER, "Shaders/basic.vert"),
       //pgr::createShaderFromFile(GL_FRAGMENT_SHADER, "Shaders/basic.frag"),
       pgr::createShaderFromFile(GL_VERTEX_SHADER, "Shaders/3d_light.vert"),
       pgr::createShaderFromFile(GL_FRAGMENT_SHADER, "Shaders/3d_light.frag"),
       0
     };
-    shaderProgram = pgr::createProgram(shaders);
+    AllShaders.ObjectShader = pgr::createProgram(objectShaders);
+
+
 
     for (auto objInfo : SCENE_OBJECTS_SETUP) {
-        sceneObjects.push_back(new Object(objInfo.path, shaderProgram, 
+        sceneObjects.push_back(new Object(objInfo.path, AllShaders.ObjectShader,
                                             globalMeshManager,
                                             objInfo.position, 
                                             objInfo.rotation, 
                                             objInfo.scale));
     }
 
+
 }
 
 void draw() {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-    glUseProgram(shaderProgram);
+    glUseProgram(AllShaders.ObjectShader);
 
     glm::mat4 proj = camera.getProjectionMatrix();
     glm::mat4 view = camera.getViewMatrix();
 
-    GLint projLocation = glGetUniformLocation(shaderProgram, "projection");
-    GLint viewLocation = glGetUniformLocation(shaderProgram, "view");
-    GLint lightPosLocation = glGetUniformLocation(shaderProgram, "lightPos");
-    GLint cameraPosLocation = glGetUniformLocation(shaderProgram, "viewPos");
+    GLint projLocation = glGetUniformLocation(AllShaders.ObjectShader, "projection");
+    GLint viewLocation = glGetUniformLocation(AllShaders.ObjectShader, "view");
+    GLint lightPosLocation = glGetUniformLocation(AllShaders.ObjectShader, "lightPos");
+    GLint cameraPosLocation = glGetUniformLocation(AllShaders.ObjectShader, "viewPos");
 
     glUniformMatrix4fv(viewLocation, 1, GL_FALSE, glm::value_ptr(view));
     glUniformMatrix4fv(projLocation, 1, GL_FALSE, glm::value_ptr(proj));
@@ -154,6 +172,7 @@ void draw() {
     for (auto obj : sceneObjects) {
         obj->draw();
     }
+    skybox->draw(view, proj);
     glutSwapBuffers();
 }
 

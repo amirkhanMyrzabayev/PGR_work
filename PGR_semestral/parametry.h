@@ -1,7 +1,11 @@
 #pragma once
-#include <string>
 #include <vector>
+#include <string>
 #include "pgr.h"
+
+constexpr const int WIN_WIDTH = 1024;
+constexpr const int WIN_HEIGHT = 1024;
+constexpr const char* WIN_TITLE = "PRG_Semestral";
 
 struct ObjectSetup {
 	std::string path;
@@ -30,6 +34,12 @@ const std::vector<ObjectSetup> SCENE_OBJECTS_SETUP = {
 
 	{ "Assets/bezdomovec/bezdomovecModel.obj",
 	glm::vec3(4.5f, 0.0f, -0.2f), glm::vec3(glm::radians(90.0f), 0.0f, 0.0f), glm::vec3(2.0f) }
+};
+
+const std::vector<std::string> SKYBOX_FACES = {
+	"Assets/Cubemaps/sky/1_posx.png", "Assets/Cubemaps/sky/1_negx.png",
+	"Assets/Cubemaps/sky/1_posy.png", "Assets/Cubemaps/sky/1_negy.png",
+	"Assets/Cubemaps/sky/1_posz.png", "Assets/Cubemaps/sky/1_negz.png",
 };
 
 
