@@ -13,6 +13,8 @@ uniform vec3 matSpecular;
 uniform float matShininess;
 uniform sampler2D diffuseMap;
 uniform int hasDiffuseMap;
+uniform sampler2D specularMap;
+uniform int hasSpecularMap;
 
 out vec4 color;
 
@@ -24,11 +26,17 @@ void main() {
   } else {
     baseDiffuse = matDiffuse;
   }
+  vec3 baseSpecular;
+  if (hasSpecularMap == 1) {
+    baseSpecular = texture(specularMap, textureCoord).rgb;
+  } else {
+    baseSpecular = matSpecular;
+  }
   vec3 lightDir = normalize(lightPos - vertexPosition);
   vec3 viewDir = normalize(viewPos - vertexPosition);
   float ambientIntensity = 0.1;
   float diffuse = max(dot(lightDir, norm), 0);
   float specular = pow(max(dot(viewDir, reflect(-lightDir, norm)), 0.0), matShininess);
-  vec3 finalColor = (ambientIntensity * baseDiffuse) + (diffuse * baseDiffuse) + (specular * matSpecular);
+  vec3 finalColor = (ambientIntensity * baseDiffuse) + (diffuse * baseDiffuse) + (specular * baseSpecular);
   color = vec4(finalColor, 1.0);
 }

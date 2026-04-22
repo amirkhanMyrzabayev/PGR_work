@@ -149,14 +149,21 @@ std::unordered_map<std::string, Material> ObjLoader::loadMTL(std::string& path) 
         else if (strcmp(lineHeader, "map_Kd") == 0) {
             char texPath[256];
             fscanf(file, "%255s\n", texPath);
-            std::string fullPath = std::string(texPath); // Or just use texPath if your .mtl paths are already perfectly relative to the project root!
+            std::string fullPath = currentDir + std::string(texPath); // Or just use texPath if your .mtl paths are already perfectly relative to the project root!
             materials[currentMaterialName].diffuseTextureID = pgr::createTexture(fullPath);
         }
         else if (strcmp(lineHeader, "map_bump") == 0 || strcmp(lineHeader, "bump") == 0) {
             char texPath[256];
             fscanf(file, "%255s\n", texPath);
-            std::string fullPath = std::string(texPath);
+            std::string fullPath = currentDir + std::string(texPath);
             materials[currentMaterialName].normalTextureID = pgr::createTexture(fullPath);
+        } 
+        else if (strcmp(lineHeader, "map_Ks") == 0) {
+            char texPath[256];
+            fscanf(file, "%255s\n", texPath);
+            printf("read: %s", texPath);
+            std::string fullPath = currentDir + std::string(texPath);
+            materials[currentMaterialName].specularTextureID = pgr::createTexture(fullPath);
         }
     }
 
@@ -165,7 +172,7 @@ std::unordered_map<std::string, Material> ObjLoader::loadMTL(std::string& path) 
 }
 
 bool ObjLoader::loadHardcode(const float* positions, const float* normals, const float* uvs,
-                            const int vertex_count,
+                            const int vertex_count, const std::string& texturePath,
                             std::vector<glm::vec3>& out_vertices,
                             std::vector<glm::vec2>& out_uvs,
                             std::vector<glm::vec3>& out_normals,
@@ -182,6 +189,7 @@ bool ObjLoader::loadHardcode(const float* positions, const float* normals, const
     subMesh.material.diffuse = glm::vec3(0.8f, 0.8f, 0.8f);
     subMesh.material.specular = glm::vec3(0.8f, 0.8f, 0.8f);
     subMesh.material.shininess = 0.5f;
+    if (!texturePath.empty()) subMesh.material.diffuseTextureID = pgr::createTexture(texturePath);
     subMeshes.push_back(subMesh);
     return true;
 }

@@ -12,7 +12,8 @@ newmtl cartoon_building
 	Kd 0.5880 0.5880 0.5880
 	Ks 0.0000 0.0000 0.0000
 	Ke 0.0000 0.0000 0.0000
-	map_Ka Assets/cartoon_building/textures/cartoon_building_Albedo.png
-	map_Kd Assets/cartoon_building/textures/cartoon_building_Albedo.png
-	map_bump Assets/cartoon_building/textures/cartoon_building_Normal.png
-	bump Assets/cartoon_building/textures/cartoon_building_Normal.png
+	map_Ka textures/cartoon_building_Albedo.png
+	map_Kd textures/cartoon_building_Albedo.png
+	map_Ks textures/cartoon_building_Metallic.png
+	map_bump textures/cartoon_building_Normal.png
+	bump textures/cartoon_building_Normal.png

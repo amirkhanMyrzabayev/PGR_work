@@ -17,7 +17,7 @@ class ObjLoader {
 
 
     static bool loadHardcode(const float* positions, const float* normals, const float* uvs,
-                            const int vertex_count,
+                            const int vertex_count, const std::string& texturePath,
                             std::vector<glm::vec3>& out_vertices,
                             std::vector<glm::vec2>& out_uvs,
                             std::vector<glm::vec3>& out_normals,

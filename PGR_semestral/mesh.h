@@ -8,9 +8,10 @@ struct Material {
 	glm::vec3 diffuse;
 	glm::vec3 specular;
 	std::string name;
+	float shininess;
 	GLuint diffuseTextureID = 0;
 	GLuint normalTextureID = 0;
-	float shininess;
+	GLuint specularTextureID = 0;
 };
 
 struct SubMesh {

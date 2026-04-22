@@ -21,8 +21,12 @@ Mesh* MeshManager::getMesh(const std::string& filePath, GLuint shaderProgram) {
 	std::vector<glm::vec2> uv_array;
 	std::vector<glm::vec3> normals;
 	std::vector<SubMesh> subMeshes;
-	if (filePath == "HARD") ObjLoader::loadHardcode(_positions, _normals, _uvs, HARDCODED_VERTEX_COUNT,
-													vertices, uv_array, normals, subMeshes);
+	if (filePath == "HARD") {
+		ObjLoader::loadHardcode(_positions, _normals, _uvs, HARDCODED_VERTEX_COUNT,
+			"Assets/CVUT_znak.png",
+			vertices, uv_array, normals, subMeshes);
+		
+	}
 	else ObjLoader::loadOBJ(filePath, vertices, uv_array, normals, subMeshes);
 
 

@@ -19,6 +19,8 @@ struct shaderLocations {
 	GLint shininessLoc;
 	GLint diffuseMapLoc;
 	GLint hasDiffuseMapLoc;
+	GLint specularMapLoc;
+	GLint hasSpecularMapLoc;
 };
 
 class Object
