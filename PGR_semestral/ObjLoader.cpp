@@ -150,3 +150,25 @@ std::unordered_map<std::string, Material> ObjLoader::loadMTL(std::string& path) 
     fclose(file);
     return materials;
 }
+
+bool ObjLoader::loadHardcode(const float* positions, const float* normals, const float* uvs,
+                            const int vertex_count,
+                            std::vector<glm::vec3>& out_vertices,
+                            std::vector<glm::vec2>& out_uvs,
+                            std::vector<glm::vec3>& out_normals,
+                            std::vector<SubMesh>& subMeshes) {
+    for (int i = 0; i < vertex_count; i++) {
+        out_vertices.push_back(glm::vec3(positions[i * 3], positions[i * 3 + 1], positions[i * 3 + 2]));
+        out_normals.push_back(glm::vec3(normals[i * 3], normals[i * 3 + 1], normals[i * 3 + 2]));
+        out_uvs.push_back(glm::vec2(uvs[i * 2], uvs[i * 2 + 1]));
+    }
+    SubMesh subMesh;
+    subMesh.startIndex = 0;
+    subMesh.numVertices = vertex_count;
+    subMesh.material.ambient = glm::vec3(0.8f, 0.8f, 0.8f);
+    subMesh.material.diffuse = glm::vec3(0.8f, 0.8f, 0.8f);
+    subMesh.material.specular = glm::vec3(0.8f, 0.8f, 0.8f);
+    subMesh.material.shininess = 0.5f;
+    subMeshes.push_back(subMesh);
+    return true;
+}

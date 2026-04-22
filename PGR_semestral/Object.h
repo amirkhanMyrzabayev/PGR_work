@@ -4,16 +4,18 @@
 #include "pgr.h"
 #include "mesh.h"
 #include "MeshManager.h"
-
+#include "ShaderManager.h"
 
 
 class Object
 {
 public:
-	Object(const std::string& filePath, GLuint _shaderProgram, MeshManager& meshManager);
-	Object(const std::string& filePath, GLuint _shaderProgram, MeshManager& meshManager, const glm::vec3& newPos, const glm::vec3& newRotation, const glm::vec3& newScale);
+	Object(const std::string& filePath, const std::string& shaderName, ShaderManager& shaderManager, MeshManager& meshManager);
+	Object(const std::string& filePath, const std::string& shaderName, ShaderManager& shaderManager, MeshManager& meshManager,
+			const glm::vec3& newPos, const glm::vec3& newRotation, const glm::vec3& newScale);
 	~Object();
-	void draw();
+	void draw(const glm::mat4 view, const glm::mat4& proj,
+			const glm::vec3& lightPos, const glm::vec3& viewPos);
 
 	void setPosition(const glm::vec3& newPos);
 	void setRotation(const glm::vec3& newRot);

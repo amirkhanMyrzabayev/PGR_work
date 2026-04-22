@@ -1,6 +1,7 @@
 #include "MeshManager.h"
 #include "ObjLoader.h"
 #include "mesh.h"
+#include "hardcodeObject.h"
 #include <iostream>
 
 MeshManager::~MeshManager() {
@@ -20,7 +21,11 @@ Mesh* MeshManager::getMesh(const std::string& filePath, GLuint shaderProgram) {
 	std::vector<glm::vec2> uv_array;
 	std::vector<glm::vec3> normals;
 	std::vector<SubMesh> subMeshes;
-	ObjLoader::loadOBJ(filePath, vertices, uv_array, normals, subMeshes);
+	if (filePath == "HARD") ObjLoader::loadHardcode(_positions, _normals, _uvs, HARDCODED_VERTEX_COUNT,
+													vertices, uv_array, normals, subMeshes);
+	else ObjLoader::loadOBJ(filePath, vertices, uv_array, normals, subMeshes);
+
+
 	size_t _numVertices = vertices.size();
 	std::vector<VertexData> vertexData;
 	for (size_t i = 0; i < _numVertices; i++) {
