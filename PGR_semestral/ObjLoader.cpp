@@ -112,7 +112,8 @@ std::unordered_map<std::string, Material> ObjLoader::loadMTL(std::string& path) 
         std::cout << "Failed to open file: " << path << std::endl;
         return materials;
     }
-   
+    size_t slashIndex = path.find_last_of("/\\");
+    std::string currentDir = path.substr(0, slashIndex + 1);
     char lineHeader[128];
     std::string currentMaterialName = "";
     // Read the first word of the line until the End Of File
@@ -144,6 +145,18 @@ std::unordered_map<std::string, Material> ObjLoader::loadMTL(std::string& path) 
             glm::vec3 specularColor;
             fscanf(file, "%f %f %f\n", &specularColor.x, &specularColor.y, &specularColor.z);
             materials[currentMaterialName].specular = specularColor;
+        }
+        else if (strcmp(lineHeader, "map_Kd") == 0) {
+            char texPath[256];
+            fscanf(file, "%255s\n", texPath);
+            std::string fullPath = std::string(texPath); // Or just use texPath if your .mtl paths are already perfectly relative to the project root!
+            materials[currentMaterialName].diffuseTextureID = pgr::createTexture(fullPath);
+        }
+        else if (strcmp(lineHeader, "map_bump") == 0 || strcmp(lineHeader, "bump") == 0) {
+            char texPath[256];
+            fscanf(file, "%255s\n", texPath);
+            std::string fullPath = std::string(texPath);
+            materials[currentMaterialName].normalTextureID = pgr::createTexture(fullPath);
         }
     }
 

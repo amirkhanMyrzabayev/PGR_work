@@ -17,6 +17,8 @@ Object::Object(const std::string& filePath, const std::string& shaderName, Shade
 	locations.diffuseLoc = glGetUniformLocation(shaderProgram, "matDiffuse");
 	locations.specularLoc = glGetUniformLocation(shaderProgram, "matSpecular");
 	locations.shininessLoc = glGetUniformLocation(shaderProgram, "matShininess");
+	locations.diffuseMapLoc = glGetUniformLocation(shaderProgram, "diffuseMap");
+	locations.hasDiffuseMapLoc = glGetUniformLocation(shaderProgram, "hasDiffuseMap");
 	this->mesh = meshManager.getMesh(filePath, shaderProgram);
 }
 
@@ -69,6 +71,15 @@ void Object::draw(const glm::mat4 view, const glm::mat4& proj,
 		glUniform3fv(locations.diffuseLoc, 1, glm::value_ptr(subMesh.material.diffuse));
 		glUniform3fv(locations.specularLoc, 1, glm::value_ptr(subMesh.material.specular));
 		glUniform1f(locations.shininessLoc, (GLfloat)subMesh.material.shininess);
+		if (subMesh.material.diffuseTextureID != 0) {
+			glUniform1i(locations.hasDiffuseMapLoc, 1); 
+			glActiveTexture(GL_TEXTURE0);
+			glBindTexture(GL_TEXTURE_2D, subMesh.material.diffuseTextureID);
+			glUniform1i(locations.diffuseMapLoc, 0); 
+		}
+		else {
+			glUniform1i(locations.hasDiffuseMapLoc, 0);
+		}
 		glDrawArrays(GL_TRIANGLES, subMesh.startIndex, subMesh.numVertices);
 	}
 	glBindVertexArray(0);

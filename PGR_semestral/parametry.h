@@ -27,16 +27,16 @@ const StaticCamera STATIC_CAMERAS[2] = {
 };
 
 const std::vector<ObjectSetup> SCENE_OBJECTS_SETUP = {
-	{ "Assets/BarStand/BarStandModel.obj", "Shaders/3d_light",
+	{ "Assets/BarStand/BarStandModel.obj", "Shaders/3d_light_pixel",
 	glm::vec3(5.0f, 0.0f, 0.0f), glm::vec3(glm::radians(-90.0f), 0.0f, glm::radians(90.0f)), glm::vec3(1.0f) },
 
-	{ "Assets/cartoon_building/cartoon_building.obj", "Shaders/3d_light",
+	{ "Assets/cartoon_building/cartoon_building.obj", "Shaders/3d_light_pixel",
 	glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f), glm::vec3(0.05f) },
 
-	{ "Assets/bezdomovec/bezdomovecModel.obj", "Shaders/3d_light",
+	{ "Assets/bezdomovec/bezdomovecModel.obj", "Shaders/3d_light_pixel",
 	glm::vec3(4.5f, 0.0f, -0.2f), glm::vec3(glm::radians(90.0f), 0.0f, 0.0f), glm::vec3(2.0f) },
 
-	{ "HARD", "Shaders/3d_light",
+	{ "HARD", "Shaders/3d_light_pixel",
 	glm::vec3(4.8f, 1.05f, 0.5f), glm::vec3(0.0f), glm::vec3(0.025f)}
 };
 

@@ -12,7 +12,7 @@ newmtl cartoon_building
 	Kd 0.5880 0.5880 0.5880
 	Ks 0.0000 0.0000 0.0000
 	Ke 0.0000 0.0000 0.0000
-	map_Ka C:\Users\hunte\Desktop\cartoon_building\textures\cartoon_building_Albedo.png
-	map_Kd C:\Users\hunte\Desktop\cartoon_building\textures\cartoon_building_Albedo.png
-	map_bump C:\Users\hunte\Desktop\cartoon_building\textures\cartoon_building_Normal.png
-	bump C:\Users\hunte\Desktop\cartoon_building\textures\cartoon_building_Normal.png
+	map_Ka Assets/cartoon_building/textures/cartoon_building_Albedo.png
+	map_Kd Assets/cartoon_building/textures/cartoon_building_Albedo.png
+	map_bump Assets/cartoon_building/textures/cartoon_building_Normal.png
+	bump Assets/cartoon_building/textures/cartoon_building_Normal.png

@@ -28,6 +28,9 @@
     <Filter Include="Assets\cartoon_building">
       <UniqueIdentifier>{29a93319-ef4e-4f69-a4e8-ac9a4a52cc9f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Assets\cartoon_building\textures">
+      <UniqueIdentifier>{c41fa695-8d0f-4291-8733-7ec005b39fc7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -95,6 +98,12 @@
     <None Include="Shaders\skybox.vert">
       <Filter>Shaders</Filter>
     </None>
+    <None Include="Shaders\3d_light_pixel.frag">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="Shaders\3d_light_pixel.vert">
+      <Filter>Shaders</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="InputManager.h">
@@ -135,6 +144,21 @@
     <Image Include="Assets\bezdomovec\bezdomovec.jpg">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="Assets\cartoon_building\textures\cartoon_building_Albedo.png">
+      <Filter>Assets\cartoon_building\textures</Filter>
+    </Image>
+    <Image Include="Assets\cartoon_building\textures\cartoon_building_AO.png">
+      <Filter>Assets\cartoon_building\textures</Filter>
+    </Image>
+    <Image Include="Assets\cartoon_building\textures\cartoon_building_Metallic.png">
+      <Filter>Assets\cartoon_building\textures</Filter>
+    </Image>
+    <Image Include="Assets\cartoon_building\textures\cartoon_building_Normal.png">
+      <Filter>Assets\cartoon_building\textures</Filter>
+    </Image>
+    <Image Include="Assets\cartoon_building\textures\cartoon_building_Roughness.png">
+      <Filter>Assets\cartoon_building\textures</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <Text Include="Assets\BarStand\BarStand.txt">
@@ -149,10 +173,8 @@
     <Text Include="Assets\bezdomovec\bezdomovecModel.obj">
       <Filter>Assets\bezdomovec</Filter>
     </Text>
-  </ItemGroup>
-  <ItemGroup>
-    <Object Include="Assets\cartoon_building\cartoon_building.obj">
+    <Text Include="Assets\cartoon_building\cartoon_building.obj">
       <Filter>Assets\cartoon_building</Filter>
-    </Object>
+    </Text>
   </ItemGroup>
 </Project>

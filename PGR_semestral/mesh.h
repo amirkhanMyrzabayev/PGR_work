@@ -8,6 +8,8 @@ struct Material {
 	glm::vec3 diffuse;
 	glm::vec3 specular;
 	std::string name;
+	GLuint diffuseTextureID = 0;
+	GLuint normalTextureID = 0;
 	float shininess;
 };
 
@@ -26,4 +28,5 @@ struct Mesh {
 struct VertexData {
 	glm::vec3 position;
 	glm::vec3 normal;
+	glm::vec2 Texcoord;
 };

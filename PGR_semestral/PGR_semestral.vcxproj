@@ -154,6 +154,8 @@
     <None Include="Shaders\3d_basic.vert" />
     <None Include="Shaders\3d_light.frag" />
     <None Include="Shaders\3d_light.vert" />
+    <None Include="Shaders\3d_light_pixel.frag" />
+    <None Include="Shaders\3d_light_pixel.vert" />
     <None Include="Shaders\3d_texture.frag" />
     <None Include="Shaders\3d_texture.vert" />
     <None Include="Shaders\basic.frag" />
@@ -178,6 +180,11 @@
       <FileType>Text</FileType>
     </Image>
     <Image Include="Assets\bezdomovec\bezdomovec.jpg" />
+    <Image Include="Assets\cartoon_building\textures\cartoon_building_Albedo.png" />
+    <Image Include="Assets\cartoon_building\textures\cartoon_building_AO.png" />
+    <Image Include="Assets\cartoon_building\textures\cartoon_building_Metallic.png" />
+    <Image Include="Assets\cartoon_building\textures\cartoon_building_Normal.png" />
+    <Image Include="Assets\cartoon_building\textures\cartoon_building_Roughness.png" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="Assets\BarStand\BarStand.txt" />
@@ -190,7 +197,9 @@
     </Text>
   </ItemGroup>
   <ItemGroup>
-    <Object Include="Assets\cartoon_building\cartoon_building.obj" />
+    <Text Include="Assets\cartoon_building\cartoon_building.obj">
+      <FileType>Document</FileType>
+    </Text>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

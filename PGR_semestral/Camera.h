@@ -33,7 +33,7 @@ private:
 	glm::vec3 position;
 	glm::vec3 front;
 	glm::vec3 up;
-	float cameraSpeed = 0.05f;
+	float cameraSpeed = 0.1f;
 	float yaw = -90.0f;
 	float pitch = 0.0f;
 	float mouseSensitivity = 0.1f;
