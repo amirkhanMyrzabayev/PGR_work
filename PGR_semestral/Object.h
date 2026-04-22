@@ -6,6 +6,18 @@
 #include "MeshManager.h"
 #include "ShaderManager.h"
 
+struct shaderLocations {
+	GLint viewLoc;
+	GLint projLoc;
+	GLint lightPosLoc;
+	GLint viewPosLoc;
+	GLint modelLoc;
+	GLint normalMatrixLoc;
+	GLint ambientLoc;
+	GLint diffuseLoc;
+	GLint specularLoc;
+	GLint shininessLoc;
+};
 
 class Object
 {
@@ -27,6 +39,7 @@ private:
 	glm::vec3 rotation;
 	glm::vec3 scale;
 	glm::mat4 modelMatrix;
+	shaderLocations locations;
 	Mesh* mesh;
 };
 

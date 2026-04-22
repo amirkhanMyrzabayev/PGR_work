@@ -7,6 +7,16 @@ Object::Object(const std::string& filePath, const std::string& shaderName, Shade
 	rotation = glm::vec3(0.0f);
 	scale = glm::vec3(1.0f);
 	shaderProgram = shaderManager.getShaderProgram(shaderName);
+	locations.viewLoc = glGetUniformLocation(shaderProgram, "view");
+	locations.projLoc = glGetUniformLocation(shaderProgram, "projection");
+	locations.lightPosLoc = glGetUniformLocation(shaderProgram, "lightPos");
+	locations.viewPosLoc = glGetUniformLocation(shaderProgram, "viewPos");
+	locations.modelLoc = glGetUniformLocation(shaderProgram, "model");
+	locations.normalMatrixLoc = glGetUniformLocation(shaderProgram, "normalMatrix");
+	locations.ambientLoc = glGetUniformLocation(shaderProgram, "matAmbient");
+	locations.diffuseLoc = glGetUniformLocation(shaderProgram, "matDiffuse");
+	locations.specularLoc = glGetUniformLocation(shaderProgram, "matSpecular");
+	locations.shininessLoc = glGetUniformLocation(shaderProgram, "matShininess");
 	this->mesh = meshManager.getMesh(filePath, shaderProgram);
 }
 
@@ -33,16 +43,11 @@ void Object::setSRP(const glm::vec3& newPos, const glm::vec3& newRotation, const
 void Object::draw(const glm::mat4 view, const glm::mat4& proj,
 	const glm::vec3& lightPos, const glm::vec3& viewPos) {
 	glUseProgram(shaderProgram);
-	GLint viewLocation = glGetUniformLocation(shaderProgram, "view");
-	GLint projLocation = glGetUniformLocation(shaderProgram, "projection");
-	GLint lightPosLocation = glGetUniformLocation(shaderProgram, "lightPos");
-	GLint viewPosLocation = glGetUniformLocation(shaderProgram, "viewPos");
 
-
-	glUniformMatrix4fv(viewLocation, 1, GL_FALSE, glm::value_ptr(view));
-	glUniformMatrix4fv(projLocation, 1, GL_FALSE, glm::value_ptr(proj));
-	glUniform3fv(lightPosLocation, 1, glm::value_ptr(lightPos));
-	glUniform3fv(viewPosLocation, 1, glm::value_ptr(viewPos));
+	glUniformMatrix4fv(locations.viewLoc, 1, GL_FALSE, glm::value_ptr(view));
+	glUniformMatrix4fv(locations.projLoc, 1, GL_FALSE, glm::value_ptr(proj));
+	glUniform3fv(locations.lightPosLoc, 1, glm::value_ptr(lightPos));
+	glUniform3fv(locations.viewPosLoc, 1, glm::value_ptr(viewPos));
 
 	glm::mat4 modelR = glm::mat4(1.0f);
 	modelR = glm::translate(modelR, position);
@@ -52,24 +57,18 @@ void Object::draw(const glm::mat4 view, const glm::mat4& proj,
 	modelR = glm::scale(modelR, scale);
 
 	glm::mat3 normalMatrix = glm::mat3(glm::transpose(glm::inverse(modelR)));
-	GLint modelLocation = glGetUniformLocation(shaderProgram, "model");
-	GLint normalMatrixLocation = glGetUniformLocation(shaderProgram, "normalMatrix");
 
-	GLint ambientLocation = glGetUniformLocation(shaderProgram, "matAmbient");
-	GLint diffuseLocation = glGetUniformLocation(shaderProgram, "matDiffuse");
-	GLint specularlLocation = glGetUniformLocation(shaderProgram, "matSpecular");
-	GLint shininessLocation = glGetUniformLocation(shaderProgram, "matShininess");
 
-	glUniformMatrix4fv(modelLocation, 1, GL_FALSE, glm::value_ptr(modelR));
-	glUniformMatrix3fv(normalMatrixLocation, 1, GL_FALSE, glm::value_ptr(normalMatrix));
+	glUniformMatrix4fv(locations.modelLoc, 1, GL_FALSE, glm::value_ptr(modelR));
+	glUniformMatrix3fv(locations.normalMatrixLoc, 1, GL_FALSE, glm::value_ptr(normalMatrix));
 	//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 
 	glBindVertexArray(mesh->vao);
 	for (const auto& subMesh : mesh->subMeshes) {
-		glUniform3fv(ambientLocation, 1, glm::value_ptr(subMesh.material.ambient));
-		glUniform3fv(diffuseLocation, 1, glm::value_ptr(subMesh.material.diffuse));
-		glUniform3fv(specularlLocation, 1, glm::value_ptr(subMesh.material.specular));
-		glUniform1f(shininessLocation, (GLfloat)subMesh.material.shininess);
+		glUniform3fv(locations.ambientLoc, 1, glm::value_ptr(subMesh.material.ambient));
+		glUniform3fv(locations.diffuseLoc, 1, glm::value_ptr(subMesh.material.diffuse));
+		glUniform3fv(locations.specularLoc, 1, glm::value_ptr(subMesh.material.specular));
+		glUniform1f(locations.shininessLoc, (GLfloat)subMesh.material.shininess);
 		glDrawArrays(GL_TRIANGLES, subMesh.startIndex, subMesh.numVertices);
 	}
 	glBindVertexArray(0);
