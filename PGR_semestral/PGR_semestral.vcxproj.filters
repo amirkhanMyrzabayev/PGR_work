@@ -149,8 +149,10 @@
     <Text Include="Assets\bezdomovec\bezdomovecModel.obj">
       <Filter>Assets\bezdomovec</Filter>
     </Text>
-    <Text Include="Assets\cartoon_building\cartoon_building.obj">
+  </ItemGroup>
+  <ItemGroup>
+    <Object Include="Assets\cartoon_building\cartoon_building.obj">
       <Filter>Assets\cartoon_building</Filter>
-    </Text>
+    </Object>
   </ItemGroup>
 </Project>

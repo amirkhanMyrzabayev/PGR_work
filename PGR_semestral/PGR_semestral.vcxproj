@@ -188,9 +188,9 @@
     <Text Include="Assets\bezdomovec\bezdomovecModel.obj">
       <FileType>Document</FileType>
     </Text>
-    <Text Include="Assets\cartoon_building\cartoon_building.obj">
-      <FileType>Document</FileType>
-    </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <Object Include="Assets\cartoon_building\cartoon_building.obj" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
