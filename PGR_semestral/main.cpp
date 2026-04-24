@@ -21,8 +21,9 @@ bool isRightMousePressed = false;
 
 GLuint skyboxShader = 0;
 
-
-glm::vec3 lightPos = glm::vec3(0.0f, 10.0f, 5.0f);
+std::vector<DirectionalLight*> dirLights;
+std::vector<PointLight*> pointLights;
+std::vector<SpotLight*> spotLights;
 
 
 std::vector<Object*> sceneObjects;
@@ -126,6 +127,31 @@ void init() {
     }
 
 
+    //lights
+    for (auto& setup : DIR_LIGHTS_SETUP) {
+        if (dirLights.size() == MAX_POINT_LIGHTS) {
+            std::cerr << "Maximum directional lights exceeded: ignoring remaining" << std::endl;
+            break;
+        }
+        dirLights.push_back(new DirectionalLight(setup));
+    }
+
+    for (auto& setup : POINT_LIGHTS_SETUP) {
+        if (pointLights.size() == MAX_POINT_LIGHTS) {
+            std::cerr << "Maximum point lights exceeded: ignoring remaining" << std::endl;
+            break;
+        }
+        pointLights.push_back(new PointLight(setup));
+    }
+
+    for (auto& setup : SPOT_LIGHTS_SETUP) {
+        if (spotLights.size() == MAX_POINT_LIGHTS) {
+            std::cerr << "Maximum spot lights exceeded: ignoring remaining" << std::endl;
+            break;
+        }
+        spotLights.push_back(new SpotLight(setup));
+    }
+
 }
 
 void draw() {
@@ -136,8 +162,38 @@ void draw() {
 
     //glBindVertexArray(vao);
     //glDrawArrays(GL_TRIANGLES, 0, 6);
+    GLint mainLightShader = globalShaderManager.getShaderProgram(mainLightShaderName);
+    glUseProgram(mainLightShader);
+    int i = 0;
+    for (i = 0; i < dirLights.size(); i++) {
+        if (i == MAX_DIR_LIGHTS) {
+            std::cerr << "Maximum directional lights " << MAX_DIR_LIGHTS << " exceeded: ignoring remaining" << std::endl;
+            break;
+        }
+        dirLights[i]->bindUniforms(mainLightShader, i);
+    }
+    GLint numLightLoc = glGetUniformLocation(mainLightShader, "numDirLights");
+    glUniform1i(numLightLoc, i);
+    for (i = 0; i < pointLights.size(); i++) {
+        if (i == MAX_POINT_LIGHTS) {
+            std::cerr << "Maximum point lights " << MAX_POINT_LIGHTS << " exceeded: ignoring remaining" << std::endl;
+            break;
+        }
+        pointLights[i]->bindUniforms(mainLightShader, i);
+    }
+    numLightLoc = glGetUniformLocation(mainLightShader, "numPointLights");
+    glUniform1i(numLightLoc, i);
+    for (int i = 0; i < spotLights.size(); i++) {
+        if (i == MAX_SPOT_LIGHTS) {
+            std::cerr << "Maximum spot lights " << MAX_SPOT_LIGHTS << " exceeded: ignoring remaining" << std::endl;
+            break;
+        }
+        spotLights[i]->bindUniforms(mainLightShader, i);
+    }
+    numLightLoc = glGetUniformLocation(mainLightShader, "numSpotLights");
+    glUniform1i(numLightLoc, i);
     for (auto obj : sceneObjects) {
-        obj->draw(view, proj, lightPos, camera.getPosition());
+        obj->draw(view, proj, camera.getPosition());
     }
     skybox->draw(view, proj);
     glutSwapBuffers();

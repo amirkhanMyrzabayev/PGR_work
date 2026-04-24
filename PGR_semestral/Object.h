@@ -6,10 +6,13 @@
 #include "MeshManager.h"
 #include "ShaderManager.h"
 
-struct shaderLocations {
+class DirectionalLight;
+class PointLight;
+class SpotLight;
+
+struct ShaderLocations {
 	GLint viewLoc;
 	GLint projLoc;
-	GLint lightPosLoc;
 	GLint viewPosLoc;
 	GLint modelLoc;
 	GLint normalMatrixLoc;
@@ -31,7 +34,7 @@ public:
 			const glm::vec3& newPos, const glm::vec3& newRotation, const glm::vec3& newScale);
 	~Object();
 	void draw(const glm::mat4 view, const glm::mat4& proj,
-			const glm::vec3& lightPos, const glm::vec3& viewPos);
+			 const glm::vec3& viewPos);
 
 	void setPosition(const glm::vec3& newPos);
 	void setRotation(const glm::vec3& newRot);
@@ -43,7 +46,7 @@ private:
 	glm::vec3 rotation;
 	glm::vec3 scale;
 	glm::mat4 modelMatrix;
-	shaderLocations locations;
+	ShaderLocations locations;
 	Mesh* mesh;
 };
 

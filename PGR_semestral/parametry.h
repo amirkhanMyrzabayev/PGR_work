@@ -2,10 +2,18 @@
 #include <vector>
 #include <string>
 #include "pgr.h"
+#include "DirectionalLight.h"
+#include "PointLight.h"
+#include "SpotLight.h"
+#define MAX_DIR_LIGHTS 5
+#define MAX_POINT_LIGHTS 5
+#define MAX_SPOT_LIGHTS 5
 
 constexpr const int WIN_WIDTH = 1024;
 constexpr const int WIN_HEIGHT = 1024;
 constexpr const char* WIN_TITLE = "PRG_Semestral";
+const std::string mainLightShaderName = "Shaders/3d_light_pixel";
+
 
 struct ObjectSetup {
 	std::string path;
@@ -20,6 +28,7 @@ struct StaticCamera {
 	glm::vec3 front;
 	glm::vec3 up;
 };
+
 
 const StaticCamera STATIC_CAMERAS[2] = {
 	{ glm::vec3(0.0f, 2.0f, 10.0f), glm::vec3(0.0f, 0.0f, -1.0f), glm::vec3(0.0f, 1.0f, 0.0f) },
@@ -40,11 +49,46 @@ const std::vector<ObjectSetup> SCENE_OBJECTS_SETUP = {
 	glm::vec3(4.8f, 1.05f, 0.5f), glm::vec3(0.0f), glm::vec3(0.025f)}
 };
 
+
+const std::vector<DirLightSetup> DIR_LIGHTS_SETUP = {
+	{
+		//  ambient							diffuse
+		glm::vec3(0.1f, 0.1f, 0.1f), glm::vec3(0.8f, 0.8f, 0.8f),
+		//	specular						direction
+		glm::vec3(0.8f, 0.8f, 0.8f), glm::vec3(-0.2f, -1.0f, -0.3f)
+	}
+};
+
+const std::vector<PointLightSetup> POINT_LIGHTS_SETUP = {
+	{
+		//  ambient							diffuse
+		glm::vec3(0.05f, 0.0f, 0.0f), glm::vec3(1.0f, 0.5f, 0.0f),
+		//	specular						position
+		glm::vec3(1.0f, 1.0f, 1.0f),  glm::vec3(4.8f, 1.05f, 0.5f),
+		//	linearDecay						quadraticDecay			constantDecay(default=1.0f) 
+			0.09f,							0.032f
+	}
+};
+
+const std::vector<SpotLightSetup> SPOT_LIGHTS_SETUP = {
+	{
+		//  ambient						diffuse
+		glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(1.0f, 1.0f, 1.0f),
+		//	specular					direction
+		glm::vec3(1.0f, 1.0f, 1.0f), glm::vec3(0.0f, -1.0f, 0.0f),
+		//  position					innerCutOffAngle			outerCutOffAngle
+		glm::vec3(0.0f, 5.0f, 0.0f), glm::radians(12.5f),			glm::radians(17.5f), 
+		//	linearDecay					quadraticDecay				constantDecay(default=1.0f) 
+		0.09f,							0.032f
+	}
+};
+
 const std::vector<std::string> SKYBOX_FACES = {
 	"Assets/Cubemaps/sky/1_posx.png", "Assets/Cubemaps/sky/1_negx.png",
 	"Assets/Cubemaps/sky/1_posy.png", "Assets/Cubemaps/sky/1_negy.png",
 	"Assets/Cubemaps/sky/1_posz.png", "Assets/Cubemaps/sky/1_negz.png",
 };
+
 
 
 

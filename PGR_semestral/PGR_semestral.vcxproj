@@ -135,14 +135,18 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="BaseLight.cpp" />
     <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="DirectionalLight.cpp" />
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MeshManager.cpp" />
     <ClCompile Include="Object.cpp" />
     <ClCompile Include="ObjLoader.cpp" />
+    <ClCompile Include="PointLight.cpp" />
     <ClCompile Include="ShaderManager.cpp" />
     <ClCompile Include="Skybox.cpp" />
+    <ClCompile Include="SpotLight.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\BarStand\BarStand.mtl">
@@ -164,7 +168,9 @@
     <None Include="Shaders\skybox.vert" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BaseLight.h" />
     <ClInclude Include="Camera.h" />
+    <ClInclude Include="DirectionalLight.h" />
     <ClInclude Include="hardcodeObject.h" />
     <ClInclude Include="InputManager.h" />
     <ClInclude Include="mesh.h" />
@@ -172,8 +178,10 @@
     <ClInclude Include="Object.h" />
     <ClInclude Include="ObjLoader.h" />
     <ClInclude Include="parametry.h" />
+    <ClInclude Include="PointLight.h" />
     <ClInclude Include="ShaderManager.h" />
     <ClInclude Include="Skybox.h" />
+    <ClInclude Include="SpotLight.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\BarStand\BarStand.jpg">

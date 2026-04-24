@@ -1,5 +1,8 @@
 #include "Object.h"
 #include "ObjLoader.h"
+#include "DirectionalLight.h"
+#include "PointLight.h"
+#include "SpotLight.h"
 
 
 Object::Object(const std::string& filePath, const std::string& shaderName, ShaderManager& shaderManager, MeshManager& meshManager) {
@@ -9,7 +12,6 @@ Object::Object(const std::string& filePath, const std::string& shaderName, Shade
 	shaderProgram = shaderManager.getShaderProgram(shaderName);
 	locations.viewLoc = glGetUniformLocation(shaderProgram, "view");
 	locations.projLoc = glGetUniformLocation(shaderProgram, "projection");
-	locations.lightPosLoc = glGetUniformLocation(shaderProgram, "lightPos");
 	locations.viewPosLoc = glGetUniformLocation(shaderProgram, "viewPos");
 	locations.modelLoc = glGetUniformLocation(shaderProgram, "model");
 	locations.normalMatrixLoc = glGetUniformLocation(shaderProgram, "normalMatrix");
@@ -45,12 +47,12 @@ void Object::setSRP(const glm::vec3& newPos, const glm::vec3& newRotation, const
 }
 
 void Object::draw(const glm::mat4 view, const glm::mat4& proj,
-	const glm::vec3& lightPos, const glm::vec3& viewPos) {
+				 const glm::vec3& viewPos) {
 	glUseProgram(shaderProgram);
 
 	glUniformMatrix4fv(locations.viewLoc, 1, GL_FALSE, glm::value_ptr(view));
 	glUniformMatrix4fv(locations.projLoc, 1, GL_FALSE, glm::value_ptr(proj));
-	glUniform3fv(locations.lightPosLoc, 1, glm::value_ptr(lightPos));
+
 	glUniform3fv(locations.viewPosLoc, 1, glm::value_ptr(viewPos));
 
 	glm::mat4 modelR = glm::mat4(1.0f);
