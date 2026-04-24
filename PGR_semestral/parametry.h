@@ -64,7 +64,7 @@ const std::vector<PointLightSetup> POINT_LIGHTS_SETUP = {
 		//  ambient							diffuse
 		glm::vec3(0.05f, 0.0f, 0.0f), glm::vec3(1.0f, 0.5f, 0.0f),
 		//	specular						position
-		glm::vec3(1.0f, 1.0f, 1.0f),  glm::vec3(4.8f, 1.05f, 0.5f),
+		glm::vec3(1.0f, 1.0f, 1.0f),  glm::vec3(4.8f, 1.1f, 0.5f),
 		//	linearDecay						quadraticDecay			constantDecay(default=1.0f) 
 			0.09f,							0.032f
 	}
