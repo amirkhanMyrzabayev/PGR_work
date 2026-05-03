@@ -24,6 +24,7 @@ struct ShaderLocations {
 	GLint hasDiffuseMapLoc;
 	GLint specularMapLoc;
 	GLint hasSpecularMapLoc;
+	GLint texMatrixLoc;
 };
 
 class Object
@@ -40,12 +41,18 @@ public:
 	void setRotation(const glm::vec3& newRot);
 	void setScale(const glm::vec3& newScale);
 	void setSRP(const glm::vec3& newPos, const glm::vec3& newRotation, const glm::vec3& newScale);
+	void setTextureMatrix(const glm::mat4& matrix);
+
+
+
+	bool isTextureAnimated;
 private:
 	GLuint shaderProgram;
 	glm::vec3 position;
 	glm::vec3 rotation;
 	glm::vec3 scale;
 	glm::mat4 modelMatrix;
+	glm::mat4 textureMatrix;
 	ShaderLocations locations;
 	Mesh* mesh;
 };

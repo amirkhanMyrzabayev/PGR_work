@@ -49,7 +49,6 @@ void keyPressed(unsigned char key, int x, int y) {
 
 void keyRealesed(unsigned char key, int x, int y) {
     inputManager.releaseKey(key);
-    //if (inputManager.keys[key] == false) std::cout << "key " << key << " is realesed" << std::endl;
 }
 
 void specialKeyPressed(int key, int x, int y) {
@@ -104,6 +103,16 @@ void mouseCallback(int xpos, int ypos) {
 }
 
 void timerFunc(int value) {
+    float timeScale = glutGet(GLUT_ELAPSED_TIME) / 1000.0f;
+    for (auto obj : sceneObjects) {
+        if (obj->isTextureAnimated) {
+            glm::mat4 texMat = glm::mat4(1.0f);
+            texMat = glm::translate(texMat, glm::vec3(timeScale * 0.2f, 0.0f, 0.0f));
+            texMat = glm::rotate(texMat, timeScale * 1.5f, glm::vec3(0.0f, 0.0f, 1.0f));
+            obj->setTextureMatrix(texMat);
+        }
+    }
+    dirLights[0]->update(timeScale);
     camera.move(inputManager);
     glutPostRedisplay();
     glutTimerFunc(33, timerFunc, 0);
@@ -124,6 +133,7 @@ void init() {
                                             objInfo.position, 
                                             objInfo.rotation, 
                                             objInfo.scale));
+        sceneObjects.back()->isTextureAnimated = objInfo.isTexAnim;
     }
 
 

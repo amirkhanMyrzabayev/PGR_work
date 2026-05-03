@@ -31,12 +31,18 @@
     <Filter Include="Assets\cartoon_building\textures">
       <UniqueIdentifier>{c41fa695-8d0f-4291-8733-7ec005b39fc7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Managers">
+      <UniqueIdentifier>{6cc56000-1ae8-4bf2-8a19-b34a26983ade}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Lights">
+      <UniqueIdentifier>{9cc5604c-6ea5-4ee4-9116-879d159c4457}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Assets\trashbin">
+      <UniqueIdentifier>{48b63891-faee-401c-b842-1237a06404ea}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="InputManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Camera.cpp">
@@ -48,26 +54,29 @@
     <ClCompile Include="ObjLoader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="MeshManager.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Skybox.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="ShaderManager.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="BaseLight.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="DirectionalLight.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="PointLight.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="SpotLight.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="InputManager.cpp">
+      <Filter>Source Files\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="ShaderManager.cpp">
+      <Filter>Source Files\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="MeshManager.cpp">
+      <Filter>Source Files\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="BaseLight.cpp">
+      <Filter>Source Files\Lights</Filter>
+    </ClCompile>
+    <ClCompile Include="DirectionalLight.cpp">
+      <Filter>Source Files\Lights</Filter>
+    </ClCompile>
+    <ClCompile Include="PointLight.cpp">
+      <Filter>Source Files\Lights</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -115,6 +124,9 @@
     </None>
     <None Include="Shaders\3d_light_pixel.vert">
       <Filter>Shaders</Filter>
+    </None>
+    <None Include="Assets\trashbin\trashbin.mtl">
+      <Filter>Assets\trashbin</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -199,6 +211,12 @@
     </Text>
     <Text Include="Assets\cartoon_building\cartoon_building.obj">
       <Filter>Assets\cartoon_building</Filter>
+    </Text>
+    <Text Include="Assets\trashbin\trashbin.txt">
+      <Filter>Assets\trashbin</Filter>
+    </Text>
+    <Text Include="Assets\trashbin\trashbin.obj">
+      <Filter>Assets\trashbin</Filter>
     </Text>
   </ItemGroup>
 </Project>

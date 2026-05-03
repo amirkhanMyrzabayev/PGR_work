@@ -21,6 +21,7 @@ struct ObjectSetup {
 	glm::vec3 position;
 	glm::vec3 rotation;
 	glm::vec3 scale;
+	bool isTexAnim = false;
 };
 
 struct StaticCamera {
@@ -45,9 +46,13 @@ const std::vector<ObjectSetup> SCENE_OBJECTS_SETUP = {
 	{ "Assets/bezdomovec/bezdomovecModel.obj", "Shaders/3d_light_pixel",
 	glm::vec3(4.5f, 0.0f, -0.2f), glm::vec3(glm::radians(90.0f), 0.0f, 0.0f), glm::vec3(2.0f) },
 
+	{ "Assets/trashbin/trashbin.obj", "Shaders/3d_light_pixel",
+	glm::vec3(5.0f, 0.0f, 0.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.025f) },
+
 	{ "HARD", "Shaders/3d_light_pixel",
-	glm::vec3(4.8f, 1.05f, 0.5f), glm::vec3(0.0f), glm::vec3(0.025f)}
+	glm::vec3(4.8f, 1.05f, 0.5f), glm::vec3(0.0f), glm::vec3(0.025f), true}
 };
+
 
 
 const std::vector<DirLightSetup> DIR_LIGHTS_SETUP = {
@@ -56,6 +61,12 @@ const std::vector<DirLightSetup> DIR_LIGHTS_SETUP = {
 		glm::vec3(0.1f, 0.1f, 0.1f), glm::vec3(0.8f, 0.8f, 0.8f),
 		//	specular						direction
 		glm::vec3(0.8f, 0.8f, 0.8f), glm::vec3(-0.2f, -1.0f, -0.3f)
+	},
+	{
+		//  ambient							diffuse
+		glm::vec3(0.1f, 0.1f, 0.1f), glm::vec3(0.2f, 0.2f, 0.2f),
+		//	specular						direction
+		glm::vec3(0.1f, 0.1f, 0.1f), glm::vec3(-0.2f, -1.0f, -0.3f)
 	}
 };
 
@@ -64,7 +75,7 @@ const std::vector<PointLightSetup> POINT_LIGHTS_SETUP = {
 		//  ambient							diffuse
 		glm::vec3(0.05f, 0.0f, 0.0f), glm::vec3(1.0f, 0.5f, 0.0f),
 		//	specular						position
-		glm::vec3(1.0f, 1.0f, 1.0f),  glm::vec3(4.8f, 1.1f, 0.5f),
+		glm::vec3(1.0f, 1.0f, 1.0f),  glm::vec3(4.0f, 1.1f, 0.5f),
 		//	linearDecay						quadraticDecay			constantDecay(default=1.0f) 
 			0.09f,							0.032f
 	}

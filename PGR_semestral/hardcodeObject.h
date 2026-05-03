@@ -1,5 +1,6 @@
 #pragma once
 
+
 // Total vertices: 144 (48 triangles * 3 vertices per triangle)
 constexpr unsigned int HARDCODED_VERTEX_COUNT = 144;
 

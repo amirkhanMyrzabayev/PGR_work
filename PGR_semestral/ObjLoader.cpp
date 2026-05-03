@@ -53,7 +53,7 @@ bool ObjLoader::loadOBJ(
                 &vertexIndex[2], &uvIndex[2], &normalIndex[2]);
 
             if (matches != 9) {
-                std::cout << "File cannot be read by parser! Bad format!\n";
+                std::cout << "File cannot be read by parser: " << path << std::endl;
                 fclose(file);
                 return false;
             }
@@ -99,7 +99,7 @@ bool ObjLoader::loadOBJ(
         subset.material = materials[currentMaterialName];
         subMeshes.push_back(subset);
     }
-
+    std::cout << "OBJ loaded: " << path << std::endl;
     fclose(file);
     return true;
 }
@@ -149,7 +149,7 @@ std::unordered_map<std::string, Material> ObjLoader::loadMTL(std::string& path) 
         else if (strcmp(lineHeader, "map_Kd") == 0) {
             char texPath[256];
             fscanf(file, "%255s\n", texPath);
-            std::string fullPath = currentDir + std::string(texPath); // Or just use texPath if your .mtl paths are already perfectly relative to the project root!
+            std::string fullPath = currentDir + std::string(texPath);
             materials[currentMaterialName].diffuseTextureID = pgr::createTexture(fullPath);
         }
         else if (strcmp(lineHeader, "map_bump") == 0 || strcmp(lineHeader, "bump") == 0) {

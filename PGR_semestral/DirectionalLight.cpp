@@ -19,3 +19,10 @@ void DirectionalLight::bindUniforms(GLuint shaderProgram, int index) {
 	GLint dirLightLoc = glGetUniformLocation(shaderProgram, directionName.c_str());
 	glUniform3fv(dirLightLoc, 1, glm::value_ptr(direction));
 }
+
+void DirectionalLight::update(float time) {
+	direction.x = glm::cos(time * slowSpeed);
+	direction.y = -glm::abs(glm::sin(time * slowSpeed));
+	ambientColor = glm::vec3(0.1f) * glm::max(direction.y * -1.0f, 0.0f);
+	diffuseColor = glm::vec3(0.5f) * glm::max(direction.y * -1.0f, 0.0f);
+}

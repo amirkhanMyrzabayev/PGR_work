@@ -154,6 +154,7 @@
     </None>
     <None Include="Assets\bezdomovec\bezdomovec.mtl" />
     <None Include="Assets\cartoon_building\cartoon_building.mtl" />
+    <None Include="Assets\trashbin\trashbin.mtl" />
     <None Include="Shaders\3d_basic.frag" />
     <None Include="Shaders\3d_basic.vert" />
     <None Include="Shaders\3d_light.frag" />
@@ -198,6 +199,7 @@
     <Text Include="Assets\BarStand\BarStand.txt" />
     <Text Include="Assets\BarStand\BarStandModel.obj" />
     <Text Include="Assets\bezdomovec\bezdomovec.txt" />
+    <Text Include="Assets\trashbin\trashbin.txt" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="Assets\bezdomovec\bezdomovecModel.obj">
@@ -206,6 +208,11 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="Assets\cartoon_building\cartoon_building.obj">
+      <FileType>Document</FileType>
+    </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Assets\trashbin\trashbin.obj">
       <FileType>Document</FileType>
     </Text>
   </ItemGroup>

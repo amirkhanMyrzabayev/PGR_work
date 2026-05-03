@@ -9,6 +9,8 @@ Object::Object(const std::string& filePath, const std::string& shaderName, Shade
 	position = glm::vec3(0.0f, 0.0f, 0.0f);
 	rotation = glm::vec3(0.0f);
 	scale = glm::vec3(1.0f);
+	textureMatrix = glm::mat4(1.0f);
+	isTextureAnimated = false;
 	shaderProgram = shaderManager.getShaderProgram(shaderName);
 	locations.viewLoc = glGetUniformLocation(shaderProgram, "view");
 	locations.projLoc = glGetUniformLocation(shaderProgram, "projection");
@@ -23,6 +25,7 @@ Object::Object(const std::string& filePath, const std::string& shaderName, Shade
 	locations.hasDiffuseMapLoc = glGetUniformLocation(shaderProgram, "hasDiffuseMap");
 	locations.specularMapLoc = glGetUniformLocation(shaderProgram, "specularMap");
 	locations.hasSpecularMapLoc = glGetUniformLocation(shaderProgram, "hasSpecularMap");
+	locations.texMatrixLoc = glGetUniformLocation(shaderProgram, "texMatrix");
 	this->mesh = meshManager.getMesh(filePath, shaderProgram);
 }
 
@@ -46,12 +49,15 @@ void Object::setSRP(const glm::vec3& newPos, const glm::vec3& newRotation, const
 	setScale(newScale);
 }
 
+void Object::setTextureMatrix(const glm::mat4& matrix) { textureMatrix = matrix; }
+
 void Object::draw(const glm::mat4 view, const glm::mat4& proj,
 				 const glm::vec3& viewPos) {
 	glUseProgram(shaderProgram);
 
 	glUniformMatrix4fv(locations.viewLoc, 1, GL_FALSE, glm::value_ptr(view));
 	glUniformMatrix4fv(locations.projLoc, 1, GL_FALSE, glm::value_ptr(proj));
+	glUniformMatrix4fv(locations.texMatrixLoc, 1, GL_FALSE, glm::value_ptr(textureMatrix));
 
 	glUniform3fv(locations.viewPosLoc, 1, glm::value_ptr(viewPos));
 
