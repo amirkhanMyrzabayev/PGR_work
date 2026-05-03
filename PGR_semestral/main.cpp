@@ -128,12 +128,24 @@ void init() {
 
 
     for (auto objInfo : SCENE_OBJECTS_SETUP) {
-        sceneObjects.push_back(new Object(objInfo.path, objInfo.shaderPath, 
-                                            globalShaderManager, globalMeshManager,
-                                            objInfo.position, 
-                                            objInfo.rotation, 
-                                            objInfo.scale));
+        sceneObjects.push_back(new Object(objInfo,globalShaderManager, globalMeshManager));
         sceneObjects.back()->isTextureAnimated = objInfo.isTexAnim;
+    }
+    int borderIndex = 0;
+    ObjectSetup curObject;
+    for (float x = MIN_X; x < MAX_X; x += TILE_SIZE) {
+        for (float z = MIN_Z; z < MAX_Z; z += TILE_SIZE) {
+            if (x == MIN_X || x == MAX_X || z == MIN_Z || z == MAX_Z) {
+                curObject = { BORDER_OBJECTS_PATHS[borderIndex % BORDER_OBJECTS_PATHS.size()], 
+                              mainLightShaderName, glm::vec3(x, 0.0f, z), glm::vec3(0.0f), glm::vec3(0.005f) };
+                borderIndex++;
+                sceneObjects.push_back(new Object(curObject, globalShaderManager, globalMeshManager));
+            }
+            else {
+                curObject = { tilePath, mainLightShaderName, glm::vec3(x, 0.0f, z), glm::vec3(0.0f), glm::vec3(11.0f) };
+                sceneObjects.push_back(new Object(curObject, globalShaderManager, globalMeshManager));
+            }
+        }
     }
 
 

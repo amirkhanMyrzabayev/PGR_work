@@ -154,6 +154,10 @@
     </None>
     <None Include="Assets\bezdomovec\bezdomovec.mtl" />
     <None Include="Assets\cartoon_building\cartoon_building.mtl" />
+    <None Include="Assets\snowLand\metadata.json" />
+    <None Include="Assets\snowLand\snowLand.mtl" />
+    <None Include="Assets\Stone\metadata.json" />
+    <None Include="Assets\Stone\Stone.mtl" />
     <None Include="Assets\trashbin\trashbin.mtl" />
     <None Include="Shaders\3d_basic.frag" />
     <None Include="Shaders\3d_basic.vert" />
@@ -199,6 +203,8 @@
     <Text Include="Assets\BarStand\BarStand.txt" />
     <Text Include="Assets\BarStand\BarStandModel.obj" />
     <Text Include="Assets\bezdomovec\bezdomovec.txt" />
+    <Text Include="Assets\snowLand\snowLand.txt" />
+    <Text Include="Assets\Stone\Stone.txt" />
     <Text Include="Assets\trashbin\trashbin.txt" />
   </ItemGroup>
   <ItemGroup>
@@ -213,6 +219,16 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="Assets\trashbin\trashbin.obj">
+      <FileType>Document</FileType>
+    </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Assets\snowLand\snowLand.obj">
+      <FileType>Document</FileType>
+    </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Assets\Stone\Stone.obj">
       <FileType>Document</FileType>
     </Text>
   </ItemGroup>

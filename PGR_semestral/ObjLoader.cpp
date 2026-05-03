@@ -45,24 +45,54 @@ bool ObjLoader::loadOBJ(
             temp_normals.push_back(normal);
         }
         else if (strcmp(lineHeader, "f") == 0) {
-            unsigned int vertexIndex[3], uvIndex[3], normalIndex[3];
+            char tempLine[256];
+            fgets(tempLine, 256, file);
+            int offset = 0;
+            std::vector<unsigned int> vIndices;
+            std::vector<unsigned int> uvIndices;
+            std::vector<unsigned int> nIndices;
 
-            int matches = fscanf(file, "%d/%d/%d %d/%d/%d %d/%d/%d\n",
-                &vertexIndex[0], &uvIndex[0], &normalIndex[0],
-                &vertexIndex[1], &uvIndex[1], &normalIndex[1],
-                &vertexIndex[2], &uvIndex[2], &normalIndex[2]);
 
-            if (matches != 9) {
-                std::cout << "File cannot be read by parser: " << path << std::endl;
-                fclose(file);
-                return false;
+            int vertexIndex, uvIndex, normalIndex;
+            int bytesRead;
+            while (sscanf(tempLine + offset, "%d/%d/%d%n", &vertexIndex, &uvIndex, &normalIndex, &bytesRead) == 3) {
+                vIndices.push_back(vertexIndex-1);
+                uvIndices.push_back(uvIndex-1);
+                nIndices.push_back(normalIndex-1);
+                offset += bytesRead;
             }
-
-            for (int i = 0; i < 3; i++) {
-                out_vertices.push_back(temp_vertices[vertexIndex[i] - 1]);
-                out_uvs.push_back(temp_uvs[uvIndex[i] - 1]);
-                out_normals.push_back(temp_normals[normalIndex[i] - 1]);
+            if (vIndices.size() == 3) {
+                out_vertices.push_back(temp_vertices[vIndices[0]]);
+                out_vertices.push_back(temp_vertices[vIndices[1]]);
+                out_vertices.push_back(temp_vertices[vIndices[2]]);
+                out_uvs.push_back(temp_uvs[uvIndices[0]]);
+                out_uvs.push_back(temp_uvs[uvIndices[1]]);
+                out_uvs.push_back(temp_uvs[uvIndices[2]]);
+                out_normals.push_back(temp_normals[nIndices[0]]);
+                out_normals.push_back(temp_normals[nIndices[1]]);
+                out_normals.push_back(temp_normals[nIndices[2]]);
             }
+            else if (vIndices.size() == 4) {
+                out_vertices.push_back(temp_vertices[vIndices[0]]);
+                out_vertices.push_back(temp_vertices[vIndices[1]]);
+                out_vertices.push_back(temp_vertices[vIndices[2]]);
+                out_uvs.push_back(temp_uvs[uvIndices[0]]);
+                out_uvs.push_back(temp_uvs[uvIndices[1]]);
+                out_uvs.push_back(temp_uvs[uvIndices[2]]);
+                out_normals.push_back(temp_normals[nIndices[0]]);
+                out_normals.push_back(temp_normals[nIndices[1]]);
+                out_normals.push_back(temp_normals[nIndices[2]]);
+                out_vertices.push_back(temp_vertices[vIndices[0]]);
+                out_vertices.push_back(temp_vertices[vIndices[2]]);
+                out_vertices.push_back(temp_vertices[vIndices[3]]);
+                out_uvs.push_back(temp_uvs[uvIndices[0]]);
+                out_uvs.push_back(temp_uvs[uvIndices[2]]);
+                out_uvs.push_back(temp_uvs[uvIndices[3]]);
+                out_normals.push_back(temp_normals[nIndices[0]]);
+                out_normals.push_back(temp_normals[nIndices[2]]);
+                out_normals.push_back(temp_normals[nIndices[3]]);
+            }
+            
         }
         else if (strcmp(lineHeader, "mtllib") == 0) {
             char mtllibName[127];
@@ -118,7 +148,7 @@ std::unordered_map<std::string, Material> ObjLoader::loadMTL(std::string& path) 
     std::string currentMaterialName = "";
     // Read the first word of the line until the End Of File
     while (fscanf(file, "%127s", lineHeader) != EOF) {
-        if (strcmp(lineHeader, "newmtl") == 0) {
+        if (_stricmp(lineHeader, "newmtl") == 0) {
             char matName[128];
             fscanf(file, "%127s\n", matName);
             currentMaterialName = matName;
@@ -126,39 +156,39 @@ std::unordered_map<std::string, Material> ObjLoader::loadMTL(std::string& path) 
             tempMat.name = currentMaterialName;
             materials[currentMaterialName] = tempMat;
         }
-        else if (strcmp(lineHeader, "Ns") == 0) {
+        else if (_stricmp(lineHeader, "Ns") == 0) {
             float shininess;
             fscanf(file, "%f\n", &shininess);
             materials[currentMaterialName].shininess = shininess;
         }
-        else if (strcmp(lineHeader, "Ka") == 0) {
+        else if (_stricmp(lineHeader, "Ka") == 0) {
             glm::vec3 ambientColor;
             fscanf(file, "%f %f %f\n", &ambientColor.x, &ambientColor.y, &ambientColor.z);
             materials[currentMaterialName].ambient = ambientColor;
         }
-        else if (strcmp(lineHeader, "Kd") == 0) {
+        else if (_stricmp(lineHeader, "Kd") == 0) {
             glm::vec3 diffuseColor;
             fscanf(file, "%f %f %f\n", &diffuseColor.x, &diffuseColor.y, &diffuseColor.z);
             materials[currentMaterialName].diffuse = diffuseColor;
         }
-        else if (strcmp(lineHeader, "Ks") == 0) {
+        else if (_stricmp(lineHeader, "Ks") == 0) {
             glm::vec3 specularColor;
             fscanf(file, "%f %f %f\n", &specularColor.x, &specularColor.y, &specularColor.z);
             materials[currentMaterialName].specular = specularColor;
         }
-        else if (strcmp(lineHeader, "map_Kd") == 0) {
+        else if (_stricmp(lineHeader, "map_Kd") == 0) {
             char texPath[256];
             fscanf(file, "%255s\n", texPath);
             std::string fullPath = currentDir + std::string(texPath);
             materials[currentMaterialName].diffuseTextureID = pgr::createTexture(fullPath);
         }
-        else if (strcmp(lineHeader, "map_bump") == 0 || strcmp(lineHeader, "bump") == 0) {
+        else if (_stricmp(lineHeader, "map_bump") == 0 || _stricmp(lineHeader, "bump") == 0) {
             char texPath[256];
             fscanf(file, "%255s\n", texPath);
             std::string fullPath = currentDir + std::string(texPath);
             materials[currentMaterialName].normalTextureID = pgr::createTexture(fullPath);
         } 
-        else if (strcmp(lineHeader, "map_Ks") == 0) {
+        else if (_stricmp(lineHeader, "map_Ks") == 0) {
             char texPath[256];
             fscanf(file, "%255s\n", texPath);
             printf("read: %s", texPath);

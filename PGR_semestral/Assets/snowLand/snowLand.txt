@@ -1,0 +1,12 @@
+#DownloadModelFormat: OBJ
+#GeometryFile: snowLand.obj
+#MaterialFile: snowLand.mtl
+#PreviewFile: snowLand.jpg
+#OtherFiles: Neve01_DIFF2.png
+#DownloadedFromURL: https://sketchfab.com/3d-models/patch-of-old-snow-d87fd353cf604345967156ee3679c5b2
+#DateOfDownload: 06.5.2025
+#CreatedBy: simonspata
+#CreatedIn: Blender
+#UploadedBy: Nikolaenkov Grigorii
+#Description: Model of snow terrain
+#NumberOfPolygons: 9858

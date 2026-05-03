@@ -5,6 +5,7 @@
 #include "SpotLight.h"
 
 
+
 Object::Object(const std::string& filePath, const std::string& shaderName, ShaderManager& shaderManager, MeshManager& meshManager) {
 	position = glm::vec3(0.0f, 0.0f, 0.0f);
 	rotation = glm::vec3(0.0f);
@@ -36,6 +37,10 @@ Object::Object(const std::string& filePath, const std::string& shaderName,
 				const glm::vec3& newRotation, 
 				const glm::vec3& newScale) : Object(filePath, shaderName, shaderManager, meshManager){
 	setSRP(newPos, newRotation, newScale);
+}
+Object::Object(ObjectSetup& setup, ShaderManager& shaderManager, MeshManager& meshManager) 
+	: Object(setup.path, setup.shaderPath, shaderManager, meshManager, setup.position, setup.rotation, setup.scale)
+{
 }
 
 

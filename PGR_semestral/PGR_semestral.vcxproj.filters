@@ -40,6 +40,12 @@
     <Filter Include="Assets\trashbin">
       <UniqueIdentifier>{48b63891-faee-401c-b842-1237a06404ea}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Assets\snowLand">
+      <UniqueIdentifier>{18201772-8e46-4e3b-af4b-5670abfea117}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Assets\Stone">
+      <UniqueIdentifier>{105af9ee-c9a7-4dee-97b8-c40ab7719577}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -127,6 +133,18 @@
     </None>
     <None Include="Assets\trashbin\trashbin.mtl">
       <Filter>Assets\trashbin</Filter>
+    </None>
+    <None Include="Assets\snowLand\metadata.json">
+      <Filter>Assets\snowLand</Filter>
+    </None>
+    <None Include="Assets\snowLand\snowLand.mtl">
+      <Filter>Assets\snowLand</Filter>
+    </None>
+    <None Include="Assets\Stone\Stone.mtl">
+      <Filter>Assets\Stone</Filter>
+    </None>
+    <None Include="Assets\Stone\metadata.json">
+      <Filter>Assets\Stone</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -217,6 +235,18 @@
     </Text>
     <Text Include="Assets\trashbin\trashbin.obj">
       <Filter>Assets\trashbin</Filter>
+    </Text>
+    <Text Include="Assets\snowLand\snowLand.txt">
+      <Filter>Assets\snowLand</Filter>
+    </Text>
+    <Text Include="Assets\snowLand\snowLand.obj">
+      <Filter>Assets\snowLand</Filter>
+    </Text>
+    <Text Include="Assets\Stone\Stone.txt">
+      <Filter>Assets\Stone</Filter>
+    </Text>
+    <Text Include="Assets\Stone\Stone.obj">
+      <Filter>Assets\Stone</Filter>
     </Text>
   </ItemGroup>
 </Project>
