@@ -133,17 +133,19 @@ void init() {
     }
     int borderIndex = 0;
     ObjectSetup curObject;
+    glm::vec3 rotation = glm::vec3(0.0f, -glm::radians(90.0f), 0.0f);
     for (float x = MIN_X; x < MAX_X; x += TILE_SIZE) {
+        rotation.y = -rotation.y;
         for (float z = MIN_Z; z < MAX_Z; z += TILE_SIZE) {
-            if (x == MIN_X || x == MAX_X || z == MIN_Z || z == MAX_Z) {
+            if (x == MIN_X || x == MAX_X-TILE_SIZE || z == MIN_Z || z == MAX_Z-TILE_SIZE) {
                 curObject = { BORDER_OBJECTS_PATHS[borderIndex % BORDER_OBJECTS_PATHS.size()], 
-                              mainLightShaderName, glm::vec3(x, 0.0f, z), glm::vec3(0.0f), glm::vec3(0.005f) };
-                borderIndex++;
+                              mainLightShaderName, glm::vec3(x, 0.0f, z), glm::vec3(0.0f), glm::vec3(0.05f) };
                 sceneObjects.push_back(new Object(curObject, globalShaderManager, globalMeshManager));
             }
             else {
-                curObject = { tilePath, mainLightShaderName, glm::vec3(x, 0.0f, z), glm::vec3(0.0f), glm::vec3(11.0f) };
+                curObject = { tilePath, mainLightShaderName, glm::vec3(x, 0.0f, z), rotation, glm::vec3(15.0f)};
                 sceneObjects.push_back(new Object(curObject, globalShaderManager, globalMeshManager));
+
             }
         }
     }

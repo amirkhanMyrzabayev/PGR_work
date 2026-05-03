@@ -1,0 +1,12 @@
+#DownloadModelFormat: OBJ
+#GeometryFile: cat.obj
+#MaterialFile: Cat.mtl
+#PreviewFile: cat_preview.jpg
+#OtherFiles: Cat_bump.jpg, Cat.jpg
+#DownloadedFromURL: https://free3d.com/3d-model/cat-v1--326682.html
+#DateOfDownload: 21.6.2020
+#CreatedBy: printable_models
+#CreatedIn: Unknown
+#UploadedBy: Yanina Arameleva
+#Description: black cat
+#NumberOfPolygons: 35288

@@ -1,0 +1,12 @@
+#DownloadModelFormat: OBJ
+#GeometryFile: gitara.obj
+#MaterialFile: gitara.mtl
+#PreviewFile: preview.jpg
+#OtherFiles: gitara_normal.tga, gitara.tga
+#DownloadedFromURL: http://www.turbosquid.com
+#DateOfDownload: 9.1.2013
+#CreatedBy: Mansurov Renat
+#CreatedIn: 3DS Max
+#UploadedBy: Vasily Zhovner
+#Description: Blue Guitar
+#NumberOfPolygons: 596

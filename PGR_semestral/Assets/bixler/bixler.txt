@@ -1,0 +1,12 @@
+#DownloadModelFormat: OBJ
+#GeometryFile: bixler.obj
+#MaterialFile: bixler.mtl
+#PreviewFile: bixler.jpg
+#OtherFiles: bixlerTexturedUVmap.png
+#DownloadedFromURL: https://free3d.com/3d-model/hobbyking-bixler-sky-surfer-89447.html
+#DateOfDownload: 1.5.2021
+#CreatedBy: appros
+#CreatedIn: Blender
+#UploadedBy: Filip Ruta
+#Description: Model of bixler plane
+#NumberOfPolygons: 1880

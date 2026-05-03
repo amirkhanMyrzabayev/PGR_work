@@ -1,0 +1,12 @@
+#DownloadModelFormat: OBJ
+#GeometryFile: kadibouda.obj
+#MaterialFile: kadibouda.mtl
+#PreviewFile: preview.jpg
+#OtherFiles: kadibouda.tga,kadibouda.txt
+#DownloadedFromURL:   www.sirall.com
+#DateOfDownload:   4.6.2007
+#CreatedBy:  Michal (Sirall) Èervenka
+#CreatedIn:    3D Studio Max 9
+#UploadedBy: Michal (Sirall) Èervenka
+#Description: Model starého suchého záchodu (kadiboudy)
+#NumberOfPolygons: 80

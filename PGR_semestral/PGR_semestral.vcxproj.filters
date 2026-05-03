@@ -46,6 +46,21 @@
     <Filter Include="Assets\Stone">
       <UniqueIdentifier>{105af9ee-c9a7-4dee-97b8-c40ab7719577}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Assets\bixler">
+      <UniqueIdentifier>{5cbd87c0-3ea9-4edd-b7b3-5e4327417813}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Assets\gitara">
+      <UniqueIdentifier>{4e063640-7442-49bb-b1f9-094bbefa0925}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Assets\kadibouda">
+      <UniqueIdentifier>{1a7f9361-8be2-486a-a68e-9c5b9f9b1269}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Assets\Cat">
+      <UniqueIdentifier>{d6fa8975-dd41-40a3-a941-6ae879bfd101}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Assets\lamp">
+      <UniqueIdentifier>{94c8de84-96ee-4feb-8634-496887cb1f57}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -145,6 +160,36 @@
     </None>
     <None Include="Assets\Stone\metadata.json">
       <Filter>Assets\Stone</Filter>
+    </None>
+    <None Include="Assets\bixler\bixler.mtl">
+      <Filter>Assets\bixler</Filter>
+    </None>
+    <None Include="Assets\bixler\metadata.json">
+      <Filter>Assets\bixler</Filter>
+    </None>
+    <None Include="Assets\gitara\gitara.mtl">
+      <Filter>Assets\gitara</Filter>
+    </None>
+    <None Include="Assets\gitara\metadata.json">
+      <Filter>Assets\gitara</Filter>
+    </None>
+    <None Include="Assets\kadibouda\metadata.json">
+      <Filter>Assets\kadibouda</Filter>
+    </None>
+    <None Include="Assets\kadibouda\kadibouda.mtl">
+      <Filter>Assets\kadibouda</Filter>
+    </None>
+    <None Include="Assets\Cat\Cat.mtl">
+      <Filter>Assets\Cat</Filter>
+    </None>
+    <None Include="Assets\Cat\metadata.json">
+      <Filter>Assets\Cat</Filter>
+    </None>
+    <None Include="Assets\lamp\lamp.mtl">
+      <Filter>Assets\lamp</Filter>
+    </None>
+    <None Include="Assets\lamp\metadata.json">
+      <Filter>Assets\lamp</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -248,5 +293,37 @@
     <Text Include="Assets\Stone\Stone.obj">
       <Filter>Assets\Stone</Filter>
     </Text>
+    <Text Include="Assets\bixler\bixler.txt">
+      <Filter>Assets\bixler</Filter>
+    </Text>
+    <Text Include="Assets\bixler\bixler.obj">
+      <Filter>Assets\bixler</Filter>
+    </Text>
+    <Text Include="Assets\gitara\gitara.txt">
+      <Filter>Assets\gitara</Filter>
+    </Text>
+    <Text Include="Assets\kadibouda\kadibouda.txt">
+      <Filter>Assets\kadibouda</Filter>
+    </Text>
+    <Text Include="Assets\Cat\cat.txt">
+      <Filter>Assets\Cat</Filter>
+    </Text>
+    <Text Include="Assets\lamp\lamp.txt">
+      <Filter>Assets\lamp</Filter>
+    </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <Object Include="Assets\gitara\gitara.obj">
+      <Filter>Assets\gitara</Filter>
+    </Object>
+    <Object Include="Assets\kadibouda\kadibouda.obj">
+      <Filter>Assets\kadibouda</Filter>
+    </Object>
+    <Object Include="Assets\Cat\Cat.obj">
+      <Filter>Assets\Cat</Filter>
+    </Object>
+    <Object Include="Assets\lamp\lamp.obj">
+      <Filter>Assets\lamp</Filter>
+    </Object>
   </ItemGroup>
 </Project>

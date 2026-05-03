@@ -68,8 +68,11 @@ const std::vector<ObjectSetup> SCENE_OBJECTS_SETUP = {
 	{ "Assets/trashbin/trashbin.obj", "Shaders/3d_light_pixel",
 	glm::vec3(5.0f, 0.0f, 0.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.005f) },
 
+	{ "Assets/bixler/bixler.obj", "Shaders/3d_light_pixel",
+	glm::vec3(5.0f, 5.0f, 0.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.05f) },
+
 	{ "HARD", "Shaders/3d_light_pixel",
-	glm::vec3(4.8f, 1.05f, 0.5f), glm::vec3(0.0f), glm::vec3(0.025f), true}
+	glm::vec3(4.8f, 1.05f, 0.5f), glm::vec3(0.0f), glm::vec3(0.1f), true}
 };
 
 
@@ -85,9 +88,9 @@ const std::vector<DirLightSetup> DIR_LIGHTS_SETUP = {
 		//PassiveLight
 	{
 		//  ambient							diffuse
-		glm::vec3(0.1f, 0.1f, 0.1f), glm::vec3(0.2f, 0.2f, 0.2f),
+		glm::vec3(0.1f, 0.1f, 0.1f), glm::vec3(0.1f, 0.1f, 0.1f),
 		//	specular						direction
-		glm::vec3(0.1f, 0.1f, 0.1f), glm::vec3(-0.2f, -1.0f, -0.3f)
+		glm::vec3(0.1f, 0.1f, 0.1f), glm::vec3(0.0f, -1.0f, 0.0f)
 	}
 };
 

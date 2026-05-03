@@ -153,7 +153,17 @@
       <FileType>Text</FileType>
     </None>
     <None Include="Assets\bezdomovec\bezdomovec.mtl" />
+    <None Include="Assets\bixler\bixler.mtl" />
+    <None Include="Assets\bixler\metadata.json" />
     <None Include="Assets\cartoon_building\cartoon_building.mtl" />
+    <None Include="Assets\Cat\Cat.mtl" />
+    <None Include="Assets\Cat\metadata.json" />
+    <None Include="Assets\gitara\gitara.mtl" />
+    <None Include="Assets\gitara\metadata.json" />
+    <None Include="Assets\kadibouda\kadibouda.mtl" />
+    <None Include="Assets\kadibouda\metadata.json" />
+    <None Include="Assets\lamp\lamp.mtl" />
+    <None Include="Assets\lamp\metadata.json" />
     <None Include="Assets\snowLand\metadata.json" />
     <None Include="Assets\snowLand\snowLand.mtl" />
     <None Include="Assets\Stone\metadata.json" />
@@ -203,6 +213,11 @@
     <Text Include="Assets\BarStand\BarStand.txt" />
     <Text Include="Assets\BarStand\BarStandModel.obj" />
     <Text Include="Assets\bezdomovec\bezdomovec.txt" />
+    <Text Include="Assets\bixler\bixler.txt" />
+    <Text Include="Assets\Cat\cat.txt" />
+    <Text Include="Assets\gitara\gitara.txt" />
+    <Text Include="Assets\kadibouda\kadibouda.txt" />
+    <Text Include="Assets\lamp\lamp.txt" />
     <Text Include="Assets\snowLand\snowLand.txt" />
     <Text Include="Assets\Stone\Stone.txt" />
     <Text Include="Assets\trashbin\trashbin.txt" />
@@ -231,6 +246,17 @@
     <Text Include="Assets\Stone\Stone.obj">
       <FileType>Document</FileType>
     </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Assets\bixler\bixler.obj">
+      <FileType>Document</FileType>
+    </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <Object Include="Assets\Cat\Cat.obj" />
+    <Object Include="Assets\gitara\gitara.obj" />
+    <Object Include="Assets\kadibouda\kadibouda.obj" />
+    <Object Include="Assets\lamp\lamp.obj" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
