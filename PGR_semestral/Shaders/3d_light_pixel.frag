@@ -56,6 +56,9 @@ uniform int numPointLights;
 uniform SpotLight spotLights[5];
 uniform int numSpotLights;
 
+uniform vec3 fogColor;
+uniform float fogStart;
+uniform float fogEnd;
 
 out vec4 color;
 
@@ -136,5 +139,8 @@ void main() {
     finalColor += calcSpotLight(spotLights[i], norm, viewDir, baseDiffuse, baseSpecular, vertexPosition);
   }
 
+  float fogDist = fogEnd - distance(viewPos, vertexPosition);
+  float visibilityFactor =  clamp(fogDist/(fogEnd - fogStart), 0.0, 1.0);
+  finalColor = mix(fogColor, finalColor, visibilityFactor);
   color = vec4(finalColor, 1.0);
 }

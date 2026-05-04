@@ -311,19 +311,17 @@
     <Text Include="Assets\lamp\lamp.txt">
       <Filter>Assets\lamp</Filter>
     </Text>
-  </ItemGroup>
-  <ItemGroup>
-    <Object Include="Assets\gitara\gitara.obj">
-      <Filter>Assets\gitara</Filter>
-    </Object>
-    <Object Include="Assets\kadibouda\kadibouda.obj">
-      <Filter>Assets\kadibouda</Filter>
-    </Object>
-    <Object Include="Assets\Cat\Cat.obj">
+    <Text Include="Assets\Cat\Cat.obj">
       <Filter>Assets\Cat</Filter>
-    </Object>
-    <Object Include="Assets\lamp\lamp.obj">
+    </Text>
+    <Text Include="Assets\gitara\gitara.obj">
+      <Filter>Assets\gitara</Filter>
+    </Text>
+    <Text Include="Assets\kadibouda\kadibouda.obj">
+      <Filter>Assets\kadibouda</Filter>
+    </Text>
+    <Text Include="Assets\lamp\lamp.obj">
       <Filter>Assets\lamp</Filter>
-    </Object>
+    </Text>
   </ItemGroup>
 </Project>

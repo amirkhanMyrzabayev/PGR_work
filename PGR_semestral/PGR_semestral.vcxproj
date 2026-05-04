@@ -253,10 +253,18 @@
     </Text>
   </ItemGroup>
   <ItemGroup>
-    <Object Include="Assets\Cat\Cat.obj" />
-    <Object Include="Assets\gitara\gitara.obj" />
-    <Object Include="Assets\kadibouda\kadibouda.obj" />
-    <Object Include="Assets\lamp\lamp.obj" />
+    <Text Include="Assets\Cat\Cat.obj">
+      <FileType>Document</FileType>
+    </Text>
+    <Text Include="Assets\gitara\gitara.obj">
+      <FileType>Document</FileType>
+    </Text>
+    <Text Include="Assets\kadibouda\kadibouda.obj">
+      <FileType>Document</FileType>
+    </Text>
+    <Text Include="Assets\lamp\lamp.obj">
+      <FileType>Document</FileType>
+    </Text>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

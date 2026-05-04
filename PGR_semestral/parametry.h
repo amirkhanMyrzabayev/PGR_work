@@ -24,8 +24,22 @@ constexpr const int MAX_DIR_LIGHTS = 5;
 constexpr const int MAX_POINT_LIGHTS = 5;
 constexpr const int MAX_SPOT_LIGHTS = 5;
 
+
 const std::string mainLightShaderName = "Shaders/3d_light_pixel";
 const std::string tilePath = "Assets/snowLand/snowLand.obj";
+
+
+constexpr const float FOG_START = 10.0f;
+constexpr const float FOG_END = 50.0f;
+const glm::vec3 FOG_COLOR = glm::vec3(0.6f, 0.7f, 0.75f);
+
+
+struct FogPositions
+{
+	GLuint fogStartPos;
+	GLuint fogEndPos;
+	GLuint fogColorPos;
+};
 
 
 struct ObjectSetup {

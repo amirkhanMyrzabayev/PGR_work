@@ -21,6 +21,9 @@ bool isRightMousePressed = false;
 
 GLuint skyboxShader = 0;
 
+FogPositions fogPositions;
+GLint mainLightShader;
+
 std::vector<DirectionalLight*> dirLights;
 std::vector<PointLight*> pointLights;
 std::vector<SpotLight*> spotLights;
@@ -175,7 +178,17 @@ void init() {
         }
         spotLights.push_back(new SpotLight(setup));
     }
+    mainLightShader = globalShaderManager.getShaderProgram(mainLightShaderName);
+    glUseProgram(mainLightShader);
+    // fog
+    fogPositions.fogColorPos = glGetUniformLocation(mainLightShader, "fogColor");
+    fogPositions.fogStartPos = glGetUniformLocation(mainLightShader, "fogStart");
+    fogPositions.fogEndPos = glGetUniformLocation(mainLightShader, "fogEnd");
 
+    glUniform3fv(fogPositions.fogColorPos, 1, glm::value_ptr(FOG_COLOR));
+    glUniform1f(fogPositions.fogStartPos, FOG_START);
+    glUniform1f(fogPositions.fogEndPos, FOG_END);
+    glUseProgram(0);
 }
 
 void draw() {
@@ -186,7 +199,6 @@ void draw() {
 
     //glBindVertexArray(vao);
     //glDrawArrays(GL_TRIANGLES, 0, 6);
-    GLint mainLightShader = globalShaderManager.getShaderProgram(mainLightShaderName);
     glUseProgram(mainLightShader);
     int i = 0;
     for (i = 0; i < dirLights.size(); i++) {
@@ -216,10 +228,13 @@ void draw() {
     }
     numLightLoc = glGetUniformLocation(mainLightShader, "numSpotLights");
     glUniform1i(numLightLoc, i);
+
     for (auto obj : sceneObjects) {
         obj->draw(view, proj, camera.getPosition());
     }
     skybox->draw(view, proj);
+
+
     glutSwapBuffers();
 }
 
