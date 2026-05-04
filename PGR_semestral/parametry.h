@@ -29,7 +29,7 @@ const std::string mainLightShaderName = "Shaders/3d_light_pixel";
 const std::string tilePath = "Assets/snowLand/snowLand.obj";
 
 
-constexpr const float FOG_START = 10.0f;
+constexpr const float FOG_START = 20.0f;
 constexpr const float FOG_END = 50.0f;
 const glm::vec3 FOG_COLOR = glm::vec3(0.6f, 0.7f, 0.75f);
 
@@ -84,6 +84,9 @@ const std::vector<ObjectSetup> SCENE_OBJECTS_SETUP = {
 
 	{ "Assets/bixler/bixler.obj", "Shaders/3d_light_pixel",
 	glm::vec3(5.0f, 5.0f, 0.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.05f) },
+
+	{ "Assets/Cat/Cat.obj", "Shaders/3d_light_pixel",
+	glm::vec3(5.0f, 0.0f, 2.0f), glm::vec3(glm::radians(-90.0f), 0.0f, 0.0f), glm::vec3(0.0125f)},
 
 	{ "HARD", "Shaders/3d_light_pixel",
 	glm::vec3(4.8f, 1.05f, 0.5f), glm::vec3(0.0f), glm::vec3(0.1f), true}

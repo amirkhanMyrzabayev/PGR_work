@@ -15,6 +15,9 @@ protected:
 	glm::vec3 ambientColor;
 	glm::vec3 diffuseColor;
 	glm::vec3 specularColor;
+	glm::vec3 baseAmbient;
+	glm::vec3 baseDiffuse;
+	glm::vec3 baseSpecular;
 	bool isActive = true;
 	void bindColorUniforms(GLuint shaderProgram, std::string baseName);
 };

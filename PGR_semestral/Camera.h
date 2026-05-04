@@ -24,16 +24,11 @@ public:
 	void setCameraState(CameraStates newState);
 
 	glm::vec3 getPosition();
-	glm::vec3 mapToSphere(float x, float y, float screenWidth, float screenHight);
-	void startTrackball(float x, float y, float screenWidth, float screenHeight);
-	void processTrackballMovement(float x, float y, float screenWidth, float screenHeight);
 private:
-	glm::mat4 trackballRotation = glm::mat4(1.0f);
-	glm::vec3 lastTrackballPos = glm::vec3(0.0f);
 	glm::vec3 position;
 	glm::vec3 front;
 	glm::vec3 up;
-	float cameraSpeed = 0.1f;
+	float cameraSpeed = 0.2f;
 	float yaw = -90.0f;
 	float pitch = 0.0f;
 	float mouseSensitivity = 0.1f;

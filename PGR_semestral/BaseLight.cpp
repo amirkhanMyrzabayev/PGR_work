@@ -1,7 +1,9 @@
 #include "BaseLight.h"
 
 BaseLight::BaseLight(glm::vec3 ambient, glm::vec3 diffuse, glm::vec3 specular) :
-	ambientColor(ambient), diffuseColor(diffuse), specularColor(specular) {}
+	ambientColor(ambient), diffuseColor(diffuse), specularColor(specular),
+	baseAmbient(ambient), baseDiffuse(diffuse), baseSpecular(specular)
+{}
 
 BaseLight::~BaseLight() {};
 
