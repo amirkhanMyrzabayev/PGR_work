@@ -191,7 +191,7 @@ std::unordered_map<std::string, Material> ObjLoader::loadMTL(std::string& path) 
         else if (_stricmp(lineHeader, "map_Ks") == 0) {
             char texPath[256];
             fscanf(file, "%255s\n", texPath);
-            printf("read: %s", texPath);
+            //printf("read: %s", texPath);
             std::string fullPath = currentDir + std::string(texPath);
             materials[currentMaterialName].specularTextureID = pgr::createTexture(fullPath);
         }

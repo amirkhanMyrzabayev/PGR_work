@@ -25,7 +25,6 @@ Mesh* MeshManager::getMesh(const std::string& filePath, GLuint shaderProgram) {
 		ObjLoader::loadHardcode(_positions, _normals, _uvs, HARDCODED_VERTEX_COUNT,
 			"Assets/CVUT_znak.png",
 			vertices, uv_array, normals, subMeshes);
-		
 	}
 	else ObjLoader::loadOBJ(filePath, vertices, uv_array, normals, subMeshes);
 
@@ -33,7 +32,7 @@ Mesh* MeshManager::getMesh(const std::string& filePath, GLuint shaderProgram) {
 	size_t _numVertices = vertices.size();
 	std::vector<VertexData> vertexData;
 	for (size_t i = 0; i < _numVertices; i++) {
-		VertexData data = { vertices[i], normals[i], uv_array[i]};
+		VertexData data = { vertices[i], normals[i], uv_array[i] };
 		vertexData.push_back(data);
 	}
 	Mesh* newMesh = new Mesh();
@@ -48,13 +47,13 @@ Mesh* MeshManager::getMesh(const std::string& filePath, GLuint shaderProgram) {
 	glEnableVertexAttribArray(posLoc);
 	glVertexAttribPointer(posLoc, 3, GL_FLOAT, GL_FALSE, sizeof(VertexData), (void*)0);
 	GLint normalLoc = glGetAttribLocation(shaderProgram, "normal");
+	glEnableVertexAttribArray(normalLoc);
+	glVertexAttribPointer(normalLoc, 3, GL_FLOAT, GL_FALSE, sizeof(VertexData), (void*)(sizeof(VertexData::position)));
 	GLint uvLoc = glGetAttribLocation(shaderProgram, "texCoord");
 	if (uvLoc != -1) {
 		glEnableVertexAttribArray(uvLoc);
 		glVertexAttribPointer(uvLoc, 2, GL_FLOAT, GL_FALSE, sizeof(VertexData), (void*)(sizeof(glm::vec3) * 2));
 	}
-	glEnableVertexAttribArray(normalLoc);
-	glVertexAttribPointer(normalLoc, 3, GL_FLOAT, GL_FALSE, sizeof(VertexData), (void*)(sizeof(VertexData::position)));
 	glBindVertexArray(0);
 	meshes[filePath] = newMesh;
 	return newMesh;
