@@ -23,8 +23,13 @@ Mesh* MeshManager::getMesh(const std::string& filePath, GLuint shaderProgram) {
 	std::vector<SubMesh> subMeshes;
 	if (filePath == "HARD") {
 		ObjLoader::loadHardcode(_positions, _normals, _uvs, HARDCODED_VERTEX_COUNT,
-			"Assets/CVUT_znak.png",
-			vertices, uv_array, normals, subMeshes);
+								"Assets/CVUT_znak.png",
+								vertices, uv_array, normals, subMeshes);
+	}
+	else if (filePath == "HARD_FIRE") {
+		ObjLoader::loadHardcode(_quadPositions, _quadNormals, _quadUvs, QUAD_VERTEX_COUNT,
+								"Assets/rocketFire/rocketFire.png",
+								vertices, uv_array, normals, subMeshes);
 	}
 	else ObjLoader::loadOBJ(filePath, vertices, uv_array, normals, subMeshes);
 

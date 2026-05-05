@@ -36,7 +36,7 @@ public:
 			const glm::vec3& newPos, const glm::vec3& newRotation, const glm::vec3& newScale);
 	Object(const ObjectSetup& setup, ShaderManager& shaderManager, MeshManager& meshManager);
 	~Object();
-	void draw(const glm::mat4 view, const glm::mat4& proj,
+	virtual void draw(const glm::mat4 view, const glm::mat4& proj,
 			 const glm::vec3& viewPos);
 
 	void setPosition(const glm::vec3& newPos);
@@ -46,17 +46,19 @@ public:
 	void setTextureMatrix(const glm::mat4& matrix);
 
 	glm::vec3 getOrientation();
-
+	GLuint getShaderProgram();
 
 	bool isTextureAnimated;
-private:
-	GLuint shaderProgram;
+protected:
+	ShaderLocations locations;
+	Mesh* mesh;
 	glm::vec3 position;
 	glm::vec3 rotation;
 	glm::vec3 scale;
+private:
+	GLuint shaderProgram;
 	glm::mat4 modelMatrix;
 	glm::mat4 textureMatrix;
-	ShaderLocations locations;
-	Mesh* mesh;
+
 };
 

@@ -180,3 +180,31 @@ const float _uvs[] = {
     0.5f, 0.5f,  1.0f, 0.5f,  0.5f, 1.0f,
     1.0f, 0.5f,  1.0f, 1.0f,  0.5f, 1.0f
 };
+
+
+constexpr unsigned int QUAD_VERTEX_COUNT = 6;
+
+const float _quadPositions[] = {
+    -1.0f, 1.0f, 0.0f,
+    -1.0f, -1.0f, 0.0f,
+    1.0f, -1.0f, 0.0f,
+    1.0f, -1.0f, 0.0f,
+    1.0f, 1.0f, 0.0f,
+    -1.0f, 1.0f, 0.0f
+};
+const float _quadNormals[] = {
+    0.0f, 0.0f, 1.0f,
+    0.0f, 0.0f, 1.0f,
+    0.0f, 0.0f, 1.0f,
+    0.0f, 0.0f, 1.0f,
+    0.0f, 0.0f, 1.0f,
+    0.0f, 0.0f, 1.0f,
+};
+const float _quadUvs[] = {
+    0.0f, 1.0f,
+    0.0f, 0.0f,
+    1.0f, 0.0f,
+    1.0f, 0.0f,
+    1.0f, 1.0f,
+    0.0f, 1.0f
+};

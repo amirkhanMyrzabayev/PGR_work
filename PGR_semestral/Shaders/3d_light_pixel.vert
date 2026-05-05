@@ -14,9 +14,9 @@ out vec3 normalVector;
 out vec2 textureCoord;
 
 void main() {
-  vertexPosition =  vec3(model * vec4(position, 1.0));
+  vertexPosition = vec3(model * vec4(position, 1.0));
   normalVector = normalize(normalMatrix * normal);
   textureCoord = (texMatrix * vec4(texCoord, 0.0, 1.0)).xy;
-  gl_Position = projection * view * model * vec4(position, 1.0f);
+  gl_Position = projection * view * model * vec4(position, 1.0);
   
 }

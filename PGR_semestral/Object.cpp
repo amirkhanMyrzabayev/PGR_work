@@ -50,6 +50,7 @@ void Object::setPosition(const glm::vec3& newPos) { position = newPos; }
 void Object::setRotation(const glm::vec3& newRot) { rotation = newRot; }
 void Object::setScale(const glm::vec3& newScale) { scale = newScale; }
 glm::vec3 Object::getOrientation() { return rotation; };
+GLuint Object::getShaderProgram() { return shaderProgram; };
 
 void Object::setSRP(const glm::vec3& newPos, const glm::vec3& newRotation, const glm::vec3& newScale) {
 	setPosition(newPos);

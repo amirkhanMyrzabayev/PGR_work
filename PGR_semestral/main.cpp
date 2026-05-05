@@ -31,6 +31,7 @@ std::vector<std::unique_ptr<SpotLight>> spotLights;
 
 std::vector<std::unique_ptr<Object>> sceneObjects;
 std::vector<std::unique_ptr<AnimatedObject>> animatedObjects;
+std::vector<std::unique_ptr<SpriteObject>> spriteObjects;
 std::unique_ptr<Skybox> skybox;
 
 
@@ -129,8 +130,13 @@ void init() {
         sceneObjects.push_back(std::make_unique<Object>(objInfo,globalShaderManager, globalMeshManager));
         sceneObjects.back()->isTextureAnimated = objInfo.isTexAnim;
     }
+    for (auto const& spriteInfo : SPRITE_OBJECTS_SETUP) {
+        spriteObjects.push_back(std::make_unique<SpriteObject>(spriteInfo, globalShaderManager, globalMeshManager));
+    }
     for (auto const& animObjInfo : ANIMATED_OBJECTS_SETUP) {
-        animatedObjects.push_back(std::make_unique<AnimatedObject>(animObjInfo, globalShaderManager, globalMeshManager));
+        if (spriteObjects.size() == 0) animatedObjects.push_back(std::make_unique<AnimatedObject>(animObjInfo, globalShaderManager, globalMeshManager, nullptr));
+
+        else animatedObjects.push_back(std::make_unique<AnimatedObject>(animObjInfo, globalShaderManager, globalMeshManager, std::move(spriteObjects[0])));
     }
     int borderIndex = 0;
     ObjectSetup curObject;
@@ -179,15 +185,7 @@ void init() {
     }
     mainLightShader = globalShaderManager.getShaderProgram(mainLightShaderName);
     // fog
-    glUseProgram(mainLightShader);
-    fogPositions.fogColorPos = glGetUniformLocation(mainLightShader, "fogColor");
-    fogPositions.fogStartPos = glGetUniformLocation(mainLightShader, "fogStart");
-    fogPositions.fogEndPos = glGetUniformLocation(mainLightShader, "fogEnd");
-
-    glUniform3fv(fogPositions.fogColorPos, 1, glm::value_ptr(FOG_COLOR));
-    glUniform1f(fogPositions.fogStartPos, FOG_START);
-    glUniform1f(fogPositions.fogEndPos, FOG_END);
-    glUseProgram(0);
+    globalShaderManager.setFogInShaders(FOG_COLOR, FOG_START, FOG_END);
 }
 
 void draw() {
@@ -195,6 +193,7 @@ void draw() {
 
     glm::mat4 proj = camera.getProjectionMatrix();
     glm::mat4 view = camera.getViewMatrix();
+
 
     //glBindVertexArray(vao);
     //glDrawArrays(GL_TRIANGLES, 0, 6);
@@ -231,6 +230,8 @@ void draw() {
     for (auto const& obj : sceneObjects) {
         obj->draw(view, proj, camera.getPosition());
     }
+
+    
     for (auto const& animObj : animatedObjects) {
         animObj->draw(view, proj, camera.getPosition());
     }

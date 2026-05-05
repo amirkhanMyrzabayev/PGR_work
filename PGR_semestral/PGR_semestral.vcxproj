@@ -148,6 +148,7 @@
     <ClCompile Include="ShaderManager.cpp" />
     <ClCompile Include="Skybox.cpp" />
     <ClCompile Include="SpotLight.cpp" />
+    <ClCompile Include="SpriteObject.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\BarStand\BarStand.mtl">
@@ -178,6 +179,8 @@
     <None Include="Shaders\3d_light_pixel.vert" />
     <None Include="Shaders\3d_texture.frag" />
     <None Include="Shaders\3d_texture.vert" />
+    <None Include="Shaders\animated_texture.frag" />
+    <None Include="Shaders\animated_texture.vert" />
     <None Include="Shaders\basic.frag" />
     <None Include="Shaders\basic.vert" />
     <None Include="Shaders\skybox.frag" />
@@ -199,6 +202,7 @@
     <ClInclude Include="ShaderManager.h" />
     <ClInclude Include="Skybox.h" />
     <ClInclude Include="SpotLight.h" />
+    <ClInclude Include="SpriteObject.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\BarStand\BarStand.jpg">

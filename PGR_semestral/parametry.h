@@ -55,8 +55,14 @@ struct AnimatedObjectSetup : public ObjectSetup {
 	float radiusX;
 	float radiusZ;
 	float speed;
+	float animationOffset = 0.0f;
 };
 
+struct SpriteObjectSetup : public ObjectSetup {
+	size_t columns;
+	size_t rows;
+	float fps;
+};
 
 
 struct StaticCamera {
@@ -102,7 +108,14 @@ const std::vector<AnimatedObjectSetup> ANIMATED_OBJECTS_SETUP = {
 		{ { "Assets/bixler/bixler.obj", "Shaders/3d_light_pixel",
 		glm::vec3(10.0f, 5.0f, 0.0f), glm::vec3(0.0f, glm::radians(180.0f), 0.0f), glm::vec3(0.05f)},
 		// child parameters
-		3.0f, 3.0f, 2.0f }
+		3.0f, 3.0f, 2.0f,  0.55f  }
+};
+
+const std::vector<SpriteObjectSetup> SPRITE_OBJECTS_SETUP = {
+	{ { "HARD_FIRE", "Shaders/animated_texture",
+		glm::vec3(10.0f, 5.0f, 0.0f), glm::vec3(0.0f, glm::radians(90.0f), glm::radians(90.0f)), glm::vec3(1.0f)},
+		// child parameters
+		5, 3, 20.0f}
 };
 
 

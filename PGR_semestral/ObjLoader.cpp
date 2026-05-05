@@ -180,13 +180,17 @@ std::unordered_map<std::string, Material> ObjLoader::loadMTL(std::string& path) 
             char texPath[256];
             fscanf(file, "%255s\n", texPath);
             std::string fullPath = currentDir + std::string(texPath);
+
             materials[currentMaterialName].diffuseTextureID = pgr::createTexture(fullPath);
+            std::cout << "tried to load: " << texPath << " Id: " << materials[currentMaterialName].diffuseTextureID << std::endl;
         }
         else if (_stricmp(lineHeader, "map_bump") == 0 || _stricmp(lineHeader, "bump") == 0) {
             char texPath[256];
             fscanf(file, "%255s\n", texPath);
             std::string fullPath = currentDir + std::string(texPath);
+            
             materials[currentMaterialName].normalTextureID = pgr::createTexture(fullPath);
+            std::cout << "tried to load: " << texPath << std::endl;
         } 
         else if (_stricmp(lineHeader, "map_Ks") == 0) {
             char texPath[256];
@@ -194,6 +198,7 @@ std::unordered_map<std::string, Material> ObjLoader::loadMTL(std::string& path) 
             //printf("read: %s", texPath);
             std::string fullPath = currentDir + std::string(texPath);
             materials[currentMaterialName].specularTextureID = pgr::createTexture(fullPath);
+            std::cout << "tried to load: " << texPath << std::endl;
         }
     }
 
@@ -219,7 +224,10 @@ bool ObjLoader::loadHardcode(const float* positions, const float* normals, const
     subMesh.material.diffuse = glm::vec3(0.8f, 0.8f, 0.8f);
     subMesh.material.specular = glm::vec3(0.8f, 0.8f, 0.8f);
     subMesh.material.shininess = 0.5f;
-    if (!texturePath.empty()) subMesh.material.diffuseTextureID = pgr::createTexture(texturePath);
+    if (!texturePath.empty()) {
+        subMesh.material.diffuseTextureID = pgr::createTexture(texturePath);
+        std::cout << "tried to load: " << texturePath << " Id: " << subMesh.material.diffuseTextureID << std::endl;
+    }
     subMeshes.push_back(subMesh);
     return true;
 }
