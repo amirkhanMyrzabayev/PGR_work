@@ -39,6 +39,7 @@ Skybox::Skybox(const std::vector<std::string>& faces, GLuint ShaderProgram) {
 	glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
 }
 
+Skybox::~Skybox() {}
 
 void Skybox::draw(const glm::mat4& view, const glm::mat4& projection) {
 	glDepthFunc(GL_LEQUAL);

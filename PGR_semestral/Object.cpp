@@ -38,15 +38,18 @@ Object::Object(const std::string& filePath, const std::string& shaderName,
 				const glm::vec3& newScale) : Object(filePath, shaderName, shaderManager, meshManager){
 	setSRP(newPos, newRotation, newScale);
 }
-Object::Object(ObjectSetup& setup, ShaderManager& shaderManager, MeshManager& meshManager) 
+Object::Object(const ObjectSetup& setup, ShaderManager& shaderManager, MeshManager& meshManager) 
 	: Object(setup.path, setup.shaderPath, shaderManager, meshManager, setup.position, setup.rotation, setup.scale)
 {
 }
+
+Object::~Object() {}
 
 
 void Object::setPosition(const glm::vec3& newPos) { position = newPos; }
 void Object::setRotation(const glm::vec3& newRot) { rotation = newRot; }
 void Object::setScale(const glm::vec3& newScale) { scale = newScale; }
+glm::vec3 Object::getOrientation() { return rotation; };
 
 void Object::setSRP(const glm::vec3& newPos, const glm::vec3& newRotation, const glm::vec3& newScale) {
 	setPosition(newPos);

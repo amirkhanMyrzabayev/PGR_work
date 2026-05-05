@@ -51,6 +51,12 @@ struct ObjectSetup {
 	bool isTexAnim = false;
 };
 
+struct AnimatedObjectSetup : public ObjectSetup {
+	float radiusX;
+	float radiusZ;
+	float speed;
+};
+
 
 
 struct StaticCamera {
@@ -82,14 +88,21 @@ const std::vector<ObjectSetup> SCENE_OBJECTS_SETUP = {
 	{ "Assets/trashbin/trashbin.obj", "Shaders/3d_light_pixel",
 	glm::vec3(5.0f, 0.0f, 0.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.005f) },
 
-	{ "Assets/bixler/bixler.obj", "Shaders/3d_light_pixel",
-	glm::vec3(5.0f, 5.0f, 0.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.05f) },
+
 
 	{ "Assets/Cat/Cat.obj", "Shaders/3d_light_pixel",
 	glm::vec3(5.0f, 0.0f, 2.0f), glm::vec3(glm::radians(-90.0f), 0.0f, 0.0f), glm::vec3(0.0125f)},
 
 	{ "HARD", "Shaders/3d_light_pixel",
 	glm::vec3(4.8f, 1.05f, 0.5f), glm::vec3(0.0f), glm::vec3(0.1f), true}
+};
+
+const std::vector<AnimatedObjectSetup> ANIMATED_OBJECTS_SETUP = {
+		//parent struct
+		{ { "Assets/bixler/bixler.obj", "Shaders/3d_light_pixel",
+		glm::vec3(10.0f, 5.0f, 0.0f), glm::vec3(0.0f, glm::radians(180.0f), 0.0f), glm::vec3(0.05f)},
+		// child parameters
+		3.0f, 3.0f, 2.0f }
 };
 
 
@@ -140,7 +153,4 @@ const std::vector<std::string> SKYBOX_FACES = {
 	"Assets/Cubemaps/sky/1_posy.png", "Assets/Cubemaps/sky/1_negy.png",
 	"Assets/Cubemaps/sky/1_posz.png", "Assets/Cubemaps/sky/1_negz.png",
 };
-
-
-
 

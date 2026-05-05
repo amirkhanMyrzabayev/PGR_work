@@ -34,7 +34,7 @@ public:
 	Object(const std::string& filePath, const std::string& shaderName, ShaderManager& shaderManager, MeshManager& meshManager);
 	Object(const std::string& filePath, const std::string& shaderName, ShaderManager& shaderManager, MeshManager& meshManager,
 			const glm::vec3& newPos, const glm::vec3& newRotation, const glm::vec3& newScale);
-	Object(ObjectSetup& setup, ShaderManager& shaderManager, MeshManager& meshManager);
+	Object(const ObjectSetup& setup, ShaderManager& shaderManager, MeshManager& meshManager);
 	~Object();
 	void draw(const glm::mat4 view, const glm::mat4& proj,
 			 const glm::vec3& viewPos);
@@ -45,6 +45,7 @@ public:
 	void setSRP(const glm::vec3& newPos, const glm::vec3& newRotation, const glm::vec3& newScale);
 	void setTextureMatrix(const glm::mat4& matrix);
 
+	glm::vec3 getOrientation();
 
 
 	bool isTextureAnimated;

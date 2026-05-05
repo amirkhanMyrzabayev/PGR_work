@@ -8,7 +8,7 @@
 #include "pgr.h"
 #include "InputManager.h"
 #include "Camera.h"
-#include "Object.h"
+#include "AnimatedObject.h"
 #include "Skybox.h"
 #include "parametry.h"
 
@@ -16,6 +16,7 @@ float lastX = WIN_WIDTH / 2.0;
 float lastY = WIN_WIDTH / 2.0;
 bool firstMouse = true;
 bool isLeftMousePressed = false;
+float lastFrameTime = 0.0f;
 
 
 GLuint skyboxShader = 0;
@@ -23,13 +24,14 @@ GLuint skyboxShader = 0;
 FogPositions fogPositions;
 GLint mainLightShader;
 
-std::vector<DirectionalLight*> dirLights;
-std::vector<PointLight*> pointLights;
-std::vector<SpotLight*> spotLights;
+std::vector<std::unique_ptr<DirectionalLight>> dirLights;
+std::vector<std::unique_ptr<PointLight>> pointLights;
+std::vector<std::unique_ptr<SpotLight>> spotLights;
 
 
-std::vector<Object*> sceneObjects;
-Skybox* skybox = nullptr;
+std::vector<std::unique_ptr<Object>> sceneObjects;
+std::vector<std::unique_ptr<AnimatedObject>> animatedObjects;
+std::unique_ptr<Skybox> skybox;
 
 
 InputManager inputManager;
@@ -94,16 +96,21 @@ void mouseCallback(int xpos, int ypos) {
 }
 
 void timerFunc(int value) {
-    float timeScale = glutGet(GLUT_ELAPSED_TIME) / 1000.0f;
-    for (auto obj : sceneObjects) {
+    float currentFrameTime = glutGet(GLUT_ELAPSED_TIME) / 1000.0f;
+    float deltaTime = currentFrameTime - lastFrameTime;
+    lastFrameTime = currentFrameTime;
+    for (auto const& obj : sceneObjects) {
         if (obj->isTextureAnimated) {
             glm::mat4 texMat = glm::mat4(1.0f);
-            texMat = glm::translate(texMat, glm::vec3(timeScale * 0.2f, 0.0f, 0.0f));
-            texMat = glm::rotate(texMat, timeScale * 1.5f, glm::vec3(0.0f, 0.0f, 1.0f));
+            texMat = glm::translate(texMat, glm::vec3(currentFrameTime * 0.2f, 0.0f, 0.0f));
+            texMat = glm::rotate(texMat, currentFrameTime * 1.5f, glm::vec3(0.0f, 0.0f, 1.0f));
             obj->setTextureMatrix(texMat);
         }
     }
-    dirLights[0]->update(timeScale);
+    for (auto const& animObj : animatedObjects) {
+        animObj->update(deltaTime);
+    }
+    dirLights[0]->update(currentFrameTime);
     camera.move(inputManager);
     glutPostRedisplay();
     glutTimerFunc(33, timerFunc, 0);
@@ -115,12 +122,15 @@ void init() {
     glViewport(0, 0, glutGet(GLUT_WINDOW_WIDTH), glutGet(GLUT_WINDOW_HEIGHT));
 
     skyboxShader = globalShaderManager.getShaderProgram("Shaders/skybox");
-    skybox = new Skybox(SKYBOX_FACES, skyboxShader);
+    skybox = std::make_unique<Skybox>(SKYBOX_FACES, skyboxShader);
 
 
-    for (auto objInfo : SCENE_OBJECTS_SETUP) {
-        sceneObjects.push_back(new Object(objInfo,globalShaderManager, globalMeshManager));
+    for (auto const& objInfo : SCENE_OBJECTS_SETUP) {
+        sceneObjects.push_back(std::make_unique<Object>(objInfo,globalShaderManager, globalMeshManager));
         sceneObjects.back()->isTextureAnimated = objInfo.isTexAnim;
+    }
+    for (auto const& animObjInfo : ANIMATED_OBJECTS_SETUP) {
+        animatedObjects.push_back(std::make_unique<AnimatedObject>(animObjInfo, globalShaderManager, globalMeshManager));
     }
     int borderIndex = 0;
     ObjectSetup curObject;
@@ -131,12 +141,12 @@ void init() {
             if (x == MIN_X || x == MAX_X-TILE_SIZE || z == MIN_Z || z == MAX_Z-TILE_SIZE) {
                 curObject = { BORDER_OBJECTS_PATHS[borderIndex % BORDER_OBJECTS_PATHS.size()], 
                               mainLightShaderName, glm::vec3(x, 0.5f, z), glm::vec3(0.0f), glm::vec3(0.05f) };
-                sceneObjects.push_back(new Object(curObject, globalShaderManager, globalMeshManager));
+                sceneObjects.push_back(std::make_unique<Object>(curObject, globalShaderManager, globalMeshManager));
                 borderIndex++;
             }
             else {
                 curObject = { tilePath, mainLightShaderName, glm::vec3(x, 0.0f, z), rotation, glm::vec3(15.0f)};
-                sceneObjects.push_back(new Object(curObject, globalShaderManager, globalMeshManager));
+                sceneObjects.push_back(std::make_unique<Object>(curObject, globalShaderManager, globalMeshManager));
 
             }
         }
@@ -144,32 +154,32 @@ void init() {
 
 
     //lights
-    for (auto& setup : DIR_LIGHTS_SETUP) {
+    for (auto const& setup : DIR_LIGHTS_SETUP) {
         if (dirLights.size() == MAX_POINT_LIGHTS) {
             std::cerr << "Maximum directional lights exceeded: ignoring remaining" << std::endl;
             break;
         }
-        dirLights.push_back(new DirectionalLight(setup));
+        dirLights.push_back(std::make_unique<DirectionalLight>(setup));
     }
 
-    for (auto& setup : POINT_LIGHTS_SETUP) {
+    for (auto const& setup : POINT_LIGHTS_SETUP) {
         if (pointLights.size() == MAX_POINT_LIGHTS) {
             std::cerr << "Maximum point lights exceeded: ignoring remaining" << std::endl;
             break;
         }
-        pointLights.push_back(new PointLight(setup));
+        pointLights.push_back(std::make_unique<PointLight>(setup));
     }
 
-    for (auto& setup : SPOT_LIGHTS_SETUP) {
+    for (auto const& setup : SPOT_LIGHTS_SETUP) {
         if (spotLights.size() == MAX_POINT_LIGHTS) {
             std::cerr << "Maximum spot lights exceeded: ignoring remaining" << std::endl;
             break;
         }
-        spotLights.push_back(new SpotLight(setup));
+        spotLights.push_back(std::make_unique<SpotLight>(setup));
     }
     mainLightShader = globalShaderManager.getShaderProgram(mainLightShaderName);
-    glUseProgram(mainLightShader);
     // fog
+    glUseProgram(mainLightShader);
     fogPositions.fogColorPos = glGetUniformLocation(mainLightShader, "fogColor");
     fogPositions.fogStartPos = glGetUniformLocation(mainLightShader, "fogStart");
     fogPositions.fogEndPos = glGetUniformLocation(mainLightShader, "fogEnd");
@@ -218,8 +228,11 @@ void draw() {
     numLightLoc = glGetUniformLocation(mainLightShader, "numSpotLights");
     glUniform1i(numLightLoc, i);
 
-    for (auto obj : sceneObjects) {
+    for (auto const& obj : sceneObjects) {
         obj->draw(view, proj, camera.getPosition());
+    }
+    for (auto const& animObj : animatedObjects) {
+        animObj->draw(view, proj, camera.getPosition());
     }
     skybox->draw(view, proj);
 
