@@ -10,6 +10,7 @@ public:
 	virtual ~BaseLight();
 	virtual void update(float time);
 	virtual void bindUniforms(GLuint shaderProgram, int index) = 0;
+	void switchLight() { isActive = !isActive; };
 
 protected:
 	glm::vec3 ambientColor;

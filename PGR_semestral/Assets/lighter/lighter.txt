@@ -1,0 +1,12 @@
+#DownloadModelFormat: OBJ
+#GeometryFile: lighter.obj
+#MaterialFile: lighter.mtl
+#PreviewFile: preview.jpg
+#OtherFiles: lighter.tga,Lighter.max
+#DownloadedFromURL:   milanstezka.cz
+#DateOfDownload:   4.6.2007
+#CreatedBy:  Milan Stezka
+#CreatedIn:    3DS Max 9
+#UploadedBy: Milan Stezka
+#Description: Zapalovaè znaèky Zippo. Je vhodné použít v kombinaci s cube mapou nebo sphere mapou, jinak je potøeba texturu udìlat víc detailní. Vysokou teselaci má model právì proto, aby se na nìm environment mapa reálnì zobrazila.
+#NumberOfPolygons: 554

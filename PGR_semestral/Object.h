@@ -46,8 +46,17 @@ public:
 	void setTextureMatrix(const glm::mat4& matrix);
 	void setCollisionRadius(float radius);
 
+	int getId() { return id; };
+	void setId(int newId) { id = newId; };
+
+	bool hasLight() { return haveLight; };
+	void setLight(PointLight* newLight);
+	void setLight(SpotLight* newLight);
+	void switchLight();
+
 	glm::vec3 getOrientation();
 	GLuint getShaderProgram();
+
 
 	bool isTextureAnimated;
 protected:
@@ -56,7 +65,11 @@ protected:
 	glm::vec3 position;
 	glm::vec3 rotation;
 	glm::vec3 scale;
+	int id = 0;
 private:
+	bool haveLight = false;
+	PointLight* pointLight = nullptr;
+	SpotLight* spotLight = nullptr;
 	GLuint shaderProgram;
 	glm::mat4 modelMatrix;
 	glm::mat4 textureMatrix;

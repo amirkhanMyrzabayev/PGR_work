@@ -5,6 +5,7 @@ struct DirLight {
     vec3 diffuse;
     vec3 specular;
     vec3 direction;
+    bool isActive;
 };
 
 struct PointLight {
@@ -15,6 +16,7 @@ struct PointLight {
     float linear;
     float quadratic;
     float constant;
+    bool isActive;
 };
 
 struct SpotLight {
@@ -31,6 +33,8 @@ struct SpotLight {
     float linear;
     float quadratic;
     float constant;
+
+    bool isActive;
 };
 
 in vec3 vertexPosition;
@@ -128,14 +132,23 @@ void main() {
   vec3 finalColor = vec3(0.0);
 
   for (int i = 0; i < numDirLights; i++) {
+      if (!dirLights[i].isActive) {
+        continue;
+    }
     finalColor += calcDirLight(dirLights[i], norm, viewDir, baseDiffuse, baseSpecular);
   }
 
   for (int i = 0; i < numPointLights; i++) {
+    if (!pointLights[i].isActive) {
+        continue;
+    }
     finalColor += calcPointLight(pointLights[i], norm, viewDir, baseDiffuse, baseSpecular, vertexPosition);
   }
 
   for (int i = 0; i < numSpotLights; i++) {
+    if (!spotLights[i].isActive) {
+        continue;
+    }
     finalColor += calcSpotLight(spotLights[i], norm, viewDir, baseDiffuse, baseSpecular, vertexPosition);
   }
 

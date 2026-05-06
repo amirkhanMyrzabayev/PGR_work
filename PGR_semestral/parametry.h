@@ -51,6 +51,8 @@ struct ObjectSetup {
 	glm::vec3 rotation;
 	glm::vec3 scale;
 	bool isTexAnim = false;
+	int pointLightIndex = -1;
+	int spotLightIndex = -1;
 };
 
 struct AnimatedObjectSetup : public ObjectSetup {
@@ -79,6 +81,49 @@ const StaticCamera STATIC_CAMERAS[2] = {
 	{ glm::vec3(0.0f, 15.0f, 0.0f), glm::vec3(0.0f, -1.0f, 0.00001f), glm::vec3(0.0f, 1.0f, 0.0f) }
 };
 
+
+const std::vector<DirLightSetup> DIR_LIGHTS_SETUP = {
+	{
+		// Sunlight
+		//  ambient							diffuse
+		glm::vec3(0.1f, 0.1f, 0.1f), glm::vec3(0.8f, 0.8f, 0.8f),
+		//	specular						direction
+		glm::vec3(0.8f, 0.8f, 0.8f), glm::vec3(-0.2f, -1.0f, -0.3f)
+	},
+	//PassiveLight
+{
+	//  ambient							diffuse
+	glm::vec3(0.1f, 0.1f, 0.1f), glm::vec3(0.1f, 0.1f, 0.1f),
+	//	specular						direction
+	glm::vec3(0.1f, 0.1f, 0.1f), glm::vec3(0.0f, -1.0f, 0.0f)
+}
+};
+
+const std::vector<PointLightSetup> POINT_LIGHTS_SETUP = {
+	{
+		//  ambient							diffuse
+		glm::vec3(0.05f, 0.0f, 0.0f), glm::vec3(1.0f, 0.5f, 0.0f),
+		//	specular						position
+		glm::vec3(1.0f, 1.0f, 1.0f),  glm::vec3(4.55f, 1.2f, 0.5f),
+		//	linearDecay						quadraticDecay			constantDecay(default=1.0f) 
+			0.18f,							0.128f
+	}
+};
+
+const std::vector<SpotLightSetup> SPOT_LIGHTS_SETUP = {
+	{
+		//  ambient						diffuse
+		glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(1.0f, 1.0f, 1.0f),
+		//	specular					direction
+		glm::vec3(1.0f, 1.0f, 1.0f), glm::vec3(0.0f, -1.0f, 0.0f),
+		//  position					innerCutOffAngle			outerCutOffAngle
+		glm::vec3(0.0f, 8.0f, -0.5f), glm::radians(6.5f),			glm::radians(10.5f),
+		//	linearDecay					quadraticDecay				constantDecay(default=1.0f) 
+		0.09f,							0.032f
+	}
+};
+
+
 const std::vector<std::string> BORDER_OBJECTS_PATHS = {
 	"Assets/Stone/Stone.obj"
 };
@@ -89,7 +134,7 @@ const std::vector<ObjectSetup> SCENE_OBJECTS_SETUP = {
 	glm::vec3(5.0f, 0.0f, 0.0f), glm::vec3(glm::radians(-90.0f), 0.0f, glm::radians(90.0f)), glm::vec3(1.0f) },
 
 	{ "Assets/cartoon_building/cartoon_building.obj", "Shaders/3d_light_pixel",
-	glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f), glm::vec3(0.05f) },
+	glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f), glm::vec3(0.05f), false, -1, 0 },
 
 	{ "Assets/bezdomovec/bezdomovecModel.obj", "Shaders/3d_light_pixel",
 	glm::vec3(4.5f, 0.0f, -0.2f), glm::vec3(glm::radians(90.0f), 0.0f, 0.0f), glm::vec3(2.0f) },
@@ -98,9 +143,17 @@ const std::vector<ObjectSetup> SCENE_OBJECTS_SETUP = {
 	glm::vec3(5.0f, 0.0f, 0.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.005f) },
 
 
+	{ "Assets/kadibouda/kadibouda.obj", "Shaders/3d_light_pixel",
+	glm::vec3(-3.0f, 0.0f, 0.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0125f) },
+
+	{ "Assets/gitara/gitara.obj", "Shaders/3d_light_pixel",
+	glm::vec3(4.4f, 1.1f, 0.0f), glm::vec3(0.0f, glm::radians(90.0f), glm::radians(-90.0f)), glm::vec3(0.005f)},
 
 	{ "Assets/Cat/Cat.obj", "Shaders/3d_light_pixel",
 	glm::vec3(5.0f, 0.0f, 2.0f), glm::vec3(glm::radians(-90.0f), 0.0f, 0.0f), glm::vec3(0.0125f)},
+
+	{ "Assets/lighter/lighter.obj", "Shaders/3d_light_pixel",
+	glm::vec3(4.5f, 1.15f, 0.5f), glm::vec3(glm::radians(-90.0f), 0.0f, 0.0f), glm::vec3(0.125f), false, 0},
 
 	{ "HARD", "Shaders/3d_light_pixel",
 	glm::vec3(4.8f, 1.05f, 0.5f), glm::vec3(0.0f), glm::vec3(0.1f), true}
@@ -121,48 +174,6 @@ const std::vector<SpriteObjectSetup> SPRITE_OBJECTS_SETUP = {
 		5, 3, 20.0f}
 };
 
-
-
-const std::vector<DirLightSetup> DIR_LIGHTS_SETUP = {
-	{
-		// Sunlight
-		//  ambient							diffuse
-		glm::vec3(0.1f, 0.1f, 0.1f), glm::vec3(0.8f, 0.8f, 0.8f),
-		//	specular						direction
-		glm::vec3(0.8f, 0.8f, 0.8f), glm::vec3(-0.2f, -1.0f, -0.3f)
-	},
-		//PassiveLight
-	{
-		//  ambient							diffuse
-		glm::vec3(0.1f, 0.1f, 0.1f), glm::vec3(0.1f, 0.1f, 0.1f),
-		//	specular						direction
-		glm::vec3(0.1f, 0.1f, 0.1f), glm::vec3(0.0f, -1.0f, 0.0f)
-	}
-};
-
-const std::vector<PointLightSetup> POINT_LIGHTS_SETUP = {
-	{
-		//  ambient							diffuse
-		glm::vec3(0.05f, 0.0f, 0.0f), glm::vec3(1.0f, 0.5f, 0.0f),
-		//	specular						position
-		glm::vec3(1.0f, 1.0f, 1.0f),  glm::vec3(4.0f, 1.1f, 0.5f),
-		//	linearDecay						quadraticDecay			constantDecay(default=1.0f) 
-			0.09f,							0.032f
-	}
-};
-
-const std::vector<SpotLightSetup> SPOT_LIGHTS_SETUP = {
-	{
-		//  ambient						diffuse
-		glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(1.0f, 1.0f, 1.0f),
-		//	specular					direction
-		glm::vec3(1.0f, 1.0f, 1.0f), glm::vec3(0.0f, -1.0f, 0.0f),
-		//  position					innerCutOffAngle			outerCutOffAngle
-		glm::vec3(0.0f, 5.0f, 0.0f), glm::radians(12.5f),			glm::radians(17.5f), 
-		//	linearDecay					quadraticDecay				constantDecay(default=1.0f) 
-		0.09f,							0.032f
-	}
-};
 
 const std::vector<std::string> SKYBOX_FACES = {
 	"Assets/Cubemaps/sky/1_posx.png", "Assets/Cubemaps/sky/1_negx.png",

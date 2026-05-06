@@ -60,6 +60,23 @@ void Object::setSRP(const glm::vec3& newPos, const glm::vec3& newRotation, const
 
 void Object::setTextureMatrix(const glm::mat4& matrix) { textureMatrix = matrix; }
 
+void Object::setLight(PointLight* newLight) {
+	haveLight = true;
+	pointLight = std::move(newLight);
+}
+
+void Object::setLight(SpotLight* newLight) {
+	haveLight = true;
+	spotLight = std::move(newLight);
+}
+
+
+
+void Object::switchLight() {
+	if (pointLight != nullptr) pointLight->switchLight();
+	if (spotLight != nullptr) spotLight->switchLight();
+}
+
 void Object::draw(const glm::mat4 view, const glm::mat4& proj,
 				 const glm::vec3& viewPos) {
 	glUseProgram(shaderProgram);
