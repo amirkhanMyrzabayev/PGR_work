@@ -44,6 +44,7 @@ public:
 	void setScale(const glm::vec3& newScale);
 	void setSRP(const glm::vec3& newPos, const glm::vec3& newRotation, const glm::vec3& newScale);
 	void setTextureMatrix(const glm::mat4& matrix);
+	void setCollisionRadius(float radius);
 
 	glm::vec3 getOrientation();
 	GLuint getShaderProgram();

@@ -249,11 +249,6 @@
     </Text>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="Assets\Stone\Stone.obj">
-      <FileType>Document</FileType>
-    </Text>
-  </ItemGroup>
-  <ItemGroup>
     <Text Include="Assets\bixler\bixler.obj">
       <FileType>Document</FileType>
     </Text>
@@ -269,6 +264,11 @@
       <FileType>Document</FileType>
     </Text>
     <Text Include="Assets\lamp\lamp.obj">
+      <FileType>Document</FileType>
+    </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Assets\Stone\Stone.obj">
       <FileType>Document</FileType>
     </Text>
   </ItemGroup>

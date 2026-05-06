@@ -308,9 +308,6 @@
     <Text Include="Assets\Stone\Stone.txt">
       <Filter>Assets\Stone</Filter>
     </Text>
-    <Text Include="Assets\Stone\Stone.obj">
-      <Filter>Assets\Stone</Filter>
-    </Text>
     <Text Include="Assets\bixler\bixler.txt">
       <Filter>Assets\bixler</Filter>
     </Text>
@@ -340,6 +337,9 @@
     </Text>
     <Text Include="Assets\lamp\lamp.obj">
       <Filter>Assets\lamp</Filter>
+    </Text>
+    <Text Include="Assets\Stone\Stone.obj">
+      <Filter>Assets\Stone</Filter>
     </Text>
   </ItemGroup>
 </Project>

@@ -33,6 +33,7 @@ std::vector<std::unique_ptr<Object>> sceneObjects;
 std::vector<std::unique_ptr<AnimatedObject>> animatedObjects;
 std::vector<std::unique_ptr<SpriteObject>> spriteObjects;
 std::unique_ptr<Skybox> skybox;
+std::vector<std::pair<glm::vec3, float>> collisionCircles;
 
 
 InputManager inputManager;
@@ -112,7 +113,7 @@ void timerFunc(int value) {
         animObj->update(deltaTime);
     }
     dirLights[0]->update(currentFrameTime);
-    camera.move(inputManager);
+    camera.move(inputManager, collisionCircles);
     glutPostRedisplay();
     glutTimerFunc(33, timerFunc, 0);
 }
@@ -148,12 +149,12 @@ void init() {
                 curObject = { BORDER_OBJECTS_PATHS[borderIndex % BORDER_OBJECTS_PATHS.size()], 
                               mainLightShaderName, glm::vec3(x, 0.5f, z), glm::vec3(0.0f), glm::vec3(0.05f) };
                 sceneObjects.push_back(std::make_unique<Object>(curObject, globalShaderManager, globalMeshManager));
+                collisionCircles.push_back({ curObject.position, STONE_COLLISION_RADIUS });
                 borderIndex++;
             }
             else {
                 curObject = { tilePath, mainLightShaderName, glm::vec3(x, 0.0f, z), rotation, glm::vec3(15.0f)};
                 sceneObjects.push_back(std::make_unique<Object>(curObject, globalShaderManager, globalMeshManager));
-
             }
         }
     }

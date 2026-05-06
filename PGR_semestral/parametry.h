@@ -16,6 +16,8 @@ constexpr const float MIN_X = -50.0f;
 constexpr const float MAX_X = 50.0f;
 constexpr const float MIN_Z = -50.0f;
 constexpr const float MAX_Z = 50.0f;
+constexpr const float MIN_Y = -5.0f;
+constexpr const float MAX_Y = 25.0f;
 constexpr const float TILE_SIZE = 10.0f;
 
 constexpr const float CAMERA_PADDING = 2.0f;
@@ -80,6 +82,7 @@ const StaticCamera STATIC_CAMERAS[2] = {
 const std::vector<std::string> BORDER_OBJECTS_PATHS = {
 	"Assets/Stone/Stone.obj"
 };
+constexpr const float STONE_COLLISION_RADIUS = 5.0f;
 
 const std::vector<ObjectSetup> SCENE_OBJECTS_SETUP = {
 	{ "Assets/BarStand/BarStandModel.obj", "Shaders/3d_light_pixel",
