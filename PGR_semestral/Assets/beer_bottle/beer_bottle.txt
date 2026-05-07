@@ -1,0 +1,1 @@
+#DownloadModelFormat: OBJ#GeometryFile: beer_bottle.obj#MaterialFile: beer_bottle.mtl#PreviewFile: beer_bottle.jpg#OtherFiles: #DownloadedFromURL: www.cgtrader.com#DateOfDownload: 18.5.2021#CreatedBy: eyouel#CreatedIn: Blender 2.9#UploadedBy: Hung Pham#Description: Model of beer bottle#NumberOfPolygons: 4128

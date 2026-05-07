@@ -50,6 +50,7 @@ uniform sampler2D diffuseMap;
 uniform int hasDiffuseMap;
 uniform sampler2D specularMap;
 uniform int hasSpecularMap;
+uniform float matAlpha;
 
 uniform DirLight dirLights[5];
 uniform int numDirLights;
@@ -115,11 +116,15 @@ vec3 calcSpotLight(SpotLight spotLight, vec3 normal, vec3 viewDir,
 
 void main() {
   vec3 norm = normalize(normalVector);
+  float alpha = 1.0;
   vec3 baseDiffuse;
   if (hasDiffuseMap == 1) {
-    baseDiffuse = texture(diffuseMap, textureCoord).rgb;
+    vec4 texColor = texture(diffuseMap, textureCoord);
+    baseDiffuse = texColor.rgb;
+    alpha = min(texColor.a, 0.8);
   } else {
     baseDiffuse = matDiffuse;
+    alpha = min(matAlpha, 0.8);
   }
   vec3 baseSpecular;
   if (hasSpecularMap == 1) {
@@ -155,5 +160,5 @@ void main() {
   float fogDist = fogEnd - distance(viewPos, vertexPosition);
   float visibilityFactor =  clamp(fogDist/(fogEnd - fogStart), 0.0, 1.0);
   finalColor = mix(fogColor, finalColor, visibilityFactor);
-  color = vec4(finalColor, 1.0);
+  color = vec4(finalColor, alpha);
 }

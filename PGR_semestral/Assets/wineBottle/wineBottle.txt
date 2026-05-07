@@ -1,0 +1,12 @@
+#DownloadModelFormat: OBJ
+#GeometryFile: wineBottle.obj
+#MaterialFile: wineBottle.mtl
+#PreviewFile: wineBottle_preview.jpg
+#OtherFiles: wineBottle.jpg
+#DownloadedFromURL: https://free3d.com/3d-model/-ml-wine-bottle-v1--691507.html
+#DateOfDownload: 2.5.2022
+#CreatedBy: Lucia Čahojová
+#CreatedIn: blender
+#UploadedBy: Lucia Čahojová
+#Description: Model of wine bottle
+#NumberOfPolygons: 10000

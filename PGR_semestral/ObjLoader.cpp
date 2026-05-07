@@ -176,6 +176,16 @@ std::unordered_map<std::string, Material> ObjLoader::loadMTL(std::string& path) 
             fscanf(file, "%f %f %f\n", &specularColor.x, &specularColor.y, &specularColor.z);
             materials[currentMaterialName].specular = specularColor;
         }
+        else if (_stricmp(lineHeader, "d") == 0) {
+            float alphaVal;
+            fscanf(file, "%f\n", &alphaVal);
+            materials[currentMaterialName].alpha = alphaVal;
+        }
+        else if (_stricmp(lineHeader, "Tr") == 0) {
+            float tr;
+            fscanf(file, "%f\n", &tr);
+            materials[currentMaterialName].alpha = 1.0f - tr; 
+        }
         else if (_stricmp(lineHeader, "map_Kd") == 0) {
             char texPath[256];
             fscanf(file, "%255s\n", texPath);

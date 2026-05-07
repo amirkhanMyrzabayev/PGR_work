@@ -154,9 +154,13 @@
     <None Include="Assets\BarStand\BarStand.mtl">
       <FileType>Text</FileType>
     </None>
+    <None Include="Assets\beer_bottle\beer_bottle.mtl" />
+    <None Include="Assets\beer_bottle\metadata.json" />
     <None Include="Assets\bezdomovec\bezdomovec.mtl" />
     <None Include="Assets\bixler\bixler.mtl" />
     <None Include="Assets\bixler\metadata.json" />
+    <None Include="Assets\bottles\bottles.mtl" />
+    <None Include="Assets\bottles\metadata.json" />
     <None Include="Assets\cartoon_building\cartoon_building.mtl" />
     <None Include="Assets\Cat\Cat.mtl" />
     <None Include="Assets\Cat\metadata.json" />
@@ -172,6 +176,8 @@
     <None Include="Assets\Stone\metadata.json" />
     <None Include="Assets\Stone\Stone.mtl" />
     <None Include="Assets\trashbin\trashbin.mtl" />
+    <None Include="Assets\wineBottle\metadata.json" />
+    <None Include="Assets\wineBottle\wineBottle.mtl" />
     <None Include="Shaders\3d_basic.frag" />
     <None Include="Shaders\3d_basic.vert" />
     <None Include="Shaders\3d_light.frag" />
@@ -219,8 +225,10 @@
   <ItemGroup>
     <Text Include="Assets\BarStand\BarStand.txt" />
     <Text Include="Assets\BarStand\BarStandModel.obj" />
+    <Text Include="Assets\beer_bottle\beer_bottle.txt" />
     <Text Include="Assets\bezdomovec\bezdomovec.txt" />
     <Text Include="Assets\bixler\bixler.txt" />
+    <Text Include="Assets\bottles\bottles.txt" />
     <Text Include="Assets\Cat\cat.txt" />
     <Text Include="Assets\gitara\gitara.txt" />
     <Text Include="Assets\kadibouda\kadibouda.txt" />
@@ -228,6 +236,7 @@
     <Text Include="Assets\snowLand\snowLand.txt" />
     <Text Include="Assets\Stone\Stone.txt" />
     <Text Include="Assets\trashbin\trashbin.txt" />
+    <Text Include="Assets\wineBottle\wineBottle.txt" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="Assets\bezdomovec\bezdomovecModel.obj">
@@ -272,6 +281,19 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="Assets\lighter\lighter.obj">
+      <FileType>Document</FileType>
+    </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Assets\beer_bottle\beer_bottle.obj">
+      <FileType>Document</FileType>
+    </Text>
+    <Text Include="Assets\bottles\bottles.obj">
+      <FileType>Document</FileType>
+    </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Assets\wineBottle\wineBottle.obj">
       <FileType>Document</FileType>
     </Text>
   </ItemGroup>

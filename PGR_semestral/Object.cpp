@@ -27,6 +27,7 @@ Object::Object(const std::string& filePath, const std::string& shaderName, Shade
 	locations.specularMapLoc = glGetUniformLocation(shaderProgram, "specularMap");
 	locations.hasSpecularMapLoc = glGetUniformLocation(shaderProgram, "hasSpecularMap");
 	locations.texMatrixLoc = glGetUniformLocation(shaderProgram, "texMatrix");
+	locations.alphaLoc = glGetUniformLocation(shaderProgram, "matAlpha");
 	this->mesh = meshManager.getMesh(filePath, shaderProgram);
 }
 
@@ -125,6 +126,7 @@ void Object::draw(const glm::mat4 view, const glm::mat4& proj,
 		else {
 			glUniform1i(locations.hasSpecularMapLoc, 0);
 		}
+		glUniform1f(locations.alphaLoc, subMesh.material.alpha);
 		glDrawArrays(GL_TRIANGLES, subMesh.startIndex, subMesh.numVertices);
 	}
 	glBindVertexArray(0);

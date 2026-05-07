@@ -61,6 +61,15 @@
     <Filter Include="Assets\lighter">
       <UniqueIdentifier>{b7fc5922-3cef-46b8-b7ff-33e0575c6cc4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Assets\beer_bottle">
+      <UniqueIdentifier>{45d5f101-330d-46e4-81aa-11a46c2424a9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Assets\bottles">
+      <UniqueIdentifier>{e28e9090-50f6-438d-99fd-5adb8a92d3f8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Assets\wineBottle">
+      <UniqueIdentifier>{f64b106b-3572-4b22-a4d6-4224d61be6c2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -206,6 +215,24 @@
     <None Include="Assets\lighter\metadata.json">
       <Filter>Assets\lighter</Filter>
     </None>
+    <None Include="Assets\beer_bottle\beer_bottle.mtl">
+      <Filter>Assets\beer_bottle</Filter>
+    </None>
+    <None Include="Assets\beer_bottle\metadata.json">
+      <Filter>Assets\beer_bottle</Filter>
+    </None>
+    <None Include="Assets\bottles\bottles.mtl">
+      <Filter>Assets\bottles</Filter>
+    </None>
+    <None Include="Assets\bottles\metadata.json">
+      <Filter>Assets\bottles</Filter>
+    </None>
+    <None Include="Assets\wineBottle\metadata.json">
+      <Filter>Assets\wineBottle</Filter>
+    </None>
+    <None Include="Assets\wineBottle\wineBottle.mtl">
+      <Filter>Assets\wineBottle</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="InputManager.h">
@@ -343,6 +370,24 @@
     </Text>
     <Text Include="Assets\lighter\lighter.obj">
       <Filter>Assets\lighter</Filter>
+    </Text>
+    <Text Include="Assets\beer_bottle\beer_bottle.txt">
+      <Filter>Assets\beer_bottle</Filter>
+    </Text>
+    <Text Include="Assets\bottles\bottles.txt">
+      <Filter>Assets\bottles</Filter>
+    </Text>
+    <Text Include="Assets\beer_bottle\beer_bottle.obj">
+      <Filter>Assets\beer_bottle</Filter>
+    </Text>
+    <Text Include="Assets\bottles\bottles.obj">
+      <Filter>Assets\bottles</Filter>
+    </Text>
+    <Text Include="Assets\wineBottle\wineBottle.txt">
+      <Filter>Assets\wineBottle</Filter>
+    </Text>
+    <Text Include="Assets\wineBottle\wineBottle.obj">
+      <Filter>Assets\wineBottle</Filter>
     </Text>
   </ItemGroup>
 </Project>

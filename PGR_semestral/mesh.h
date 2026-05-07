@@ -9,6 +9,7 @@ struct Material {
 	glm::vec3 specular;
 	std::string name;
 	float shininess;
+	float alpha = 1.0f;
 	GLuint diffuseTextureID = 0;
 	GLuint normalTextureID = 0;
 	GLuint specularTextureID = 0;

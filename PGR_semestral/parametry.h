@@ -156,7 +156,18 @@ const std::vector<ObjectSetup> SCENE_OBJECTS_SETUP = {
 	glm::vec3(4.5f, 1.15f, 0.5f), glm::vec3(glm::radians(-90.0f), 0.0f, 0.0f), glm::vec3(0.125f), false, 0},
 
 	{ "HARD", "Shaders/3d_light_pixel",
-	glm::vec3(4.8f, 1.05f, 0.5f), glm::vec3(0.0f), glm::vec3(0.1f), true}
+	glm::vec3(4.8f, 1.1f, 0.5f), glm::vec3(0.0f), glm::vec3(0.1f), true}
+};
+
+const std::vector<ObjectSetup> TRANSPARENT_OBJECTS_SETUP = {
+	{ "Assets/beer_bottle/beer_bottle.obj", "Shaders/3d_light_pixel",
+	glm::vec3(4.2f, 1.03f, 0.5f), glm::vec3(glm::radians(-90.0f), 0.0f, 0.0f), glm::vec3(1.0f)},
+	{ "Assets/bottles/bottles.obj", "Shaders/3d_light_pixel",
+	glm::vec3(3.6f, 1.03f, 1.0f), glm::vec3(0.0f, glm::radians(20.0f), 0.0f), glm::vec3(0.005f)},
+	{ "Assets/wineBottle/wineBottle.obj", "Shaders/3d_light_pixel",
+	glm::vec3(3.4f, 1.03f, 0.8f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.025f) }
+
+
 };
 
 const std::vector<AnimatedObjectSetup> ANIMATED_OBJECTS_SETUP = {

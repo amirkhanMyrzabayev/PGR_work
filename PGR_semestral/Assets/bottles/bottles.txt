@@ -1,0 +1,13 @@
+#DownloadModelFormat: OBJ
+#GeometryFile: bottles.obj
+#MaterialFile: bottles.mtl
+#PreviewFile: bottles.jpg
+#OtherFiles: bottles.txt
+#DownloadedFromURL: http://o.ffrench.free.fr/meshbank 
+#DateOfDownload: 23.5.2008
+#CreatedBy: Olivier Ffrench
+#CreatedIn: Amapi
+#UploadedBy: Markéta Rejdová
+#Description: Model of three small bottles
+#NumberOfPolygons: 19144
+

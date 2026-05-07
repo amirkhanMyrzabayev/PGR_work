@@ -26,6 +26,7 @@ struct ShaderLocations {
 	GLint specularMapLoc;
 	GLint hasSpecularMapLoc;
 	GLint texMatrixLoc;
+	GLint alphaLoc;
 };
 
 class Object
@@ -40,6 +41,8 @@ public:
 			 const glm::vec3& viewPos);
 
 	void setPosition(const glm::vec3& newPos);
+	glm::vec3 getPosition() { return position; };
+
 	void setRotation(const glm::vec3& newRot);
 	void setScale(const glm::vec3& newScale);
 	void setSRP(const glm::vec3& newPos, const glm::vec3& newRotation, const glm::vec3& newScale);

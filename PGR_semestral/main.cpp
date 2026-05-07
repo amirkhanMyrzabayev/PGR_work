@@ -5,6 +5,7 @@
  */
 
 #include <iostream>
+#include <map>
 #include "pgr.h"
 #include "InputManager.h"
 #include "Camera.h"
@@ -32,6 +33,7 @@ std::vector<std::unique_ptr<SpotLight>> spotLights;
 std::vector<std::unique_ptr<Object>> sceneObjects;
 std::vector<std::unique_ptr<AnimatedObject>> animatedObjects;
 std::vector<std::unique_ptr<SpriteObject>> spriteObjects;
+std::vector<std::unique_ptr<Object>> transparentObjects;
 std::unique_ptr<Skybox> skybox;
 std::vector<std::pair<glm::vec3, float>> collisionCircles;
 
@@ -66,6 +68,7 @@ void specialKeyRealesed(int key, int x, int y) {
 }
 
 Object* getObjectById(int id) {
+    if (id == 0) return nullptr;
     for (auto& obj : sceneObjects) {
         if (obj->getId() == id) return obj.get();
     }
@@ -96,15 +99,13 @@ void mouseClickCallback(int button, int state, int xpos, int ypos) {
         if (state == GLUT_DOWN) {
             firstMouse = true;
             isLeftMousePressed = true;
+            int readY = glutGet(GLUT_WINDOW_HEIGHT) - ypos - 1;
+            unsigned char clickedId = 0;
+            glReadPixels(xpos, readY, 1, 1, GL_STENCIL_INDEX, GL_UNSIGNED_BYTE, &clickedId);
+            std::cout << "clicked id " << (int)clickedId << std::endl;
+            handlePicking(static_cast<int>(clickedId));
         }
         else if (state == GLUT_UP) {
-            if (isLeftMousePressed) {
-                int readY = glutGet(GLUT_WINDOW_HEIGHT) - ypos - 1;
-                unsigned char clickedId = 0;
-                glReadPixels(xpos, readY, 1, 1, GL_STENCIL_INDEX, GL_UNSIGNED_BYTE, &clickedId);
-                std::cout << "clicked id " << (int)clickedId << std::endl;
-                handlePicking(static_cast<int>(clickedId));
-            }
             isLeftMousePressed = false;
         }
     }
@@ -144,7 +145,7 @@ void timerFunc(int value) {
     for (auto const& animObj : animatedObjects) {
         animObj->update(deltaTime);
     }
-    dirLights[0]->update(currentFrameTime);
+    //dirLights[0]->update(currentFrameTime);
     camera.move(inputManager, collisionCircles);
     glutPostRedisplay();
     glutTimerFunc(33, timerFunc, 0);
@@ -207,6 +208,9 @@ void init() {
         animatedObjects.back()->setId(objId);
         objId++;
     }
+    for (auto const& transpObjInfo : TRANSPARENT_OBJECTS_SETUP) {
+        transparentObjects.push_back(std::make_unique<Object>(transpObjInfo, globalShaderManager, globalMeshManager));
+    }
     int borderIndex = 0;
     ObjectSetup curObject;
     glm::vec3 rotation = glm::vec3(0.0f, -glm::radians(90.0f), 0.0f);
@@ -235,13 +239,15 @@ void init() {
 
 void draw() {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
-
+    //glClearStencil(0);
     glm::mat4 proj = camera.getProjectionMatrix();
     glm::mat4 view = camera.getViewMatrix();
-
+    glm::vec3 cameraPos = camera.getPosition();
+    skybox->draw(view, proj);
 
     //glBindVertexArray(vao);
     //glDrawArrays(GL_TRIANGLES, 0, 6);
+    // light setup
     glUseProgram(mainLightShader);
     int i = 0;
     for (i = 0; i < dirLights.size(); i++) {
@@ -280,7 +286,7 @@ void draw() {
         else {
             glStencilOp(GL_KEEP, GL_KEEP, GL_KEEP);
         }
-        obj->draw(view, proj, camera.getPosition());
+        obj->draw(view, proj, cameraPos);
     }
 
     
@@ -292,9 +298,24 @@ void draw() {
         else {
             glStencilOp(GL_KEEP, GL_KEEP, GL_KEEP);
         }
-        animObj->draw(view, proj, camera.getPosition());
+        animObj->draw(view, proj, cameraPos);
     }
-    skybox->draw(view, proj);
+    glStencilOp(GL_KEEP, GL_KEEP, GL_KEEP);
+    std::map<float, Object*> sortedTransparent;
+
+    for (auto const& obj : transparentObjects) {
+        float dist = glm::distance(cameraPos, obj->getPosition());
+        sortedTransparent[dist] = obj.get();
+    }
+
+    glEnable(GL_BLEND);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+    for (auto it = sortedTransparent.rbegin(); it != sortedTransparent.rend(); it++) {
+        it->second->draw(view, proj, cameraPos);
+    }
+    glDisable(GL_BLEND);
+
 
 
     glutSwapBuffers();
