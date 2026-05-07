@@ -29,12 +29,19 @@ constexpr const int MAX_SPOT_LIGHTS = 5;
 
 const std::string mainLightShaderName = "Shaders/3d_light_pixel";
 const std::string tilePath = "Assets/snowLand/snowLand.obj";
+const std::string HARDCODED_OBJ = "HARD";
+const std::string FIRE_SPRITE_OBJ = "HARD_FIRE";
+const std::string CYLINDER = "CYLINDER";
 
 
 constexpr const float FOG_START = 20.0f;
 constexpr const float FOG_END = 50.0f;
 const glm::vec3 FOG_COLOR = glm::vec3(0.6f, 0.7f, 0.75f);
 
+
+constexpr const float CYLINDER_RADIUS = 1.0f;
+constexpr const float CYLINDER_HEIGHT = 4.0f;
+constexpr const size_t CYLINDR_SECTOR_COUNT = 36;
 
 struct FogPositions
 {
@@ -129,6 +136,11 @@ const std::vector<std::string> BORDER_OBJECTS_PATHS = {
 };
 constexpr const float STONE_COLLISION_RADIUS = 5.0f;
 
+const ObjectSetup ARM_CYLINDER_SETUP = {
+	CYLINDER, "Shaders/3d_light_pixel",
+	glm::vec3(15.0f, 0.5f, 2.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.5f)
+};
+
 const std::vector<ObjectSetup> SCENE_OBJECTS_SETUP = {
 	{ "Assets/BarStand/BarStandModel.obj", "Shaders/3d_light_pixel",
 	glm::vec3(5.0f, 0.0f, 0.0f), glm::vec3(glm::radians(-90.0f), 0.0f, glm::radians(90.0f)), glm::vec3(1.0f) },
@@ -153,10 +165,11 @@ const std::vector<ObjectSetup> SCENE_OBJECTS_SETUP = {
 	glm::vec3(5.0f, 0.0f, 2.0f), glm::vec3(glm::radians(-90.0f), 0.0f, 0.0f), glm::vec3(0.0125f)},
 
 	{ "Assets/lighter/lighter.obj", "Shaders/3d_light_pixel",
-	glm::vec3(4.5f, 1.15f, 0.5f), glm::vec3(glm::radians(-90.0f), 0.0f, 0.0f), glm::vec3(0.125f), false, 0},
+	glm::vec3(4.5f, 1.1f, 0.5f), glm::vec3(glm::radians(-90.0f), 0.0f, 0.0f), glm::vec3(0.125f), false, 0},
 
-	{ "HARD", "Shaders/3d_light_pixel",
-	glm::vec3(4.8f, 1.1f, 0.5f), glm::vec3(0.0f), glm::vec3(0.1f), true}
+	{ HARDCODED_OBJ, "Shaders/3d_light_pixel",
+	glm::vec3(4.8f, 1.1f, 0.5f), glm::vec3(0.0f), glm::vec3(0.1f), true},
+	
 };
 
 const std::vector<ObjectSetup> TRANSPARENT_OBJECTS_SETUP = {
@@ -179,7 +192,7 @@ const std::vector<AnimatedObjectSetup> ANIMATED_OBJECTS_SETUP = {
 };
 
 const std::vector<SpriteObjectSetup> SPRITE_OBJECTS_SETUP = {
-	{ { "HARD_FIRE", "Shaders/animated_texture",
+	{ { FIRE_SPRITE_OBJ, "Shaders/animated_texture",
 		glm::vec3(10.0f, 5.0f, 0.0f), glm::vec3(0.0f, glm::radians(90.0f), glm::radians(90.0f)), glm::vec3(1.0f)},
 		// child parameters
 		5, 3, 20.0f}

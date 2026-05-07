@@ -2,6 +2,7 @@
 #include "ObjLoader.h"
 #include "mesh.h"
 #include "hardcodeObject.h"
+#include "parametry.h"
 #include <iostream>
 
 MeshManager::~MeshManager() {
@@ -30,6 +31,11 @@ Mesh* MeshManager::getMesh(const std::string& filePath, GLuint shaderProgram) {
 		ObjLoader::loadHardcode(_quadPositions, _quadNormals, _quadUvs, QUAD_VERTEX_COUNT,
 								"Assets/rocketFire/rocketFire.png",
 								vertices, uv_array, normals, subMeshes);
+	}
+	else if (filePath == "CYLINDER") {
+		ObjLoader::loadProceduralCylinder(CYLINDER_RADIUS, CYLINDER_HEIGHT, CYLINDR_SECTOR_COUNT,
+										"",
+										vertices, uv_array, normals, subMeshes);
 	}
 	else ObjLoader::loadOBJ(filePath, vertices, uv_array, normals, subMeshes);
 

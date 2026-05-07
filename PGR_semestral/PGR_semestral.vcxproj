@@ -145,6 +145,7 @@
     <ClCompile Include="Object.cpp" />
     <ClCompile Include="ObjLoader.cpp" />
     <ClCompile Include="PointLight.cpp" />
+    <ClCompile Include="SegmentedArm.cpp" />
     <ClCompile Include="ShaderManager.cpp" />
     <ClCompile Include="Skybox.cpp" />
     <ClCompile Include="SpotLight.cpp" />
@@ -206,6 +207,7 @@
     <ClInclude Include="ObjLoader.h" />
     <ClInclude Include="parametry.h" />
     <ClInclude Include="PointLight.h" />
+    <ClInclude Include="SegmentedArm.h" />
     <ClInclude Include="ShaderManager.h" />
     <ClInclude Include="Skybox.h" />
     <ClInclude Include="SpotLight.h" />

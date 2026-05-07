@@ -37,11 +37,12 @@ public:
 			const glm::vec3& newPos, const glm::vec3& newRotation, const glm::vec3& newScale);
 	Object(const ObjectSetup& setup, ShaderManager& shaderManager, MeshManager& meshManager);
 	~Object();
-	virtual void draw(const glm::mat4 view, const glm::mat4& proj,
+	virtual void draw(const glm::mat4& view, const glm::mat4& proj,
 			 const glm::vec3& viewPos);
-
+	void drawWithCustomModelMatrix(const glm::mat4& view, const glm::mat4& proj,
+		const glm::vec3& viewPos, glm::mat4& model);
 	void setPosition(const glm::vec3& newPos);
-	glm::vec3 getPosition() { return position; };
+
 
 	void setRotation(const glm::vec3& newRot);
 	void setScale(const glm::vec3& newScale);
@@ -49,17 +50,21 @@ public:
 	void setTextureMatrix(const glm::mat4& matrix);
 	void setCollisionRadius(float radius);
 
-	int getId() { return id; };
-	void setId(int newId) { id = newId; };
 
-	bool hasLight() { return haveLight; };
 	void setLight(PointLight* newLight);
 	void setLight(SpotLight* newLight);
 	void switchLight();
 
-	glm::vec3 getOrientation();
-	GLuint getShaderProgram();
+	GLuint getShaderProgram() { return shaderProgram; };
 
+	glm::vec3 getPosition() { return position; };
+	glm::vec3 getOrientation() { return rotation; };
+	glm::vec3 getScale() { return scale; };
+
+	bool hasLight() { return haveLight; };
+
+	void setId(int newId) { id = newId; };
+	int getId() { return id; };
 
 	bool isTextureAnimated;
 protected:

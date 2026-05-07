@@ -14,7 +14,7 @@ class SpriteObject :
 public:
     SpriteObject(const SpriteObjectSetup& setup, ShaderManager& shaderManager, MeshManager& meshManager);
     void update(float deltaTime);
-    void draw(const glm::mat4 view, const glm::mat4& proj, const glm::vec3& viewPos) override;
+    void draw(const glm::mat4 view, const glm::mat4& proj, const glm::vec3& viewPos);
     glm::vec3 getStartOrientation() { return startOrientation; };
 
 private:

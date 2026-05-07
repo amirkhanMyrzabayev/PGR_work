@@ -14,7 +14,7 @@ bool ObjLoader::loadOBJ(
     std::string currentMaterialName = "";
     unsigned int currentStartIndex = 0;
     std::unordered_map<std::string, Material> materials;
-    // Using fopen_s as Visual Studio considers standard fopen unsafe
+
     FILE* file;
     if (fopen_s(&file, path.c_str(), "r") != 0 || file == nullptr) {
         std::cout << "Failed to open file: " << path << std::endl;
@@ -29,22 +29,22 @@ bool ObjLoader::loadOBJ(
     // Read the first word of the line until the End Of File
     while (fscanf(file, "%127s", lineHeader) != EOF) {
 
-        if (strcmp(lineHeader, "v") == 0) {
+        if (_stricmp(lineHeader, "v") == 0) {
             glm::vec3 vertex;
             fscanf(file, "%f %f %f\n", &vertex.x, &vertex.y, &vertex.z);
             temp_vertices.push_back(vertex);
         }
-        else if (strcmp(lineHeader, "vt") == 0) {
+        else if (_stricmp(lineHeader, "vt") == 0) {
             glm::vec2 uv;
             fscanf(file, "%f %f\n", &uv.x, &uv.y);
             temp_uvs.push_back(uv);
         }
-        else if (strcmp(lineHeader, "vn") == 0) {
+        else if (_stricmp(lineHeader, "vn") == 0) {
             glm::vec3 normal;
             fscanf(file, "%f %f %f\n", &normal.x, &normal.y, &normal.z);
             temp_normals.push_back(normal);
         }
-        else if (strcmp(lineHeader, "f") == 0) {
+        else if (_stricmp(lineHeader, "f") == 0) {
             char tempLine[256];
             fgets(tempLine, 256, file);
             int offset = 0;
@@ -94,7 +94,7 @@ bool ObjLoader::loadOBJ(
             }
             
         }
-        else if (strcmp(lineHeader, "mtllib") == 0) {
+        else if (_stricmp(lineHeader, "mtllib") == 0) {
             char mtllibName[127];
             fscanf(file, "%127s\n", mtllibName);
             size_t slashIndex = path.find_last_of("/\\");
@@ -102,7 +102,7 @@ bool ObjLoader::loadOBJ(
             materials = loadMTL(materialName);
 
         }
-        else if (strcmp(lineHeader, "usemtl") == 0) {
+        else if (_stricmp(lineHeader, "usemtl") == 0) {
             char matName[128];
             fscanf(file, "%127s\n", matName);
 
@@ -233,7 +233,83 @@ bool ObjLoader::loadHardcode(const float* positions, const float* normals, const
     subMesh.material.ambient = glm::vec3(0.8f, 0.8f, 0.8f);
     subMesh.material.diffuse = glm::vec3(0.8f, 0.8f, 0.8f);
     subMesh.material.specular = glm::vec3(0.8f, 0.8f, 0.8f);
-    subMesh.material.shininess = 0.5f;
+    subMesh.material.shininess = 32.0f;
+    if (!texturePath.empty()) {
+        subMesh.material.diffuseTextureID = pgr::createTexture(texturePath);
+        std::cout << "tried to load: " << texturePath << " Id: " << subMesh.material.diffuseTextureID << std::endl;
+    }
+    subMeshes.push_back(subMesh);
+    return true;
+}
+
+bool ObjLoader::loadProceduralCylinder( const float radius, const float height, const size_t sectorCount,
+                                        const std::string& texturePath,
+                                        std::vector<glm::vec3>& out_vertices,
+                                        std::vector<glm::vec2>& out_uvs,
+                                        std::vector<glm::vec3>& out_normals,
+                                        std::vector<SubMesh>& subMeshes) {
+    
+    float sectorStep = glm::two_pi<float>() / sectorCount;
+    int vertexCount = 0;
+    for (int i = 0; i < sectorCount; ++i) {
+        float sectorAngle = i * sectorStep;
+
+        float x = radius * glm::cos(sectorAngle);
+        float z = radius * glm::sin(sectorAngle);
+
+        glm::vec3 bottomVertex(x, 0.0f, z);
+        glm::vec3 topVertex(x, height, z);
+
+        glm::vec3 normal(glm::cos(sectorAngle), 0.0f, glm::sin(sectorAngle));
+
+        float u = static_cast<float>(i) / sectorCount;
+        glm::vec2 bottomUV(u, 0.0f);
+        glm::vec2 topUV(u, 1.0f);
+
+
+        int next_index = i + 1;
+        sectorAngle = next_index * sectorStep;
+        x = radius * glm::cos(sectorAngle);
+        z = radius * glm::sin(sectorAngle);
+
+        glm::vec3 bottomVertexNext(x, 0.0f, z);
+        glm::vec3 topVertexNext(x, height, z);
+
+        glm::vec3 normalNext(glm::cos(sectorAngle), 0.0f, glm::sin(sectorAngle));
+
+        u = static_cast<float>(next_index) / sectorCount;
+        glm::vec2 bottomUVNext(u, 0.0f);
+        glm::vec2 topUVNext(u, 1.0f);
+
+        out_vertices.push_back(bottomVertex);
+        out_vertices.push_back(topVertex);
+        out_vertices.push_back(bottomVertexNext);
+        out_normals.push_back(normal);
+        out_normals.push_back(normal);
+        out_normals.push_back(normalNext);
+        out_uvs.push_back(bottomUV);
+        out_uvs.push_back(topUV);
+        out_uvs.push_back(bottomUVNext);
+
+        out_vertices.push_back(topVertex);
+        out_vertices.push_back(topVertexNext);
+        out_vertices.push_back(bottomVertexNext);
+        out_normals.push_back(normal);
+        out_normals.push_back(normalNext);
+        out_normals.push_back(normalNext);
+        out_uvs.push_back(topUV);
+        out_uvs.push_back(topUVNext);
+        out_uvs.push_back(bottomUVNext);
+
+        vertexCount+=6;
+    }
+    SubMesh subMesh;
+    subMesh.startIndex = 0;
+    subMesh.numVertices = vertexCount;
+    subMesh.material.ambient = glm::vec3(0.8f, 0.8f, 0.8f);
+    subMesh.material.diffuse = glm::vec3(1.0f, 1.0f, 1.0f);
+    subMesh.material.specular = glm::vec3(0.8f, 0.8f, 0.8f);
+    subMesh.material.shininess = 32.0f;
     if (!texturePath.empty()) {
         subMesh.material.diffuseTextureID = pgr::createTexture(texturePath);
         std::cout << "tried to load: " << texturePath << " Id: " << subMesh.material.diffuseTextureID << std::endl;

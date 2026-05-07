@@ -10,6 +10,7 @@
 #include "InputManager.h"
 #include "Camera.h"
 #include "AnimatedObject.h"
+#include "SegmentedArm.h"
 #include "Skybox.h"
 #include "parametry.h"
 
@@ -35,6 +36,7 @@ std::vector<std::unique_ptr<AnimatedObject>> animatedObjects;
 std::vector<std::unique_ptr<SpriteObject>> spriteObjects;
 std::vector<std::unique_ptr<Object>> transparentObjects;
 std::unique_ptr<Skybox> skybox;
+std::unique_ptr<SegmentedArm> segmentedArm;
 std::vector<std::pair<glm::vec3, float>> collisionCircles;
 
 
@@ -145,7 +147,8 @@ void timerFunc(int value) {
     for (auto const& animObj : animatedObjects) {
         animObj->update(deltaTime);
     }
-    //dirLights[0]->update(currentFrameTime);
+    dirLights[0]->update(currentFrameTime);
+    segmentedArm->update(deltaTime);
     camera.move(inputManager, collisionCircles);
     glutPostRedisplay();
     glutTimerFunc(33, timerFunc, 0);
@@ -159,8 +162,7 @@ void init() {
 
     skyboxShader = globalShaderManager.getShaderProgram("Shaders/skybox");
     skybox = std::make_unique<Skybox>(SKYBOX_FACES, skyboxShader);
-
-
+    
     //lights
     for (auto const& setup : DIR_LIGHTS_SETUP) {
         if (dirLights.size() == MAX_POINT_LIGHTS) {
@@ -208,6 +210,7 @@ void init() {
         animatedObjects.back()->setId(objId);
         objId++;
     }
+    segmentedArm = std::make_unique<SegmentedArm>(ARM_CYLINDER_SETUP, globalShaderManager, globalMeshManager, glm::vec3(0.0f, CYLINDER_HEIGHT, 0.0f));
     for (auto const& transpObjInfo : TRANSPARENT_OBJECTS_SETUP) {
         transparentObjects.push_back(std::make_unique<Object>(transpObjInfo, globalShaderManager, globalMeshManager));
     }
@@ -301,6 +304,8 @@ void draw() {
         animObj->draw(view, proj, cameraPos);
     }
     glStencilOp(GL_KEEP, GL_KEEP, GL_KEEP);
+
+    segmentedArm->draw(view, proj, cameraPos);
     std::map<float, Object*> sortedTransparent;
 
     for (auto const& obj : transparentObjects) {

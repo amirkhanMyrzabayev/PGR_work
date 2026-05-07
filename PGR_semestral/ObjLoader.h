@@ -23,6 +23,13 @@ class ObjLoader {
                             std::vector<glm::vec3>& out_normals,
                             std::vector<SubMesh>& subMeshes);
 
+    static bool loadProceduralCylinder(const float radius, const float height, const size_t sectorCount,
+                                        const std::string& texturePath,
+                                        std::vector<glm::vec3>& out_vertices,
+                                        std::vector<glm::vec2>& out_uvs,
+                                        std::vector<glm::vec3>& out_normals,
+                                        std::vector<SubMesh>& subMeshes);
+
 private:
     static std::unordered_map<std::string, Material> loadMTL(std::string& path);
 };

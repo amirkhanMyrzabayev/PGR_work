@@ -12,14 +12,12 @@ AnimatedObject::AnimatedObject(const AnimatedObjectSetup& setup, ShaderManager& 
     }
 }
 
-void AnimatedObject::draw(const glm::mat4 view, const glm::mat4& proj,
+void AnimatedObject::draw(const glm::mat4& view, const glm::mat4& proj,
                             const glm::vec3& viewPos) {
     Object::draw(view, proj, viewPos);
     if (animatedSprtie && isAnimating) {
-        glEnable(GL_BLEND); 
-        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
         animatedSprtie->draw(view, proj, viewPos);
-        glDisable(GL_BLEND);
     }
 }
 

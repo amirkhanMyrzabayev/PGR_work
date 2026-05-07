@@ -50,8 +50,7 @@ Object::~Object() {}
 void Object::setPosition(const glm::vec3& newPos) { position = newPos; }
 void Object::setRotation(const glm::vec3& newRot) { rotation = newRot; }
 void Object::setScale(const glm::vec3& newScale) { scale = newScale; }
-glm::vec3 Object::getOrientation() { return rotation; };
-GLuint Object::getShaderProgram() { return shaderProgram; };
+
 
 void Object::setSRP(const glm::vec3& newPos, const glm::vec3& newRotation, const glm::vec3& newScale) {
 	setPosition(newPos);
@@ -78,7 +77,7 @@ void Object::switchLight() {
 	if (spotLight != nullptr) spotLight->switchLight();
 }
 
-void Object::draw(const glm::mat4 view, const glm::mat4& proj,
+void Object::draw(const glm::mat4& view, const glm::mat4& proj,
 				 const glm::vec3& viewPos) {
 	glUseProgram(shaderProgram);
 
@@ -88,17 +87,17 @@ void Object::draw(const glm::mat4 view, const glm::mat4& proj,
 
 	glUniform3fv(locations.viewPosLoc, 1, glm::value_ptr(viewPos));
 
-	glm::mat4 modelR = glm::mat4(1.0f);
-	modelR = glm::translate(modelR, position);
-	modelR = glm::rotate(modelR, rotation.x, glm::vec3(1.0f, 0.0f, 0.0f));
-	modelR = glm::rotate(modelR, rotation.y, glm::vec3(0.0f, 1.0f, 0.0f));
-	modelR = glm::rotate(modelR, rotation.z, glm::vec3(0.0f, 0.0f, 1.0f));
-	modelR = glm::scale(modelR, scale);
+	glm::mat4 model = glm::mat4(1.0f);
+	model = glm::translate(model, position);
+	model = glm::rotate(model, rotation.x, glm::vec3(1.0f, 0.0f, 0.0f));
+	model = glm::rotate(model, rotation.y, glm::vec3(0.0f, 1.0f, 0.0f));
+	model = glm::rotate(model, rotation.z, glm::vec3(0.0f, 0.0f, 1.0f));
+	model = glm::scale(model, scale);
 
-	glm::mat3 normalMatrix = glm::mat3(glm::transpose(glm::inverse(modelR)));
+	glm::mat3 normalMatrix = glm::mat3(glm::transpose(glm::inverse(model)));
 
 
-	glUniformMatrix4fv(locations.modelLoc, 1, GL_FALSE, glm::value_ptr(modelR));
+	glUniformMatrix4fv(locations.modelLoc, 1, GL_FALSE, glm::value_ptr(model));
 	glUniformMatrix3fv(locations.normalMatrixLoc, 1, GL_FALSE, glm::value_ptr(normalMatrix));
 	//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 
@@ -113,6 +112,52 @@ void Object::draw(const glm::mat4 view, const glm::mat4& proj,
 			glActiveTexture(GL_TEXTURE0);
 			glBindTexture(GL_TEXTURE_2D, subMesh.material.diffuseTextureID);
 			glUniform1i(locations.diffuseMapLoc, 0); 
+		}
+		else {
+			glUniform1i(locations.hasDiffuseMapLoc, 0);
+		}
+		if (subMesh.material.specularTextureID != 0) {
+			glUniform1i(locations.hasSpecularMapLoc, 1);
+			glActiveTexture(GL_TEXTURE1);
+			glBindTexture(GL_TEXTURE_2D, subMesh.material.specularTextureID);
+			glUniform1i(locations.specularMapLoc, 1);
+		}
+		else {
+			glUniform1i(locations.hasSpecularMapLoc, 0);
+		}
+		glUniform1f(locations.alphaLoc, subMesh.material.alpha);
+		glDrawArrays(GL_TRIANGLES, subMesh.startIndex, subMesh.numVertices);
+	}
+	glBindVertexArray(0);
+	//glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+}
+
+void Object::drawWithCustomModelMatrix(const glm::mat4& view, const glm::mat4& proj,
+								const glm::vec3& viewPos, glm::mat4& model) {
+	glUseProgram(shaderProgram);
+
+	glUniformMatrix4fv(locations.viewLoc, 1, GL_FALSE, glm::value_ptr(view));
+	glUniformMatrix4fv(locations.projLoc, 1, GL_FALSE, glm::value_ptr(proj));
+	glUniformMatrix4fv(locations.texMatrixLoc, 1, GL_FALSE, glm::value_ptr(textureMatrix));
+
+	glUniform3fv(locations.viewPosLoc, 1, glm::value_ptr(viewPos));
+
+	glm::mat3 normalMatrix = glm::mat3(glm::transpose(glm::inverse(model)));
+	glUniformMatrix4fv(locations.modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+	glUniformMatrix3fv(locations.normalMatrixLoc, 1, GL_FALSE, glm::value_ptr(normalMatrix));
+	//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+
+	glBindVertexArray(mesh->vao);
+	for (const auto& subMesh : mesh->subMeshes) {
+		glUniform3fv(locations.ambientLoc, 1, glm::value_ptr(subMesh.material.ambient));
+		glUniform3fv(locations.diffuseLoc, 1, glm::value_ptr(subMesh.material.diffuse));
+		glUniform3fv(locations.specularLoc, 1, glm::value_ptr(subMesh.material.specular));
+		glUniform1f(locations.shininessLoc, (GLfloat)subMesh.material.shininess);
+		if (subMesh.material.diffuseTextureID != 0) {
+			glUniform1i(locations.hasDiffuseMapLoc, 1);
+			glActiveTexture(GL_TEXTURE0);
+			glBindTexture(GL_TEXTURE_2D, subMesh.material.diffuseTextureID);
+			glUniform1i(locations.diffuseMapLoc, 0);
 		}
 		else {
 			glUniform1i(locations.hasDiffuseMapLoc, 0);

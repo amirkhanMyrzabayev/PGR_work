@@ -9,7 +9,7 @@ public:
     AnimatedObject(const AnimatedObjectSetup& setup, ShaderManager& shaderManager, MeshManager& meshManager, 
                     std::unique_ptr<SpriteObject> animation = nullptr);
     void update(float time);
-    void draw(const glm::mat4 view, const glm::mat4& proj,
+    void draw(const glm::mat4& view, const glm::mat4& proj,
                 const glm::vec3& viewPos) override;
     void switchAnimation() { isAnimating = !isAnimating; };
 private:
