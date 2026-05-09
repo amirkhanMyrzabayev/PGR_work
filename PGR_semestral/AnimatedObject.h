@@ -8,10 +8,12 @@ class AnimatedObject :
 public:
     AnimatedObject(const AnimatedObjectSetup& setup, ShaderManager& shaderManager, MeshManager& meshManager, 
                     std::unique_ptr<SpriteObject> animation = nullptr);
-    void update(float time);
+    void update(float time) override;
     void draw(const glm::mat4& view, const glm::mat4& proj,
                 const glm::vec3& viewPos) override;
     void switchAnimation() { isAnimating = !isAnimating; };
+
+    float getYaw() { return yaw; };
 private:
     std::unique_ptr<SpriteObject> animatedSprtie;
     glm::vec3 centerOrbit;
@@ -20,6 +22,7 @@ private:
     float radiusX;
     float radiusZ;
     float speed;
+    float yaw;
     float elapsedTime = 0.0f;
     bool isAnimating = false;
 };

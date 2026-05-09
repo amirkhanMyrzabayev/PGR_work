@@ -236,6 +236,12 @@
     <None Include="Assets\wineBottle\wineBottle.mtl">
       <Filter>Assets\wineBottle</Filter>
     </None>
+    <None Include="Shaders\3d_light_pixel_time.frag">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="Shaders\3d_light_pixel_time.vert">
+      <Filter>Shaders</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="InputManager.h">

@@ -24,12 +24,12 @@ float lastFrameTime = 0.0f;
 GLuint skyboxShader = 0;
 
 FogPositions fogPositions;
-GLint mainLightShader;
 
 std::vector<std::unique_ptr<DirectionalLight>> dirLights;
 std::vector<std::unique_ptr<PointLight>> pointLights;
 std::vector<std::unique_ptr<SpotLight>> spotLights;
 
+std::vector<GLuint> lightShaders;
 
 std::vector<std::unique_ptr<Object>> sceneObjects;
 std::vector<std::unique_ptr<AnimatedObject>> animatedObjects;
@@ -41,7 +41,7 @@ std::vector<std::pair<glm::vec3, float>> collisionCircles;
 
 
 InputManager inputManager;
-Camera camera(STATIC_CAMERAS[0].position);
+Camera camera(STATIC_CAMERAS[0].position, CAMERA_PATH);
 MeshManager globalMeshManager;
 ShaderManager globalShaderManager;
 
@@ -63,6 +63,13 @@ void keyRealesed(unsigned char key, int x, int y) {
 
 void specialKeyPressed(int key, int x, int y) {
     inputManager.pressSpecialKey(key);
+    if (key == GLUT_KEY_F1) {
+        camera.setCameraState(splineCamera);
+    }
+    else if (key == GLUT_KEY_F2)
+    {
+        camera.setCameraState(movingWithObject);
+    }
 }
 
 void specialKeyRealesed(int key, int x, int y) {
@@ -122,7 +129,7 @@ void mouseCallback(int xpos, int ypos) {
         lastY = ypos;
         firstMouse = false;
     }
-    if (isLeftMousePressed) {
+    if (isLeftMousePressed &&  camera.getCameraState() != movingWithObject) {
         float offset_x = xpos - lastX;
         float offset_y = lastY - ypos;
         camera.processMouseMovement(offset_x, offset_y);
@@ -143,13 +150,16 @@ void timerFunc(int value) {
             texMat = glm::rotate(texMat, currentFrameTime * 1.5f, glm::vec3(0.0f, 0.0f, 1.0f));
             obj->setTextureMatrix(texMat);
         }
+        obj->update(currentFrameTime);
     }
     for (auto const& animObj : animatedObjects) {
         animObj->update(deltaTime);
     }
     dirLights[0]->update(currentFrameTime);
     segmentedArm->update(deltaTime);
-    camera.move(inputManager, collisionCircles);
+    if (camera.getCameraState() == movingWithObject) camera.moveWithObject(animatedObjects[0]->getPosition() + glm::vec3(0.0f, 0.2f, 0.0f),
+                                                                            animatedObjects[0]->getYaw());
+    else camera.move(inputManager, collisionCircles, deltaTime);
     glutPostRedisplay();
     glutTimerFunc(33, timerFunc, 0);
 }
@@ -235,7 +245,9 @@ void init() {
     }
 
 
-    mainLightShader = globalShaderManager.getShaderProgram(mainLightShaderName);
+    for (auto const& shaderName : LIGHT_SHADERS) {
+        lightShaders.push_back(globalShaderManager.getShaderProgram(shaderName));
+    }
     // fog
     globalShaderManager.setFogInShaders(FOG_COLOR, FOG_START, FOG_END);
 }
@@ -251,36 +263,37 @@ void draw() {
     //glBindVertexArray(vao);
     //glDrawArrays(GL_TRIANGLES, 0, 6);
     // light setup
-    glUseProgram(mainLightShader);
-    int i = 0;
-    for (i = 0; i < dirLights.size(); i++) {
-        if (i == MAX_DIR_LIGHTS) {
-            std::cerr << "Maximum directional lights " << MAX_DIR_LIGHTS << " exceeded: ignoring remaining" << std::endl;
-            break;
+    for (auto const& shaderProgram : lightShaders) {
+        glUseProgram(shaderProgram);
+        int i = 0;
+        for (i = 0; i < dirLights.size(); i++) {
+            if (i == MAX_DIR_LIGHTS) {
+                std::cerr << "Maximum directional lights " << MAX_DIR_LIGHTS << " exceeded: ignoring remaining" << std::endl;
+                break;
+            }
+            dirLights[i]->bindUniforms(shaderProgram, i);
         }
-        dirLights[i]->bindUniforms(mainLightShader, i);
-    }
-    GLint numLightLoc = glGetUniformLocation(mainLightShader, "numDirLights");
-    glUniform1i(numLightLoc, i);
-    for (i = 0; i < pointLights.size(); i++) {
-        if (i == MAX_POINT_LIGHTS) {
-            std::cerr << "Maximum point lights " << MAX_POINT_LIGHTS << " exceeded: ignoring remaining" << std::endl;
-            break;
+        GLint numLightLoc = glGetUniformLocation(shaderProgram, "numDirLights");
+        glUniform1i(numLightLoc, i);
+        for (i = 0; i < pointLights.size(); i++) {
+            if (i == MAX_POINT_LIGHTS) {
+                std::cerr << "Maximum point lights " << MAX_POINT_LIGHTS << " exceeded: ignoring remaining" << std::endl;
+                break;
+            }
+            pointLights[i]->bindUniforms(shaderProgram, i);
         }
-        pointLights[i]->bindUniforms(mainLightShader, i);
-    }
-    numLightLoc = glGetUniformLocation(mainLightShader, "numPointLights");
-    glUniform1i(numLightLoc, i);
-    for (int i = 0; i < spotLights.size(); i++) {
-        if (i == MAX_SPOT_LIGHTS) {
-            std::cerr << "Maximum spot lights " << MAX_SPOT_LIGHTS << " exceeded: ignoring remaining" << std::endl;
-            break;
+        numLightLoc = glGetUniformLocation(shaderProgram, "numPointLights");
+        glUniform1i(numLightLoc, i);
+        for (int i = 0; i < spotLights.size(); i++) {
+            if (i == MAX_SPOT_LIGHTS) {
+                std::cerr << "Maximum spot lights " << MAX_SPOT_LIGHTS << " exceeded: ignoring remaining" << std::endl;
+                break;
+            }
+            spotLights[i]->bindUniforms(shaderProgram, i);
         }
-        spotLights[i]->bindUniforms(mainLightShader, i);
+        numLightLoc = glGetUniformLocation(shaderProgram, "numSpotLights");
+        glUniform1i(numLightLoc, i);
     }
-    numLightLoc = glGetUniformLocation(mainLightShader, "numSpotLights");
-    glUniform1i(numLightLoc, i);
-
     for (auto const& obj : sceneObjects) {
         glStencilFunc(GL_ALWAYS, obj->getId(), 0xFF);
         if (obj->getId() > 0) {

@@ -27,6 +27,7 @@ struct ShaderLocations {
 	GLint hasSpecularMapLoc;
 	GLint texMatrixLoc;
 	GLint alphaLoc;
+	GLint elapsedTimeLoc;
 };
 
 class Object
@@ -39,9 +40,12 @@ public:
 	~Object();
 	virtual void draw(const glm::mat4& view, const glm::mat4& proj,
 			 const glm::vec3& viewPos);
+	virtual void update(float deltaTime);
+
 	void drawWithCustomModelMatrix(const glm::mat4& view, const glm::mat4& proj,
 		const glm::vec3& viewPos, glm::mat4& model);
 	void setPosition(const glm::vec3& newPos);
+
 
 
 	void setRotation(const glm::vec3& newRot);

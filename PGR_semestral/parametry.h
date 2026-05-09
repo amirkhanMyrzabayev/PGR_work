@@ -26,7 +26,6 @@ constexpr const int MAX_DIR_LIGHTS = 5;
 constexpr const int MAX_POINT_LIGHTS = 5;
 constexpr const int MAX_SPOT_LIGHTS = 5;
 
-
 const std::string mainLightShaderName = "Shaders/3d_light_pixel";
 const std::string tilePath = "Assets/snowLand/snowLand.obj";
 const std::string HARDCODED_OBJ = "HARD";
@@ -89,6 +88,15 @@ const StaticCamera STATIC_CAMERAS[2] = {
 };
 
 
+const std::vector<glm::vec3> CAMERA_PATH = {
+	glm::vec3(0.0f, 5.0f,  10.0f), 
+	glm::vec3(10.0f, 2.0f,  0.0f), 
+	glm::vec3(0.0f, 8.0f, -10.0f), 
+	glm::vec3(-10.0f, 3.0f,  0.0f),
+	glm::vec3(10.0f, 2.0f,  0.0f),
+	glm::vec3(0.0f, 5.0f,  10.0f)
+};
+
 const std::vector<DirLightSetup> DIR_LIGHTS_SETUP = {
 	{
 		// Sunlight
@@ -131,6 +139,11 @@ const std::vector<SpotLightSetup> SPOT_LIGHTS_SETUP = {
 };
 
 
+
+const std::vector<std::string> LIGHT_SHADERS = {
+	"Shaders/3d_light_pixel", "Shaders/3d_light_pixel_time",
+};
+
 const std::vector<std::string> BORDER_OBJECTS_PATHS = {
 	"Assets/Stone/Stone.obj"
 };
@@ -161,7 +174,7 @@ const std::vector<ObjectSetup> SCENE_OBJECTS_SETUP = {
 	{ "Assets/gitara/gitara.obj", "Shaders/3d_light_pixel",
 	glm::vec3(4.4f, 1.1f, 0.0f), glm::vec3(0.0f, glm::radians(90.0f), glm::radians(-90.0f)), glm::vec3(0.005f)},
 
-	{ "Assets/Cat/Cat.obj", "Shaders/3d_light_pixel",
+	{ "Assets/Cat/Cat.obj", "Shaders/3d_light_pixel_time",
 	glm::vec3(5.0f, 0.0f, 2.0f), glm::vec3(glm::radians(-90.0f), 0.0f, 0.0f), glm::vec3(0.0125f)},
 
 	{ "Assets/lighter/lighter.obj", "Shaders/3d_light_pixel",
@@ -169,6 +182,8 @@ const std::vector<ObjectSetup> SCENE_OBJECTS_SETUP = {
 
 	{ HARDCODED_OBJ, "Shaders/3d_light_pixel",
 	glm::vec3(4.8f, 1.1f, 0.5f), glm::vec3(0.0f), glm::vec3(0.1f), true},
+
+
 	
 };
 
@@ -199,9 +214,10 @@ const std::vector<SpriteObjectSetup> SPRITE_OBJECTS_SETUP = {
 };
 
 
+
 const std::vector<std::string> SKYBOX_FACES = {
 	"Assets/Cubemaps/sky/1_posx.png", "Assets/Cubemaps/sky/1_negx.png",
 	"Assets/Cubemaps/sky/1_posy.png", "Assets/Cubemaps/sky/1_negy.png",
-	"Assets/Cubemaps/sky/1_posz.png", "Assets/Cubemaps/sky/1_negz.png",
+	"Assets/Cubemaps/sky/1_posz.png", "Assets/Cubemaps/sky/1_negz.png"
 };
 

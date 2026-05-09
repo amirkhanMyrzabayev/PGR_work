@@ -28,6 +28,7 @@ Object::Object(const std::string& filePath, const std::string& shaderName, Shade
 	locations.hasSpecularMapLoc = glGetUniformLocation(shaderProgram, "hasSpecularMap");
 	locations.texMatrixLoc = glGetUniformLocation(shaderProgram, "texMatrix");
 	locations.alphaLoc = glGetUniformLocation(shaderProgram, "matAlpha");
+	locations.elapsedTimeLoc = glGetUniformLocation(shaderProgram, "elapsedTime");
 	this->mesh = meshManager.getMesh(filePath, shaderProgram);
 }
 
@@ -70,7 +71,11 @@ void Object::setLight(SpotLight* newLight) {
 	spotLight = std::move(newLight);
 }
 
-
+void Object::update(float elapsedTime) {
+	if (locations.elapsedTimeLoc == -1) return;
+	glUseProgram(shaderProgram);
+	glUniform1f(locations.elapsedTimeLoc, elapsedTime);
+}
 
 void Object::switchLight() {
 	if (pointLight != nullptr) pointLight->switchLight();

@@ -33,9 +33,8 @@ void AnimatedObject::update(float deltaTime) {
     float forwardX = -glm::sin(angle) * radiusX;
     float forwardZ = glm::cos(angle) * radiusZ;
     glm::vec2 forwardVec = glm::normalize(glm::vec2(forwardX, forwardZ));
-    float yaw = glm::atan(forwardVec.x, forwardVec.y);
+    yaw = glm::atan(forwardVec.x, forwardVec.y);
     setRotation(startOrientation+glm::vec3(0.0f, yaw, 0.0f));
-
 
     if (animatedSprtie) {
         //std::cout << "updated animation " << std::endl;

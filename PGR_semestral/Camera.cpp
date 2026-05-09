@@ -1,8 +1,7 @@
 #include "Camera.h"
 #include "parametry.h"
-#include <glm/gtc/quaternion.hpp>
 
-Camera::Camera(glm::vec3 pos) : position(pos) {
+Camera::Camera(glm::vec3 pos, const std::vector<glm::vec3>& animationPath) : position(pos), path(animationPath) {
 	front = glm::vec3(0.0f, 0.0f, -1.0f);
 	up = glm::vec3(0.0f, 1.0f, 0.0f);
 }
@@ -12,15 +11,6 @@ Camera::~Camera() {}
 glm::mat4 Camera::getViewMatrix() {
 	switch (currentState)
 	{
-	case freeCamera:
-		//glm::vec4 position4D = glm::vec4(position, 1.0f);
-		//glm::vec4 rotatedEye4D = trackballRotation * glm::vec4(position, 1.0f);
-		//glm::vec3 rotatedEye = glm::vec3(rotatedEye4D);
-	{
-		//glm::vec4 baseFront = glm::vec4(front, 0.0f);
-
-		return glm::lookAt(position, position + front, up);
-	}
 	case staticFirst:
 		return glm::lookAt(STATIC_CAMERAS[0].position,
 			STATIC_CAMERAS[0].position + STATIC_CAMERAS[0].front, STATIC_CAMERAS[0].up);
@@ -28,21 +18,19 @@ glm::mat4 Camera::getViewMatrix() {
 		return glm::lookAt(STATIC_CAMERAS[1].position,
 			STATIC_CAMERAS[1].position + STATIC_CAMERAS[1].front, STATIC_CAMERAS[1].up);
 	default:
-		break;
+		return glm::lookAt(position, position + front, up);
 	}
 }
 
 glm::vec3 Camera::getPosition() {
 	switch (currentState)
 	{
-	case freeCamera:
-		return position;
 	case staticFirst:
 		return STATIC_CAMERAS[0].position;
 	case staticSecond:
 		return STATIC_CAMERAS[1].position;
 	default:
-		break;
+		return position;
 	}
 }
 
@@ -50,10 +38,33 @@ glm::mat4 Camera::getProjectionMatrix() {
 	return glm::perspective(glm::radians(45.0f), 1.0f, 0.1f, 100.0f);
 }
 
-void Camera::move(const InputManager& inputManager, std::vector<std::pair<glm::vec3, float>>& collisionCircles) {
+glm::vec3 Camera::getSplinePosition(float totalTime, glm::vec3 p0, glm::vec3 p1, glm::vec3 p2, glm::vec3 p3) {
+	float t2 = totalTime * totalTime;
+	float t3 = t2 * totalTime;
+	
+	return 0.5f * (
+		(2.0f * p1) +
+		(-p0 + p2) * totalTime +
+		(2.0f * p0 - 5.0f * p1 + 4.0f * p2 - p3) * t2 +
+		(-p0 + 3.0f * p1 - 3.0f * p2 + p3) * t3
+		);
+}
+void Camera::animate() {
+	float pathTime = elapsedTime * 0.5f;
+	int segment = static_cast<int>(pathTime) % (path.size() - 3);
+	float t = pathTime - floor(pathTime);
+	position = getSplinePosition(t, path[segment], path[(segment + 1)], path[(segment + 2)], path[(segment + 3)]);
+}
+
+void Camera::move(const InputManager& inputManager, std::vector<std::pair<glm::vec3, float>>& collisionCircles, float deltaTime) {
+	if (currentState == splineCamera) {
+		elapsedTime += deltaTime;
+		animate();
+		return;
+	}
+
 	if (currentState != freeCamera) return;
 	glm::vec3 nextPosition = position;
-
 	if (inputManager.specialKeys[GLUT_KEY_UP]) {
 		nextPosition += up * cameraSpeed;
 	}
@@ -72,6 +83,7 @@ void Camera::move(const InputManager& inputManager, std::vector<std::pair<glm::v
 	if (inputManager.keys['d']) {
 		nextPosition += glm::normalize(glm::cross(front, up)) * cameraSpeed;
 	}
+ 
 	if (checkCollision(collisionCircles, nextPosition)) return;
 	position = checkBounds(nextPosition);
 	return;
@@ -106,8 +118,6 @@ void Camera::processMouseMovement(float offset_x, float offset_y) {
 	pitch += offset_y;
 	if (pitch > 89.0f) pitch = 89.0f;
 	else if (pitch < -89.0f) pitch = -89.0f;
-	using glm::cos;
-	using glm::sin;
 	using glm::radians;
 	front.x = cos(radians(yaw)) * cos(radians(pitch));	
 	front.y = -sin(radians(pitch));
@@ -120,14 +130,28 @@ CameraStates Camera::getCameraState() {
 }
 
 void Camera::setCameraState(CameraStates newState) {
-	if (newState == freeCamera && currentState != freeCamera) {
+	if (newState == freeCamera && currentState != freeCamera && (currentState == staticFirst || currentState == staticSecond)) {
 		position = STATIC_CAMERAS[currentState - 1].position;
 		front = STATIC_CAMERAS[currentState - 1].front;
 		up = STATIC_CAMERAS[currentState - 1].up;
 		pitch = glm::degrees(glm::asin(-front.y));
 		yaw = glm::degrees(glm::atan(front.z, front.x));
 	}
+	
 	currentState = newState;
+}
+
+
+void Camera::moveWithObject(glm::vec3 objectPosition, float objectYaw) {
+	position = objectPosition;
+	pitch = 0.0f;
+	yaw = -glm::degrees(objectYaw) + 90.0f;
+	using glm::radians;
+	front.x = cos(radians(yaw)) * cos(radians(pitch));
+	front.y = -sin(radians(pitch));
+	front.z = sin(radians(yaw)) * cos(radians(pitch));
+	front = glm::normalize(front);
+
 }
 
 

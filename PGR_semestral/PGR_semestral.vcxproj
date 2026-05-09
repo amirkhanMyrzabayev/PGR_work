@@ -185,6 +185,8 @@
     <None Include="Shaders\3d_light.vert" />
     <None Include="Shaders\3d_light_pixel.frag" />
     <None Include="Shaders\3d_light_pixel.vert" />
+    <None Include="Shaders\3d_light_pixel_time.frag" />
+    <None Include="Shaders\3d_light_pixel_time.vert" />
     <None Include="Shaders\3d_texture.frag" />
     <None Include="Shaders\3d_texture.vert" />
     <None Include="Shaders\animated_texture.frag" />
