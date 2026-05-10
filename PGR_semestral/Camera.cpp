@@ -132,12 +132,11 @@ CameraStates Camera::getCameraState() {
 void Camera::setCameraState(CameraStates newState) {
 	if (newState == freeCamera && currentState != freeCamera && (currentState == staticFirst || currentState == staticSecond)) {
 		position = STATIC_CAMERAS[currentState - 1].position;
-		front = STATIC_CAMERAS[currentState - 1].front;
-		up = STATIC_CAMERAS[currentState - 1].up;
+		front = glm::normalize(STATIC_CAMERAS[currentState - 1].front);
+		up = glm::normalize(STATIC_CAMERAS[currentState - 1].up);
 		pitch = glm::degrees(glm::asin(-front.y));
 		yaw = glm::degrees(glm::atan(front.z, front.x));
 	}
-	
 	currentState = newState;
 }
 

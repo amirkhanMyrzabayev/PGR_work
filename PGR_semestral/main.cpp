@@ -153,7 +153,7 @@ void mouseCallback(int xpos, int ypos) {
         lastY = ypos;
         firstMouse = false;
     }
-    if (isLeftMousePressed &&  camera.getCameraState() != movingWithObject) {
+    if (isLeftMousePressed && camera.getCameraState() != movingWithObject) {
         float offset_x = xpos - lastX;
         float offset_y = lastY - ypos;
         camera.processMouseMovement(offset_x, offset_y);
