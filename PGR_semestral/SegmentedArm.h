@@ -1,4 +1,15 @@
+/**
+
+    @file      SegmentedArm.h
+    @brief     Wrapper class for 3 Objects that will have hierarchical animation.
+    @details   ~
+    @author    Amirkhan Myrzabayev
+    @date      10.05.2026
+    @copyright © Amirkhan Myrzabayev, 2026. All right reserved.
+
+**/
 #pragma once
+
 #include "parametry.h"
 #include "ShaderManager.h"
 #include "MeshManager.h"

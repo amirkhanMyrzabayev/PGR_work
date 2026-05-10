@@ -1,4 +1,15 @@
+/**
+
+    @file      InputManager.h
+    @brief     Class for handling input.
+    @details   ~
+    @author    Amirkhan Myrzabayev
+    @date      10.05.2026
+    @copyright © Amirkhan Myrzabayev, 2026. All right reserved.
+
+**/
 #pragma once
+
 
 /// @brief Keeps track of which keyboard keys are currently pressed down.
 class InputManager

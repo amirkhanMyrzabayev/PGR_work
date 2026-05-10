@@ -1,4 +1,15 @@
+/**
+
+    @file      ObjLoader.h
+    @brief     Class that loads OBJ files.
+    @details   ~
+    @author    Amirkhan Myrzabayev
+    @date      10.05.2026
+    @copyright © Amirkhan Myrzabayev, 2026. All right reserved.
+
+**/
 #pragma once
+
 
 #include <vector>
 #include <string>

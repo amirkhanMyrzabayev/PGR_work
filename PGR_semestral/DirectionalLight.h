@@ -1,4 +1,15 @@
+/**
+
+    @file      DirectionalLight.h
+    @brief     Child class of BaseLight that adds direction.
+    @details   ~
+    @author    Amirkhan Myrzabayev
+    @date      10.05.2026
+    @copyright © Amirkhan Myrzabayev, 2026. All right reserved.
+
+**/
 #pragma once
+
 #include "BaseLight.h"
 
 /// @brief Helper struct to easily pass all starting settings for a directional light.

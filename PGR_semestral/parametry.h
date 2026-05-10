@@ -1,3 +1,13 @@
+/**
+
+    @file      parametry.h
+    @brief     Header for constants and parameters.
+    @details   ~
+    @author    Amirkhan Myrzabayev
+    @date      10.05.2026
+    @copyright © Amirkhan Myrzabayev, 2026. All right reserved.
+
+**/
 #pragma once
 #include <vector>
 #include <string>

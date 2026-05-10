@@ -1,4 +1,15 @@
+/**
+
+    @file      Camera.h
+    @brief     Class that defines camera, its states and moving.
+    @details   ~
+    @author    Amirkhan Myrzabayev
+    @date      10.05.2026
+    @copyright © Amirkhan Myrzabayev, 2026. All right reserved.
+
+**/
 #pragma once
+
 #include "pgr.h"
 #include "InputManager.h"
 

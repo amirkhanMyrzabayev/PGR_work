@@ -1,4 +1,15 @@
+/**
+
+    @file      Skybox.h
+    @brief     Skybox object in the scene.
+    @details   ~
+    @author    Cool Guy
+    @date      10.05.2026
+    @copyright © Cool Guy, 2026. All right reserved.
+
+**/
 #pragma once
+
 #include <vector>
 #include <string>
 #include "pgr.h"

@@ -1,4 +1,15 @@
+/**
+
+    @file      BaseLight.h
+    @brief     Base class for all lights.
+    @details   ~
+    @author    Amirkhan Myrzabayev
+    @date      10.05.2026
+    @copyright © Amirkhan Myrzabayev, 2026. All right reserved.
+
+**/
 #pragma once
+
 #include <string>
 #include "pgr.h"
 

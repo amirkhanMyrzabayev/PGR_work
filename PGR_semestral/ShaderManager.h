@@ -1,4 +1,15 @@
+/**
+
+    @file      ShaderManager.h
+    @brief     Manager class to load, store, and reuse OpenGL shader programs.
+    @details   ~
+    @author    Amirkhan Myrzabayev
+    @date      10.05.2026
+    @copyright © Amirkhan Myrzabayev, 2026. All right reserved.
+
+**/
 #pragma once
+
 #include <unordered_map>
 #include <string>
 #include "pgr.h"

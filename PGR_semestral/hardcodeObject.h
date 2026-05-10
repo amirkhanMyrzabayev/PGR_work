@@ -1,4 +1,15 @@
+/**
+
+    @file      hardcodeObject.h
+    @brief     Header for data of some hardcoded objects.
+    @details   ~
+    @author    Amirkhan Myrzabayev
+    @date      10.05.2026
+    @copyright © Amirkhan Myrzabayev, 2026. All right reserved.
+
+**/
 #pragma once
+
 
 
 /// @brief Total vertices: 144 (48 triangles * 3 vertices per triangle)

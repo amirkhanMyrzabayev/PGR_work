@@ -1,4 +1,15 @@
+/**
+
+    @file      Object.h
+    @brief     Object class for 3D objects with helper structure.
+    @details   ~
+    @author    Amirkhan Myrzabayev
+    @date      10.05.2026
+    @copyright © Amirkhan Myrzabayev, 2026. All right reserved.
+
+**/
 #pragma once
+
 #include <string>
 #include <vector>
 #include "pgr.h"

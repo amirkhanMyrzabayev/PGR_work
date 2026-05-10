@@ -1,4 +1,15 @@
+/**
+
+    @file      SpriteObject.h
+    @brief     Child class of Object that is used for drawing animated sprites.
+    @details   ~
+    @author    Amirkhan Myrzabayev
+    @date      10.05.2026
+    @copyright © Amirkhan Myrzabayev, 2026. All right reserved.
+
+**/
 #pragma once
+
 #include "Object.h"
 
 /// @brief Stores OpenGL memory locations for sprite animation variables.

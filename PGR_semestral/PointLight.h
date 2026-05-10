@@ -1,4 +1,15 @@
+/**
+
+    @file      PointLight.h
+    @brief     Child class of BaseLight that adds position and decay.
+    @details   ~
+    @author    Amirkhan Myrzabayev
+    @date      10.05.2026
+    @copyright © Amirkhan Myrzabayev, 2026. All right reserved.
+
+**/
 #pragma once
+
 #include "BaseLight.h"
 
 /// @brief Helper struct to easily pass all starting settings for a point light.

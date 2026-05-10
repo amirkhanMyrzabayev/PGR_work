@@ -1,3 +1,18 @@
+/**
+
+    @file      AnimatedObject.h
+    @brief     Class for Animated Object that can move.  
+    @details   ~
+    @author    Amirkhan Myrzabayev
+    @date      10.05.2026
+    @copyright © Amirkhan Myrzabayev, 2026. All right reserved.
+
+**/
+#pragma once
+
+
+#pragma once
+
 #pragma once
 #include "SpriteObject.h"
 

@@ -1,4 +1,15 @@
+/**
+
+    @file      mesh.h
+    @brief     Header with helping structures for meshes and materials.
+    @details   ~
+    @author    Amirkhan Myrzabayev
+    @date      10.05.2026
+    @copyright © Amirkhan Myrzabayev, 2026. All right reserved.
+
+**/
 #pragma once
+
 #include "pgr.h"
 
 /// @brief Stores lighting colors and texture IDs for rendering.

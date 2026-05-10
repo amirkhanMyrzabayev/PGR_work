@@ -1,4 +1,15 @@
+/**
+
+    @file      SpotLight.h
+    @brief     Child class of PointLight that adds cut off angles.
+    @details   ~
+    @author    Amirkhan Myrzabayev
+    @date      10.05.2026
+    @copyright © Amirkhan Myrzabayev, 2026. All right reserved.
+
+**/
 #pragma once
+
 #include "PointLight.h"
 
 /// @brief Helper struct to easily pass all starting settings for a spotlight.
