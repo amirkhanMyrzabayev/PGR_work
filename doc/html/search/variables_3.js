@@ -1,0 +1,15 @@
+var searchData=
+[
+  ['camera_5fpadding_0',['CAMERA_PADDING',['../parametry_8h.html#a8b0401f5647048eaf5d283abaf5b4069',1,'parametry.h']]],
+  ['camera_5fpath_1',['CAMERA_PATH',['../parametry_8h.html#a6e87590a0c7fa200d0369a9baaf0b92c',1,'parametry.h']]],
+  ['clock_5fhud_2',['CLOCK_HUD',['../parametry_8h.html#a6a4377aa6688936bf519bc6e609be546',1,'parametry.h']]],
+  ['collisioncircles_3',['collisionCircles',['../main_8cpp.html#ad825ffbc0a5ed3ea505d997a9c6d950d',1,'main.cpp']]],
+  ['columns_4',['columns',['../struct_sprite_object_setup.html#a761b1dda12c683143c0270078829746f',1,'SpriteObjectSetup']]],
+  ['columnsloc_5',['columnsLoc',['../struct_frame_locations.html#af4e6fe93de9db0ab91a58642801df9d5',1,'FrameLocations']]],
+  ['constantdecay_6',['constantDecay',['../struct_point_light_setup.html#ad71fbf7e185d8e85831d583bb4c0cc58',1,'PointLightSetup::constantDecay'],['../class_point_light.html#af8379c3b2b2456d8128e1dbd17d2cf11',1,'PointLight::constantDecay'],['../struct_spot_light_setup.html#aa93dabfa3c331148977a8e7a31ccedff',1,'SpotLightSetup::constantDecay']]],
+  ['currentframeloc_7',['currentFrameLoc',['../struct_frame_locations.html#aeb350e9571bcc369548215c2967c429a',1,'FrameLocations']]],
+  ['cylinder_8',['CYLINDER',['../parametry_8h.html#abafa3831b38d996ae39b9a70e18be72b',1,'parametry.h']]],
+  ['cylinder_5fheight_9',['CYLINDER_HEIGHT',['../parametry_8h.html#a22cbfba2470e6ecf17d5f050abddd5b8',1,'parametry.h']]],
+  ['cylinder_5fradius_10',['CYLINDER_RADIUS',['../parametry_8h.html#a67b52390cff8cd26ab5705a819ff78c7',1,'parametry.h']]],
+  ['cylindr_5fsector_5fcount_11',['CYLINDR_SECTOR_COUNT',['../parametry_8h.html#a2822a855fbc6a6ec3cb13411d598724a',1,'parametry.h']]]
+];
