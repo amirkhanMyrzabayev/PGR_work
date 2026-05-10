@@ -23,7 +23,7 @@ void SpriteObject::update(float deltaTime) {
 		}
 	}
 }
-void SpriteObject::drawClock(const glm::mat4 view, float elapsedTime, float sunSpeed) {
+void SpriteObject::drawClock(const glm::mat4& view, float elapsedTime, float sunSpeed) {
 	GLuint shaderProgram = getShaderProgram();
 	glDisable(GL_DEPTH_TEST);
 	glUseProgram(shaderProgram);
@@ -48,8 +48,8 @@ void SpriteObject::drawClock(const glm::mat4 view, float elapsedTime, float sunS
 	glEnable(GL_DEPTH_TEST);
 }
 
-void SpriteObject::draw(const glm::mat4 view, const glm::mat4& proj,
-	const glm::vec3& viewPos) {
+void SpriteObject::draw(const glm::mat4& view, const glm::mat4& proj, const glm::vec3& viewPos) {
+
 	GLuint shaderProgram = getShaderProgram();
 	glUseProgram(shaderProgram);
 	glUniformMatrix4fv(locations.viewLoc, 1, GL_FALSE, glm::value_ptr(view));

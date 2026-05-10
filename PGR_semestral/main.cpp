@@ -1,9 +1,3 @@
-/**
- * \file hello-world.cpp
- * \brief Your first OpenGL application.
- * \author Tomas Barak
- */
-
 #include <iostream>
 #include <map>
 #include "pgr.h"
@@ -14,24 +8,25 @@
 #include "Skybox.h"
 #include "parametry.h"
 
-float lastX = WIN_WIDTH / 2.0;
-float lastY = WIN_WIDTH / 2.0;
+// Global variables
+float lastX = WIN_WIDTH / 2.0; ///< center of the screen x 
+float lastY = WIN_WIDTH / 2.0; ///< center of the screen y
 bool firstMouse = true;
 bool isLeftMousePressed = false;
 float lastFrameTime = 0.0f;
 
-
-
+// Skybox shader position
 GLuint skyboxShader = 0;
 
-FogPositions fogPositions;
-
+// Lights vectors
 std::vector<std::unique_ptr<DirectionalLight>> dirLights;
 std::vector<std::unique_ptr<PointLight>> pointLights;
 std::vector<std::unique_ptr<SpotLight>> spotLights;
 
+// Main light shaders to setup lights in them
 std::vector<GLuint> lightShaders;
 
+// Global storages of objects and collision circles
 std::vector<std::unique_ptr<Object>> sceneObjects;
 std::vector<std::unique_ptr<AnimatedObject>> animatedObjects;
 std::vector<std::unique_ptr<SpriteObject>> spriteObjects;
@@ -40,12 +35,17 @@ std::unique_ptr<Skybox> skybox;
 std::unique_ptr<SegmentedArm> segmentedArm;
 std::vector<std::pair<glm::vec3, float>> collisionCircles;
 
-
+// Global managers and camera
 InputManager inputManager;
 Camera camera(STATIC_CAMERAS[0].position, CAMERA_PATH);
 MeshManager globalMeshManager;
 ShaderManager globalShaderManager;
 
+
+/// @brief Handles normal keyboard button presses.
+/// @param key The character of the pressed key.
+/// @param x Mouse X position when pressed.
+/// @param y Mouse Y position when pressed.
 void keyPressed(unsigned char key, int x, int y) {
     inputManager.pressKey(key);
     if (inputManager.keys['1']) {
@@ -58,10 +58,14 @@ void keyPressed(unsigned char key, int x, int y) {
     //if (inputManager.keys[key]) std::cout << "key " << key << " is pressed" << std::endl;
 }
 
-void keyRealesed(unsigned char key, int x, int y) {
+/// @brief Handles normal keyboard button releases.
+/// @param key The character of the released key.
+void keyReleased(unsigned char key, int x, int y) {
     inputManager.releaseKey(key);
 }
 
+/// @brief Handles special keys like arrows or F1-F12.
+/// @param key The code for the special key.
 void specialKeyPressed(int key, int x, int y) {
     inputManager.pressSpecialKey(key);
     if (key == GLUT_KEY_F1) {
@@ -73,10 +77,18 @@ void specialKeyPressed(int key, int x, int y) {
     }
 }
 
-void specialKeyRealesed(int key, int x, int y) {
+
+
+/// @brief Handles special key releases.
+/// @param key The code for the special key.
+void specialKeyReleased(int key, int x, int y) {
     inputManager.releaseSpecialKey(key);
 }
 
+
+/// @brief Finds an object in the scene using its unique ID.
+/// @param id The ID to look for.
+/// @return Pointer to the object if found, nullptr otherwise.
 Object* getObjectById(int id) {
     if (id == 0) return nullptr;
     for (auto& obj : sceneObjects) {
@@ -88,6 +100,8 @@ Object* getObjectById(int id) {
     return nullptr;
 }
 
+/// @brief Checks what was clicked and toggles its light or animation.
+/// @param id The ID of the object that was clicked.
 void handlePicking(int id) {
     Object* clickedObj = getObjectById(id);
     if (clickedObj == nullptr) return;
@@ -104,6 +118,12 @@ void handlePicking(int id) {
     }
 }
 
+
+/// @brief Handles mouse button clicks and performs stencil-buffer picking.
+/// @param button Which mouse button was clicked.
+/// @param state Pressed or released.
+/// @param xpos Mouse horizontal position.
+/// @param ypos Mouse vertical position.
 void mouseClickCallback(int button, int state, int xpos, int ypos) {
     if (button == GLUT_LEFT_BUTTON) {
         if (state == GLUT_DOWN) {
@@ -123,6 +143,9 @@ void mouseClickCallback(int button, int state, int xpos, int ypos) {
     lastY = ypos;
 }
 
+/// @brief Updates camera rotation when the mouse moves while being held.
+/// @param xpos Current horizontal mouse position.
+/// @param ypos Current vertical mouse position.
 void mouseCallback(int xpos, int ypos) {
     if (!isLeftMousePressed) return;
     if (firstMouse) {
@@ -140,6 +163,9 @@ void mouseCallback(int xpos, int ypos) {
     glutPostRedisplay();
 }
 
+
+/// @brief Main logic loop that updates physics, movement, and camera.
+/// @param value Timer value (unused).
 void timerFunc(int value) {
     float currentFrameTime = glutGet(GLUT_ELAPSED_TIME) / 1000.0f;
     float deltaTime = currentFrameTime - lastFrameTime;
@@ -166,6 +192,7 @@ void timerFunc(int value) {
     glutTimerFunc(33, timerFunc, 0);
 }
 
+/// @brief Loads resources, creates objects, and sets up OpenGL state.
 void init() {
     glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
     glEnable(GL_DEPTH_TEST);
@@ -254,16 +281,15 @@ void init() {
     globalShaderManager.setFogInShaders(FOG_COLOR, FOG_START, FOG_END);
 }
 
+
+/// @brief The main rendering function that draws everything to the screen.
 void draw() {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
-    //glClearStencil(0);
     glm::mat4 proj = camera.getProjectionMatrix();
     glm::mat4 view = camera.getViewMatrix();
     glm::vec3 cameraPos = camera.getPosition();
     skybox->draw(view, proj);
 
-    //glBindVertexArray(vao);
-    //glDrawArrays(GL_TRIANGLES, 0, 6);
     // light setup
     for (auto const& shaderProgram : lightShaders) {
         glUseProgram(shaderProgram);
@@ -357,9 +383,9 @@ int main(int argc, char** argv) {
 
     glutDisplayFunc(draw);
     glutKeyboardFunc(keyPressed);
-    glutKeyboardUpFunc(keyRealesed);
+    glutKeyboardUpFunc(keyReleased);
     glutSpecialFunc(specialKeyPressed);
-    glutSpecialUpFunc(specialKeyRealesed);
+    glutSpecialUpFunc(specialKeyReleased);
     glutMotionFunc(mouseCallback);
     glutMouseFunc(mouseClickCallback);
 

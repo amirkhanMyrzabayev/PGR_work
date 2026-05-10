@@ -16,9 +16,11 @@ out vec3 vertexPosition;
 
 
 void main() {
+  // Calculate which row and column to show based on the current frame
   float column = float(currentFrame % columns);
   float row = float(currentFrame / columns);
-  row = float(rows - 1) - row;
+  row = float(rows - 1) - row; // Invert row for OpenGL's bottom-up UV coordinates
+  // Scale UVs to fit one frame, then offset to the correct position
   float offsetX = column / float(columns);
   float offsetY = row / float(rows);
   vec2 scaledUV = vec2(texCoord.x / float(columns), texCoord.y / float(rows));

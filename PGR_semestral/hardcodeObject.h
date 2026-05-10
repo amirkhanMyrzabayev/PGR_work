@@ -1,10 +1,10 @@
 #pragma once
 
 
-// Total vertices: 144 (48 triangles * 3 vertices per triangle)
+/// @brief Total vertices: 144 (48 triangles * 3 vertices per triangle)
 constexpr unsigned int HARDCODED_VERTEX_COUNT = 144;
 
-// 2x2 tessellated cube. 8 triangles per face.
+/// @brief 2x2 cube. 8 triangles per face.
 const float _positions[] = {
     // Face +Z (Front)
     -1.0f, -1.0f,  1.0f,    0.0f, -1.0f,  1.0f,   -1.0f,  0.0f,  1.0f,
@@ -67,6 +67,7 @@ const float _positions[] = {
      1.0f, -1.0f,  0.0f,    1.0f, -1.0f,  1.0f,    0.0f, -1.0f,  1.0f
 };
 
+/// @brief cube normals
 const float _normals[] = {
     // Face +Z
      0.0f, 0.0f, 1.0f,  0.0f, 0.0f, 1.0f,  0.0f, 0.0f, 1.0f,
@@ -124,6 +125,7 @@ const float _normals[] = {
      0.0f,-1.0f, 0.0f,  0.0f,-1.0f, 0.0f,  0.0f,-1.0f, 0.0f
 };
 
+/// @brief cube texture coordinates
 const float _uvs[] = {
     // Face +Z
     0.0f, 0.0f,  0.5f, 0.0f,  0.0f, 0.5f,
@@ -182,8 +184,10 @@ const float _uvs[] = {
 };
 
 
+/// @brief Total vertices: 6 (2 triangles * 3 vertices per triangle)
 constexpr unsigned int QUAD_VERTEX_COUNT = 6;
 
+/// @brief a square used for sprites
 const float _quadPositions[] = {
     -1.0f, 1.0f, 0.0f,
     -1.0f, -1.0f, 0.0f,
@@ -192,6 +196,8 @@ const float _quadPositions[] = {
     1.0f, 1.0f, 0.0f,
     -1.0f, 1.0f, 0.0f
 };
+
+/// @brief square normals
 const float _quadNormals[] = {
     0.0f, 0.0f, 1.0f,
     0.0f, 0.0f, 1.0f,
@@ -200,6 +206,8 @@ const float _quadNormals[] = {
     0.0f, 0.0f, 1.0f,
     0.0f, 0.0f, 1.0f,
 };
+
+/// @brief square texture coordinates
 const float _quadUvs[] = {
     0.0f, 1.0f,
     0.0f, 0.0f,

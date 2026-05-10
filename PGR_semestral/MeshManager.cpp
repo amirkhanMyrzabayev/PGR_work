@@ -5,6 +5,7 @@
 #include "parametry.h"
 #include <iostream>
 
+
 MeshManager::~MeshManager() {
 	for (auto mesh : meshes) {
 		glDeleteVertexArrays(1, &(mesh.second->vao));
@@ -13,6 +14,7 @@ MeshManager::~MeshManager() {
 	}
 	meshes.clear();
 }
+
 
 Mesh* MeshManager::getMesh(const std::string& filePath, GLuint shaderProgram) {
 	if (meshes.find(filePath) != meshes.end()) {

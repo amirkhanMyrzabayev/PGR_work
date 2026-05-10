@@ -1,7 +1,7 @@
 #include "InputManager.h"
 
+
 InputManager::InputManager() {
-    // Constructor: initialize your keys array to false here
 }
 
 InputManager::~InputManager() {

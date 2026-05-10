@@ -6,10 +6,10 @@
 #include "PointLight.h"
 #include "SpotLight.h"
 
-
+// Scene constants
 constexpr const int WIN_WIDTH = 1024;
 constexpr const int WIN_HEIGHT = 1024;
-constexpr const char* WIN_TITLE = "PRG_Semestral";
+constexpr const char* WIN_TITLE = "Lonely scientist";
 
 
 constexpr const float MIN_X = -50.0f;
@@ -22,12 +22,15 @@ constexpr const float TILE_SIZE = 10.0f;
 
 constexpr const float CAMERA_PADDING = 2.0f;
 
+// Light limits
 constexpr const int MAX_DIR_LIGHTS = 5;
 constexpr const int MAX_POINT_LIGHTS = 5;
 constexpr const int MAX_SPOT_LIGHTS = 5;
 
+// Shader and Asset paths
 const std::string mainLightShaderName = "Shaders/3d_light_pixel";
 const std::string tilePath = "Assets/snowLand/snowLand.obj";
+// Keywords for specific objects
 const std::string HARDCODED_OBJ = "HARD";
 const std::string FIRE_SPRITE_OBJ = "HARD_FIRE";
 const std::string CLOCK_HUD = "HUD";
@@ -45,39 +48,35 @@ constexpr const size_t CYLINDR_SECTOR_COUNT = 36;
 
 const glm::vec3 DAY_STATUSBAR_POSITION = glm::vec3(0.8f, 0.8f, 0.0f);
 
-struct FogPositions
-{
-	GLuint fogStartPos;
-	GLuint fogEndPos;
-	GLuint fogColorPos;
-};
 
-
+/// @brief Basic settings needed to load and place any 3D object.
 struct ObjectSetup {
-	std::string path;
-	std::string shaderPath;
+	std::string path;        ///< Path to the model file.
+	std::string shaderPath;  ///< Path to the shader files.
 	glm::vec3 position;
 	glm::vec3 rotation;
 	glm::vec3 scale;
-	bool isTexAnim = false;
-	int pointLightIndex = -1;
-	int spotLightIndex = -1;
+	bool isTexAnim = false;  ///< If true, the texture will slide/move over time.
+	int pointLightIndex = -1; ///< Index of an attached point light (-1 if none).
+	int spotLightIndex = -1;  ///< Index of an attached spotlight (-1 if none).
 };
 
+/// @brief Settings for objects that move in an elliptical orbit.
 struct AnimatedObjectSetup : public ObjectSetup {
-	float radiusX;
-	float radiusZ;
+	float radiusX;           ///< Horizontal width of the movement circle.
+	float radiusZ;           ///< Depth length of the movement circle.
 	float speed;
-	float animationOffset = 0.0f;
+	float animationOffset = 0.0f; ///< Distance for the following sprite (like fire).
 };
 
+/// @brief Settings for 2D animated sprites.
 struct SpriteObjectSetup : public ObjectSetup {
-	size_t columns;
-	size_t rows;
-	float fps;
+	size_t columns;          ///< Number of horizontal frames in the sprite sheet.
+	size_t rows;             ///< Number of vertical frames in the sprite sheet.
+	float fps;               ///< Speed of the animation.
 };
 
-
+/// @brief Pre-defined camera position and orientation.
 struct StaticCamera {
 	glm::vec3 position;
 	glm::vec3 front;
@@ -85,6 +84,7 @@ struct StaticCamera {
 };
 
 
+// Global Data Arrays
 const StaticCamera STATIC_CAMERAS[2] = {
 	{ glm::vec3(0.0f, 2.0f, 10.0f), glm::vec3(0.0f, 0.0f, -1.0f), glm::vec3(0.0f, 1.0f, 0.0f) },
 	{ glm::vec3(0.0f, 15.0f, 0.0f), glm::vec3(0.0f, -1.0f, 0.00001f), glm::vec3(0.0f, 1.0f, 0.0f) }

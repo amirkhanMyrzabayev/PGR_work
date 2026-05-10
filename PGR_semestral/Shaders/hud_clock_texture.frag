@@ -10,7 +10,7 @@ uniform float slowSpeed;
 
 void main() {
     float angle = time * slowSpeed; 
-    
+    // Shift UV to center (0,0), rotate it, then shift it back
     vec2 shiftedUV = textureCoord - vec2(0.5, 0.5);
     
     mat2 rotationMatrix = mat2(
@@ -19,6 +19,7 @@ void main() {
     );
     vec2 rotatedUV = rotationMatrix * shiftedUV;
     vec2 finalUV = rotatedUV + vec2(0.5, 0.5);
+    // Discard pixels that rotate outside the 0.0 - 1.0 UV bounds
     if(finalUV.x < 0.0 || finalUV.x > 1.0 || finalUV.y < 0.0 || finalUV.y > 1.0) {
         color = vec4(0.0);
     } else {

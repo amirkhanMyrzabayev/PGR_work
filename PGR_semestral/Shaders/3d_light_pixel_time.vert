@@ -21,7 +21,7 @@ const float moveOffset = 0.8;
 
 void main() {
     vec3 localPos = position;
-
+    // Use a sine wave to deform the model's X position over time
     float waveValue = sin(localPos.y * frequency + elapsedTime * speed);    
     if (waveValue > threshold) {
         localPos.x += moveOffset; 

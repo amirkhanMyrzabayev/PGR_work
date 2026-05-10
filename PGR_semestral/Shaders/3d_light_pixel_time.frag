@@ -1,4 +1,8 @@
 #version 140
+#define MAX_DIR_LIGHTS 5
+#define MAX_POINT_LIGHTS 5
+#define MAX_SPOT_LIGHTS 5
+
 
 struct DirLight {
     vec3 ambient;
@@ -19,6 +23,7 @@ struct PointLight {
     bool isActive;
 };
 
+
 struct SpotLight {
     vec3 ambient;
     vec3 diffuse;
@@ -37,30 +42,37 @@ struct SpotLight {
     bool isActive;
 };
 
-in vec3 vertexPosition;
+
+in vec3 vertexPosition; 
 in vec3 normalVector;
 in vec2 textureCoord;
 
-uniform vec3 viewPos;
-uniform vec3 matAmbient;
+uniform vec3 viewPos; // Viewer's position
+// Material uniforms
+uniform vec3 matAmbient; 
 uniform vec3 matDiffuse;
 uniform vec3 matSpecular;
 uniform float matShininess;
+uniform float matAlpha;
+// Texture uniforms
 uniform sampler2D diffuseMap;
 uniform int hasDiffuseMap;
 uniform sampler2D specularMap;
 uniform int hasSpecularMap;
-uniform float matAlpha;
 
-uniform DirLight dirLights[5];
+// Directional Lights 
+uniform DirLight dirLights[MAX_DIR_LIGHTS];
 uniform int numDirLights;
 
-uniform PointLight pointLights[5];
+// Point Lights
+uniform PointLight pointLights[MAX_POINT_LIGHTS];
 uniform int numPointLights;
 
-uniform SpotLight spotLights[5];
+// Spot Lights
+uniform SpotLight spotLights[MAX_SPOT_LIGHTS];
 uniform int numSpotLights;
 
+// Fog uniforms
 uniform vec3 fogColor;
 uniform float fogStart;
 uniform float fogEnd;
