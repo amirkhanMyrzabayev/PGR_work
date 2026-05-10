@@ -22,7 +22,7 @@ void DirectionalLight::bindUniforms(GLuint shaderProgram, int index) {
 
 void DirectionalLight::update(float time) {
 	direction.x = glm::cos(time * slowSpeed);
-	direction.y = -glm::abs(glm::sin(time * slowSpeed));
+	direction.y = -glm::sin(time * slowSpeed);
 	ambientColor = baseAmbient * glm::max(direction.y * -1.0f, 0.0f);
 	diffuseColor = baseDiffuse * glm::max(direction.y * -1.0f, 0.0f);
 }

@@ -8,7 +8,8 @@ SpriteObject::SpriteObject(const SpriteObjectSetup& setup, ShaderManager& shader
 	frameLocations.columnsLoc = glGetUniformLocation(shaderProgram, "columns");
 	frameLocations.rowsLoc = glGetUniformLocation(shaderProgram, "rows");
 	frameLocations.currentFrameLoc = glGetUniformLocation(shaderProgram, "currentFrame");
-
+	timeLoc = glGetUniformLocation(shaderProgram, "time");
+	speedLoc = glGetUniformLocation(shaderProgram, "slowSpeed");
 }
 
 void SpriteObject::update(float deltaTime) {
@@ -21,6 +22,30 @@ void SpriteObject::update(float deltaTime) {
 			currentFrame = 0;
 		}
 	}
+}
+void SpriteObject::drawClock(const glm::mat4 view, float elapsedTime, float sunSpeed) {
+	GLuint shaderProgram = getShaderProgram();
+	glDisable(GL_DEPTH_TEST);
+	glUseProgram(shaderProgram);
+	glm::mat4 modelR = glm::mat4(1.0f);
+	modelR = glm::translate(modelR, position);
+	modelR = glm::scale(modelR, scale);
+	glUniformMatrix4fv(locations.modelLoc, 1, GL_FALSE, glm::value_ptr(modelR));
+	glUniform1f(timeLoc, elapsedTime);
+	glUniform1f(speedLoc, sunSpeed);
+
+	glBindVertexArray(mesh->vao);
+	for (const auto& subMesh : mesh->subMeshes) {
+		if (subMesh.material.diffuseTextureID != 0) {
+			glActiveTexture(GL_TEXTURE0);
+			glBindTexture(GL_TEXTURE_2D, subMesh.material.diffuseTextureID);
+
+			glUniform1i(locations.diffuseMapLoc, 0);
+		}
+		glDrawArrays(GL_TRIANGLES, subMesh.startIndex, subMesh.numVertices);
+	}
+	glBindVertexArray(0);
+	glEnable(GL_DEPTH_TEST);
 }
 
 void SpriteObject::draw(const glm::mat4 view, const glm::mat4& proj,

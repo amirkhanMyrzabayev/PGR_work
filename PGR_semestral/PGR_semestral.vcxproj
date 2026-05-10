@@ -193,6 +193,8 @@
     <None Include="Shaders\animated_texture.vert" />
     <None Include="Shaders\basic.frag" />
     <None Include="Shaders\basic.vert" />
+    <None Include="Shaders\hud_clock_texture.frag" />
+    <None Include="Shaders\hud_clock_texture.vert" />
     <None Include="Shaders\skybox.frag" />
     <None Include="Shaders\skybox.vert" />
   </ItemGroup>

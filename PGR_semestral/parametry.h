@@ -30,6 +30,7 @@ const std::string mainLightShaderName = "Shaders/3d_light_pixel";
 const std::string tilePath = "Assets/snowLand/snowLand.obj";
 const std::string HARDCODED_OBJ = "HARD";
 const std::string FIRE_SPRITE_OBJ = "HARD_FIRE";
+const std::string CLOCK_HUD = "HUD";
 const std::string CYLINDER = "CYLINDER";
 
 
@@ -41,6 +42,8 @@ const glm::vec3 FOG_COLOR = glm::vec3(0.6f, 0.7f, 0.75f);
 constexpr const float CYLINDER_RADIUS = 1.0f;
 constexpr const float CYLINDER_HEIGHT = 4.0f;
 constexpr const size_t CYLINDR_SECTOR_COUNT = 36;
+
+const glm::vec3 DAY_STATUSBAR_POSITION = glm::vec3(0.8f, 0.8f, 0.0f);
 
 struct FogPositions
 {
@@ -199,18 +202,32 @@ const std::vector<ObjectSetup> TRANSPARENT_OBJECTS_SETUP = {
 };
 
 const std::vector<AnimatedObjectSetup> ANIMATED_OBJECTS_SETUP = {
-		//parent struct
-		{ { "Assets/bixler/bixler.obj", "Shaders/3d_light_pixel",
-		glm::vec3(10.0f, 5.0f, 0.0f), glm::vec3(0.0f, glm::radians(180.0f), 0.0f), glm::vec3(0.05f)},
-		// child parameters
-		3.0f, 3.0f, 2.0f,  0.55f  }
+		
+		{	//parent struct
+			{
+				"Assets/bixler/bixler.obj", "Shaders/3d_light_pixel",
+				glm::vec3(10.0f, 5.0f, 0.0f), glm::vec3(0.0f, glm::radians(180.0f), 0.0f), glm::vec3(0.05f)
+			},
+			// child parameters
+			3.0f, 3.0f, 2.0f,  0.55f  
+		}
 };
 
 const std::vector<SpriteObjectSetup> SPRITE_OBJECTS_SETUP = {
-	{ { FIRE_SPRITE_OBJ, "Shaders/animated_texture",
-		glm::vec3(10.0f, 5.0f, 0.0f), glm::vec3(0.0f, glm::radians(90.0f), glm::radians(90.0f)), glm::vec3(1.0f)},
-		// child parameters
-		5, 3, 20.0f}
+	{
+		{
+			FIRE_SPRITE_OBJ, "Shaders/animated_texture",
+			glm::vec3(10.0f, 5.0f, 0.0f), glm::vec3(0.0f, glm::radians(90.0f), glm::radians(90.0f)), glm::vec3(1.0f)
+		},
+	// child parameters
+	5, 3, 20.0f
+	},
+	{ 
+		{ 
+			CLOCK_HUD, "Shaders/hud_clock_texture", glm::vec3(0.8f, -0.8f, 0.0f), glm::vec3(0.0f), glm::vec3(0.1f)
+		},
+			5, 3, 20.0f 
+	}
 };
 
 

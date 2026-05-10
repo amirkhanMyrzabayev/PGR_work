@@ -21,6 +21,7 @@ bool isLeftMousePressed = false;
 float lastFrameTime = 0.0f;
 
 
+
 GLuint skyboxShader = 0;
 
 FogPositions fogPositions;
@@ -155,6 +156,7 @@ void timerFunc(int value) {
     for (auto const& animObj : animatedObjects) {
         animObj->update(deltaTime);
     }
+
     dirLights[0]->update(currentFrameTime);
     segmentedArm->update(deltaTime);
     if (camera.getCameraState() == movingWithObject) camera.moveWithObject(animatedObjects[0]->getPosition() + glm::vec3(0.0f, 0.2f, 0.0f),
@@ -216,7 +218,7 @@ void init() {
     for (auto const& animObjInfo : ANIMATED_OBJECTS_SETUP) {
         if (spriteObjects.size() == 0) animatedObjects.push_back(std::make_unique<AnimatedObject>(animObjInfo, globalShaderManager, globalMeshManager, nullptr));
 
-        else animatedObjects.push_back(std::make_unique<AnimatedObject>(animObjInfo, globalShaderManager, globalMeshManager, std::move(spriteObjects[0])));
+        else animatedObjects.push_back(std::make_unique<AnimatedObject>(animObjInfo, globalShaderManager, globalMeshManager, &(*spriteObjects[0])));
         animatedObjects.back()->setId(objId);
         objId++;
     }
@@ -328,14 +330,18 @@ void draw() {
 
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-
     for (auto it = sortedTransparent.rbegin(); it != sortedTransparent.rend(); it++) {
         it->second->draw(view, proj, cameraPos);
     }
     glDisable(GL_BLEND);
 
 
-
+    for (auto const& spriteObj : spriteObjects)
+    {
+        if (spriteObj->isClock()) {
+            spriteObj->drawClock(view, lastFrameTime, dirLights[0]->getSpeed());
+        }
+    }
     glutSwapBuffers();
 }
 

@@ -7,7 +7,7 @@ class AnimatedObject :
 {
 public:
     AnimatedObject(const AnimatedObjectSetup& setup, ShaderManager& shaderManager, MeshManager& meshManager, 
-                    std::unique_ptr<SpriteObject> animation = nullptr);
+                    SpriteObject* animation = nullptr);
     void update(float time) override;
     void draw(const glm::mat4& view, const glm::mat4& proj,
                 const glm::vec3& viewPos) override;
@@ -15,7 +15,7 @@ public:
 
     float getYaw() { return yaw; };
 private:
-    std::unique_ptr<SpriteObject> animatedSprtie;
+    SpriteObject* animatedSprtie;
     glm::vec3 centerOrbit;
     glm::vec3 startOrientation;
     float animationOffset = 0.0f;

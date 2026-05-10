@@ -14,7 +14,9 @@ class SpriteObject :
 public:
     SpriteObject(const SpriteObjectSetup& setup, ShaderManager& shaderManager, MeshManager& meshManager);
     void update(float deltaTime);
+    void drawClock(const glm::mat4 view, float elapsedTime, float sunSpeed);
     void draw(const glm::mat4 view, const glm::mat4& proj, const glm::vec3& viewPos);
+    bool isClock() { return timeLoc != -1; };
     glm::vec3 getStartOrientation() { return startOrientation; };
 
 private:
@@ -25,5 +27,8 @@ private:
     float frameTimer = 0.0f;
     glm::vec3 startOrientation;
     FrameLocations frameLocations;
+    GLint timeLoc = -1;
+    GLint speedLoc;
+
 };
 

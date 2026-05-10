@@ -1,13 +1,13 @@
 #include "AnimatedObject.h"
 
 AnimatedObject::AnimatedObject(const AnimatedObjectSetup& setup, ShaderManager& shaderManager, MeshManager& meshManager,
-                                std::unique_ptr<SpriteObject> animation) :
+                                SpriteObject* animation) :
     Object(setup, shaderManager, meshManager),
     radiusX(setup.radiusX), radiusZ(setup.radiusZ), speed(setup.speed), startOrientation(getOrientation()),
     centerOrbit(glm::vec3(setup.position.x - setup.radiusX, setup.position.y, setup.position.z))
 {
     if (animation != nullptr) {
-        animatedSprtie = std::move(animation);
+        animatedSprtie = animation;
         animationOffset = setup.animationOffset;
     }
 }

@@ -242,6 +242,12 @@
     <None Include="Shaders\3d_light_pixel_time.vert">
       <Filter>Shaders</Filter>
     </None>
+    <None Include="Shaders\hud_clock_texture.frag">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="Shaders\hud_clock_texture.vert">
+      <Filter>Shaders</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="InputManager.h">
