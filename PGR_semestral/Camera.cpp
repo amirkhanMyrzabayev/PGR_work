@@ -62,7 +62,6 @@ void Camera::move(const InputManager& inputManager, std::vector<std::pair<glm::v
 		animate();
 		return;
 	}
-
 	if (currentState != freeCamera) return;
 	glm::vec3 nextPosition = position;
 	if (inputManager.specialKeys[GLUT_KEY_UP]) {
@@ -130,7 +129,7 @@ CameraStates Camera::getCameraState() {
 }
 
 void Camera::setCameraState(CameraStates newState) {
-	if (newState == freeCamera && currentState != freeCamera && (currentState == staticFirst || currentState == staticSecond)) {
+	if (newState == freeCamera && (currentState == staticFirst || currentState == staticSecond)) {
 		position = STATIC_CAMERAS[currentState - 1].position;
 		front = glm::normalize(STATIC_CAMERAS[currentState - 1].front);
 		up = glm::normalize(STATIC_CAMERAS[currentState - 1].up);
