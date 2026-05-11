@@ -3,9 +3,9 @@
     @file      Skybox.h
     @brief     Skybox object in the scene.
     @details   ~
-    @author    Cool Guy
+    @author    Amirkhan Myrzabayev
     @date      10.05.2026
-    @copyright © Cool Guy, 2026. All right reserved.
+    @copyright © Amirkhan Myrzabayev, 2026. All right reserved.
 
 **/
 #pragma once
@@ -26,7 +26,7 @@ public:
 	~Skybox();
 
 	/// @brief Draws the skybox so it looks like it is infinitely far away.
-	/// @param view The camera's view matrix (we only use the rotation part so you can't walk closer to the sky).
+	/// @param view The camera's view matrix.
 	/// @param projection The camera's projection matrix.
 	void draw(const glm::mat4& view, const glm::mat4& projection);
 

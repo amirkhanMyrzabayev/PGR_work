@@ -3,9 +3,9 @@
     @file      MeshManager.h
     @brief     Manager class to load, store, and reuse 3D models and shapes.
     @details   ~
-    @author    Cool Guy
+    @author    Amirkhan Myrzabayev
     @date      10.05.2026
-    @copyright © Cool Guy, 2026. All right reserved.
+    @copyright © Amirkhan Myrzabayev, 2026. All right reserved.
 
 **/
 #pragma once
