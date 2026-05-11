@@ -24,7 +24,7 @@
 */
 var NAVTREE =
 [
-  [ "Lonely_scientist_PGR_semestral", "index.html", [
+  [ "Lonely_Scientist_PGR_semestral", "index.html", [
     [ "Classes", "annotated.html", [
       [ "Class List", "annotated.html", "annotated_dup" ],
       [ "Class Index", "classes.html", null ],
