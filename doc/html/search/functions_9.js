@@ -1,8 +1,4 @@
 var searchData=
 [
-  ['main_0',['main',['../main_8cpp.html#a3c04138a5bfe5d72780bb7e82a18e627',1,'main.cpp']]],
-  ['mousecallback_1',['mouseCallback',['../main_8cpp.html#a2c0c1be874d9fd8cd97c1187825dedf8',1,'main.cpp']]],
-  ['mouseclickcallback_2',['mouseClickCallback',['../main_8cpp.html#afaca0a027c77385df0cecb1d31ece6a5',1,'main.cpp']]],
-  ['move_3',['move',['../class_camera.html#a08f66773e1c7c341f81ad45b9f07d288',1,'Camera']]],
-  ['movewithobject_4',['moveWithObject',['../class_camera.html#a37f5ced1676f2ed99c142ece69dab2c6',1,'Camera']]]
+  ['object_0',['Object',['../class_object.html#a40344b0d2810206017acbfbafbe6b1fc',1,'Object::Object(const std::string &amp;filePath, const std::string &amp;shaderName, ShaderManager &amp;shaderManager, MeshManager &amp;meshManager)'],['../class_object.html#a4e27703d14e00c33a15852ac1d2d7fcd',1,'Object::Object(const std::string &amp;filePath, const std::string &amp;shaderName, ShaderManager &amp;shaderManager, MeshManager &amp;meshManager, const glm::vec3 &amp;newPos, const glm::vec3 &amp;newRotation, const glm::vec3 &amp;newScale)'],['../class_object.html#ac4d42bdc49ffb4bf174cb45da6cafe1a',1,'Object::Object(const ObjectSetup &amp;setup, ShaderManager &amp;shaderManager, MeshManager &amp;meshManager)']]]
 ];

@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['handlepicking_0',['handlePicking',['../main_8cpp.html#afa9d9307ff90876515473ed738935817',1,'main.cpp']]],
-  ['haslight_1',['hasLight',['../class_object.html#abe021e6f266857fd1424508494a048cf',1,'Object']]]
+  ['init_0',['init',['../main_8cpp.html#a02fd73d861ef2e4aabb38c0c9ff82947',1,'main.cpp']]],
+  ['inputmanager_1',['InputManager',['../class_input_manager.html#a8be46886da639b26d67181c29dab6d6c',1,'InputManager']]],
+  ['isclock_2',['isClock',['../class_sprite_object.html#aa279d1e6494e165fc773ea2f61881365',1,'SpriteObject']]]
 ];

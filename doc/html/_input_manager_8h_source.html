@@ -30,7 +30,7 @@ mermaid.initialize({ startOnLoad: true, theme: theme });
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Lonely_scientist_PGR_semestral
+   <div id="projectname">Lonely_scientist_PGR_semestral<span id="projectnumber">&#160;1.0</span>
    </div>
   </td>
  </tr>
@@ -118,35 +118,37 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('_input_manager
   <div class="headertitle"><div class="title">InputManager.h</div></div>
 </div><!--header-->
 <div class="contents">
-<a href="_input_manager_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#pragma once</span></div>
-<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span></div>
-<div class="foldopen" id="foldopen00004" data-start="{" data-end="};">
-<div class="line"><a id="l00004" name="l00004"></a><span class="lineno"><a class="line" href="class_input_manager.html">    4</a></span><span class="keyword">class </span><a class="code hl_function" href="class_input_manager.html#a8be46886da639b26d67181c29dab6d6c">InputManager</a></div>
-<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span>{</div>
-<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="keyword">public</span>:</div>
-<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span>    <a class="code hl_function" href="class_input_manager.html#a8be46886da639b26d67181c29dab6d6c">InputManager</a>();</div>
-<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span>    <a class="code hl_function" href="class_input_manager.html#af518290877dd183606709d5852db5491">~InputManager</a>();</div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span></div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_input_manager.html#ae5de016e5f4323f33a29f60ff1e90a97">pressKey</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> key);</div>
+<a href="_input_manager_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#pragma once</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span> </div>
 <div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span></div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_input_manager.html#a9643879955a8d438d82b40675a9e5196">releaseKey</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> key);</div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span></div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_input_manager.html#a3e34cf2ecfa9ff8f78fc75f2e1a86383">pressSpecialKey</a>(<span class="keywordtype">int</span> key);</div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span></div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_input_manager.html#a2897529e2a115a605a931a3348ed9bb7">releaseSpecialKey</a>(<span class="keywordtype">int</span> key);</div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span> </div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno"><a class="line" href="class_input_manager.html#a60967194bb1a07efcffd445b4cc43ad6">   26</a></span>    <span class="keywordtype">bool</span> <a class="code hl_variable" href="class_input_manager.html#a60967194bb1a07efcffd445b4cc43ad6">keys</a>[256] = { <span class="keyword">false</span> };        </div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno"><a class="line" href="class_input_manager.html#afab17d26c540768c07be80fcade865bc">   27</a></span>    <span class="keywordtype">bool</span> <a class="code hl_variable" href="class_input_manager.html#afab17d26c540768c07be80fcade865bc">specialKeys</a>[256] = { <span class="keyword">false</span> }; </div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>};</div>
+<div class="foldopen" id="foldopen00015" data-start="{" data-end="};">
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno"><a class="line" href="class_input_manager.html">   15</a></span><span class="keyword">class </span><a class="code hl_function" href="class_input_manager.html#a8be46886da639b26d67181c29dab6d6c">InputManager</a></div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>{</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>    <a class="code hl_function" href="class_input_manager.html#a8be46886da639b26d67181c29dab6d6c">InputManager</a>();</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>    <a class="code hl_function" href="class_input_manager.html#af518290877dd183606709d5852db5491">~InputManager</a>();</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span></div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_input_manager.html#ae5de016e5f4323f33a29f60ff1e90a97">pressKey</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> key);</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span></div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_input_manager.html#a9643879955a8d438d82b40675a9e5196">releaseKey</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> key);</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span></div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_input_manager.html#a3e34cf2ecfa9ff8f78fc75f2e1a86383">pressSpecialKey</a>(<span class="keywordtype">int</span> key);</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span></div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_input_manager.html#a2897529e2a115a605a931a3348ed9bb7">releaseSpecialKey</a>(<span class="keywordtype">int</span> key);</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span> </div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno"><a class="line" href="class_input_manager.html#a60967194bb1a07efcffd445b4cc43ad6">   37</a></span>    <span class="keywordtype">bool</span> <a class="code hl_variable" href="class_input_manager.html#a60967194bb1a07efcffd445b4cc43ad6">keys</a>[256] = { <span class="keyword">false</span> };        </div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno"><a class="line" href="class_input_manager.html#afab17d26c540768c07be80fcade865bc">   38</a></span>    <span class="keywordtype">bool</span> <a class="code hl_variable" href="class_input_manager.html#afab17d26c540768c07be80fcade865bc">specialKeys</a>[256] = { <span class="keyword">false</span> }; </div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>};</div>
 </div>
 <div class="ttc" id="aclass_input_manager_html_a2897529e2a115a605a931a3348ed9bb7"><div class="ttname"><a href="class_input_manager.html#a2897529e2a115a605a931a3348ed9bb7">InputManager::releaseSpecialKey</a></div><div class="ttdeci">void releaseSpecialKey(int key)</div><div class="ttdoc">Marks a special keyboard key as released.</div><div class="ttdef"><b>Definition</b> InputManager.cpp:22</div></div>
 <div class="ttc" id="aclass_input_manager_html_a3e34cf2ecfa9ff8f78fc75f2e1a86383"><div class="ttname"><a href="class_input_manager.html#a3e34cf2ecfa9ff8f78fc75f2e1a86383">InputManager::pressSpecialKey</a></div><div class="ttdeci">void pressSpecialKey(int key)</div><div class="ttdoc">Marks a special keyboard key (like arrows or F-keys) as pressed.</div><div class="ttdef"><b>Definition</b> InputManager.cpp:18</div></div>
-<div class="ttc" id="aclass_input_manager_html_a60967194bb1a07efcffd445b4cc43ad6"><div class="ttname"><a href="class_input_manager.html#a60967194bb1a07efcffd445b4cc43ad6">InputManager::keys</a></div><div class="ttdeci">bool keys[256]</div><div class="ttdoc">Array storing the true/false pressed state of normal ASCII keys.</div><div class="ttdef"><b>Definition</b> InputManager.h:26</div></div>
+<div class="ttc" id="aclass_input_manager_html_a60967194bb1a07efcffd445b4cc43ad6"><div class="ttname"><a href="class_input_manager.html#a60967194bb1a07efcffd445b4cc43ad6">InputManager::keys</a></div><div class="ttdeci">bool keys[256]</div><div class="ttdoc">Array storing the true/false pressed state of normal ASCII keys.</div><div class="ttdef"><b>Definition</b> InputManager.h:37</div></div>
 <div class="ttc" id="aclass_input_manager_html_a8be46886da639b26d67181c29dab6d6c"><div class="ttname"><a href="class_input_manager.html#a8be46886da639b26d67181c29dab6d6c">InputManager::InputManager</a></div><div class="ttdeci">InputManager()</div><div class="ttdef"><b>Definition</b> InputManager.cpp:4</div></div>
 <div class="ttc" id="aclass_input_manager_html_a9643879955a8d438d82b40675a9e5196"><div class="ttname"><a href="class_input_manager.html#a9643879955a8d438d82b40675a9e5196">InputManager::releaseKey</a></div><div class="ttdeci">void releaseKey(unsigned char key)</div><div class="ttdoc">Marks a standard keyboard key as released.</div><div class="ttdef"><b>Definition</b> InputManager.cpp:14</div></div>
 <div class="ttc" id="aclass_input_manager_html_ae5de016e5f4323f33a29f60ff1e90a97"><div class="ttname"><a href="class_input_manager.html#ae5de016e5f4323f33a29f60ff1e90a97">InputManager::pressKey</a></div><div class="ttdeci">void pressKey(unsigned char key)</div><div class="ttdoc">Marks a standard keyboard key as pressed.</div><div class="ttdef"><b>Definition</b> InputManager.cpp:10</div></div>
 <div class="ttc" id="aclass_input_manager_html_af518290877dd183606709d5852db5491"><div class="ttname"><a href="class_input_manager.html#af518290877dd183606709d5852db5491">InputManager::~InputManager</a></div><div class="ttdeci">~InputManager()</div><div class="ttdef"><b>Definition</b> InputManager.cpp:7</div></div>
-<div class="ttc" id="aclass_input_manager_html_afab17d26c540768c07be80fcade865bc"><div class="ttname"><a href="class_input_manager.html#afab17d26c540768c07be80fcade865bc">InputManager::specialKeys</a></div><div class="ttdeci">bool specialKeys[256]</div><div class="ttdoc">Array storing the true/false pressed state of special non-ASCII keys.</div><div class="ttdef"><b>Definition</b> InputManager.h:27</div></div>
+<div class="ttc" id="aclass_input_manager_html_afab17d26c540768c07be80fcade865bc"><div class="ttname"><a href="class_input_manager.html#afab17d26c540768c07be80fcade865bc">InputManager::specialKeys</a></div><div class="ttdeci">bool specialKeys[256]</div><div class="ttdoc">Array storing the true/false pressed state of special non-ASCII keys.</div><div class="ttdef"><b>Definition</b> InputManager.h:38</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 </div><!-- container -->

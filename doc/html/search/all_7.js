@@ -12,7 +12,6 @@ var searchData=
   ['getspeed_9',['getSpeed',['../class_directional_light.html#ae1e523a2d2da6fc1e012f705b9c7ae92',1,'DirectionalLight']]],
   ['getstartorientation_10',['getStartOrientation',['../class_sprite_object.html#a7ccb49fbb20a678a9c6c23ec120664ee',1,'SpriteObject']]],
   ['getviewmatrix_11',['getViewMatrix',['../class_camera.html#a5569ca5967e01d3344fbf6aba36d9820',1,'Camera']]],
-  ['getyaw_12',['getYaw',['../class_animated_object.html#a48b7d98e4d6ea61bb3ce7142b4fe07f0',1,'AnimatedObject']]],
-  ['globalmeshmanager_13',['globalMeshManager',['../main_8cpp.html#a69bb8c148fcb699b222d1c9ed1a8b8a5',1,'main.cpp']]],
-  ['globalshadermanager_14',['globalShaderManager',['../main_8cpp.html#a90a2c106356a5d8d5617c22810438778',1,'main.cpp']]]
+  ['globalmeshmanager_12',['globalMeshManager',['../main_8cpp.html#a69bb8c148fcb699b222d1c9ed1a8b8a5',1,'main.cpp']]],
+  ['globalshadermanager_13',['globalShaderManager',['../main_8cpp.html#a90a2c106356a5d8d5617c22810438778',1,'main.cpp']]]
 ];

@@ -14,7 +14,6 @@ var hierarchy =
     [ "Mesh", "struct_mesh.html", null ],
     [ "MeshManager", "class_mesh_manager.html", null ],
     [ "Object", "class_object.html", [
-      [ "AnimatedObject", "class_animated_object.html", null ],
       [ "SpriteObject", "class_sprite_object.html", null ]
     ] ],
     [ "ObjectSetup", "struct_object_setup.html", [

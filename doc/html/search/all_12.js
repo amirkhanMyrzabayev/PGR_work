@@ -60,6 +60,5 @@ var searchData=
   ['stone_5fcollision_5fradius_57',['STONE_COLLISION_RADIUS',['../parametry_8h.html#a2b9d4396501fe01b32f2388d6a8c2fe6',1,'parametry.h']]],
   ['submesh_58',['SubMesh',['../struct_sub_mesh.html',1,'']]],
   ['submeshes_59',['subMeshes',['../struct_mesh.html#a897590a74675b285456d13bad1f97f57',1,'Mesh']]],
-  ['switchanimation_60',['switchAnimation',['../class_animated_object.html#a9615598e39399107a84d6ffed86b05b0',1,'AnimatedObject']]],
-  ['switchlight_61',['switchLight',['../class_base_light.html#a42b4aee56ad471058db61275e9a59b1a',1,'BaseLight::switchLight()'],['../class_object.html#accbe95e10d95c23a08fc233f45d19b6f',1,'Object::switchLight()']]]
+  ['switchlight_60',['switchLight',['../class_base_light.html#a42b4aee56ad471058db61275e9a59b1a',1,'BaseLight::switchLight()'],['../class_object.html#accbe95e10d95c23a08fc233f45d19b6f',1,'Object::switchLight()']]]
 ];

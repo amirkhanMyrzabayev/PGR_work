@@ -1,6 +1,5 @@
 var annotated_dup =
 [
-    [ "AnimatedObject", "class_animated_object.html", "class_animated_object" ],
     [ "AnimatedObjectSetup", "struct_animated_object_setup.html", "struct_animated_object_setup" ],
     [ "BaseLight", "class_base_light.html", "class_base_light" ],
     [ "Camera", "class_camera.html", "class_camera" ],

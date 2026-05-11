@@ -30,7 +30,7 @@ mermaid.initialize({ startOnLoad: true, theme: theme });
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Lonely_scientist_PGR_semestral
+   <div id="projectname">Lonely_scientist_PGR_semestral<span id="projectnumber">&#160;1.0</span>
    </div>
   </td>
  </tr>
@@ -118,8 +118,11 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('main_8cpp.html
   <div class="headertitle"><div class="title">main.cpp File Reference</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &lt;iostream&gt;</code><br />
-<code>#include &lt;map&gt;</code><br />
+
+<p>Semestral project for PGR at CTU. Project name: Lonely Scientist.  
+<a href="#details">More...</a></p>
+<div class="textblock"><code>#include &lt;map&gt;</code><br />
+<code>#include &lt;iostream&gt;</code><br />
 <code>#include &quot;pgr.h&quot;</code><br />
 <code>#include &quot;<a class="el" href="_input_manager_8h_source.html">InputManager.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="_camera_8h_source.html">Camera.h</a>&quot;</code><br />
@@ -170,7 +173,7 @@ Variables</h2></td></tr>
 <tr class="memitem:a062d598b35a845b508c61b24f25d75d2" id="r_a062d598b35a845b508c61b24f25d75d2"><td class="memItemLeft">std::vector&lt; std::unique_ptr&lt; <a class="el" href="class_spot_light.html">SpotLight</a> &gt; &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a062d598b35a845b508c61b24f25d75d2">spotLights</a></td></tr>
 <tr class="memitem:a462f1bdf59a29557d3fcc08af99dd281" id="r_a462f1bdf59a29557d3fcc08af99dd281"><td class="memItemLeft">std::vector&lt; GLuint &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a462f1bdf59a29557d3fcc08af99dd281">lightShaders</a></td></tr>
 <tr class="memitem:a7f7bb6145ea46b524324f8a031307c30" id="r_a7f7bb6145ea46b524324f8a031307c30"><td class="memItemLeft">std::vector&lt; std::unique_ptr&lt; <a class="el" href="class_object.html">Object</a> &gt; &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a7f7bb6145ea46b524324f8a031307c30">sceneObjects</a></td></tr>
-<tr class="memitem:a1133714f9bd9621f6aa085e084eb35a7" id="r_a1133714f9bd9621f6aa085e084eb35a7"><td class="memItemLeft">std::vector&lt; std::unique_ptr&lt; <a class="el" href="class_animated_object.html">AnimatedObject</a> &gt; &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a1133714f9bd9621f6aa085e084eb35a7">animatedObjects</a></td></tr>
+<tr class="memitem:a1133714f9bd9621f6aa085e084eb35a7" id="r_a1133714f9bd9621f6aa085e084eb35a7"><td class="memItemLeft">std::vector&lt; std::unique_ptr&lt; AnimatedObject &gt; &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a1133714f9bd9621f6aa085e084eb35a7">animatedObjects</a></td></tr>
 <tr class="memitem:ae07965bf023dac21ca14cb865941755b" id="r_ae07965bf023dac21ca14cb865941755b"><td class="memItemLeft">std::vector&lt; std::unique_ptr&lt; <a class="el" href="class_sprite_object.html">SpriteObject</a> &gt; &gt;&#160;</td><td class="memItemRight"><a class="el" href="#ae07965bf023dac21ca14cb865941755b">spriteObjects</a></td></tr>
 <tr class="memitem:a4d4b4bd83469722a9e794a8fd1453775" id="r_a4d4b4bd83469722a9e794a8fd1453775"><td class="memItemLeft">std::vector&lt; std::unique_ptr&lt; <a class="el" href="class_object.html">Object</a> &gt; &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a4d4b4bd83469722a9e794a8fd1453775">transparentObjects</a></td></tr>
 <tr class="memitem:ab321c5fe5c76f4ede94c6861aeb079b6" id="r_ab321c5fe5c76f4ede94c6861aeb079b6"><td class="memItemLeft">std::unique_ptr&lt; <a class="el" href="class_skybox.html">Skybox</a> &gt;&#160;</td><td class="memItemRight"><a class="el" href="#ab321c5fe5c76f4ede94c6861aeb079b6">skybox</a></td></tr>
@@ -180,7 +183,12 @@ Variables</h2></td></tr>
 <tr class="memitem:a69bb8c148fcb699b222d1c9ed1a8b8a5" id="r_a69bb8c148fcb699b222d1c9ed1a8b8a5"><td class="memItemLeft"><a class="el" href="class_mesh_manager.html">MeshManager</a>&#160;</td><td class="memItemRight"><a class="el" href="#a69bb8c148fcb699b222d1c9ed1a8b8a5">globalMeshManager</a></td></tr>
 <tr class="memitem:a90a2c106356a5d8d5617c22810438778" id="r_a90a2c106356a5d8d5617c22810438778"><td class="memItemLeft"><a class="el" href="class_shader_manager.html">ShaderManager</a>&#160;</td><td class="memItemRight"><a class="el" href="#a90a2c106356a5d8d5617c22810438778">globalShaderManager</a></td></tr>
 </table>
-<a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Function Documentation</h2>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Semestral project for PGR at CTU. Project name: Lonely Scientist. </p>
+<p>~ </p><dl class="section author"><dt>Author</dt><dd>Amirkhan Myrzabayev </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>11.05.2026 </dd></dl>
+<dl class="section copyright"><dt>Copyright</dt><dd>© Amirkhan Myrzabayev, 2026. All right reserved. </dd></dl>
+</div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Function Documentation</h2>
 <a id="a954e57d78ed258f557a9ec7930024022" name="a954e57d78ed258f557a9ec7930024022"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a954e57d78ed258f557a9ec7930024022">&#9670;&#160;</a></span>camera()</h2>
 
@@ -555,7 +563,7 @@ Variables</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">std::vector&lt;std::unique_ptr&lt;<a class="el" href="class_animated_object.html">AnimatedObject</a>&gt; &gt; animatedObjects</td>
+          <td class="memname">std::vector&lt;std::unique_ptr&lt;AnimatedObject&gt; &gt; animatedObjects</td>
         </tr>
       </table>
 </div><div class="memdoc">

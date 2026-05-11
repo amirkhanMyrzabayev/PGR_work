@@ -1,5 +1,15 @@
-#include <iostream>
+/**
+
+    @file      main.cpp
+    @brief     Semestral project for PGR at CTU. Project name: Lonely Scientist.
+    @details   ~
+    @author    Amirkhan Myrzabayev
+    @date      11.05.2026
+    @copyright © Amirkhan Myrzabayev, 2026. All right reserved.
+
+**/
 #include <map>
+#include <iostream>
 #include "pgr.h"
 #include "InputManager.h"
 #include "Camera.h"
