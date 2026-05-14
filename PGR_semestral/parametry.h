@@ -103,10 +103,10 @@ const StaticCamera STATIC_CAMERAS[2] = {
 
 const std::vector<glm::vec3> CAMERA_PATH = {
 	glm::vec3(0.0f, 5.0f,  10.0f), 
-	glm::vec3(10.0f, 2.0f,  0.0f), 
+	glm::vec3(10.0f, 2.0f,  5.0f), 
 	glm::vec3(0.0f, 8.0f, -10.0f), 
 	glm::vec3(-10.0f, 3.0f,  0.0f),
-	glm::vec3(10.0f, 2.0f,  0.0f),
+	glm::vec3(10.0f, 2.0f,  5.0f),
 	glm::vec3(0.0f, 5.0f,  10.0f)
 };
 
